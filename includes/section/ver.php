@@ -64,6 +64,11 @@ $nombre = textIntoSql($_GET['pj']);
 							
 					$template->assign_var('NOMASCOTA', "GTFO");
 
+					$lvlShow="";
+					if($pj['godLevel']>0)
+					$lvlShow='<span class=" godLevelLvl">Nivel: '.($pj['nivel']+$pj['godLevel']).'</span>';
+				else
+					$lvlShow='<span class="">Nivel: '.$pj['nivel'].'</span>';
 
 
 							 $template->assign_vars(array(
@@ -80,7 +85,7 @@ $nombre = textIntoSql($_GET['pj']);
 			  'IMG_P2' => $pj['imagen'],
 			  'NOMBRE_P2' => $pj['nombre'],
 			   'ILVL2' => $stats['ItemLevel'],
-				'LVL_P2' => $pj['nivel'],
+				'LVL_P2' => $lvlShow,
 				'VIDA_P2' => $pj['Vida'],
 				'VIDA_L_P2' => $stats['VidaLimit'],
 				'MANA_P2' => $pj['Mana'],

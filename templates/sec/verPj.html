@@ -1,4 +1,4 @@
-<script src="js/verPj.js?{RAND}" type="text/javascript"></script>
+﻿<script src="js/verPj.js?{RAND}" type="text/javascript"></script>
 <script>
 var itemsCatch = new Array();
 const idPjMirando = parseInt("{IDPJ2}");
@@ -43,7 +43,7 @@ function injertoTardio()
 	
 		if(itemsCatch[id]['tipo']=="W")
 		{
-
+			
 			if(itemsCatch[id]['manoIzquierda']==1)	
 			{	
 				$("#slot_W").text("");
@@ -52,6 +52,7 @@ function injertoTardio()
 
 			if(itemsCatch[id]['manoDerecha']==1)
 			{
+			
 					thereIsDerW=1;
 					$("#slot_shield").text("");
 					$("#slot_shield").append("<a href='javascript:quitarItem("+id+");'><img border='0' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' title='"+title+"' class='"+setInfo+"' width='35' height='35' /></a>");
@@ -272,10 +273,15 @@ $(document).ready(function(){
 				<!-- END S -->
 });
 </script>
-
+<style>
+.godLevelLvl{
+  color: aqua;
+  
+}
+</style>
 <div id="sectCustom" style="background-image:url(images/perfiles/{BASEIMAGE}_{SEXO}.jpg);">
 
-	<div class="sectCustomTitle"> <div class="nombrePj" align="center">{NOMBRE_P2} Nivel: {LVL_P2}</div></div>
+	<div class="sectCustomTitle"> <div class="nombrePj" align="center">{NOMBRE_P2} {LVL_P2}</div></div>
 	<div class="perfilButtons">
 		<div class="menuItem left" onclick="javascript:mostrarGear();">Equipo</div>
 		<div class="menuItem left" onclick="javascript:mostrarSkils();">Habilidades</div>

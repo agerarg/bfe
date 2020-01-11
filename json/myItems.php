@@ -65,7 +65,7 @@ if($log->check())
 				$item['AtaqueMagico']+=intval($item['AtaqueMagico']/3);
 				$item['nameWeapon']=$item['nameCheck'];
 			}
-			//$item['Nombre']=$item['idInventario'];
+
 			$data["litem"][] = $item;
 		}
 		$data["error"] = "";

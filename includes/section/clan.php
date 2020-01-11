@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////// Script By Ager [ager.arg@gmail.com] ///////////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ if(isset($_GET['id']))
 					$filas = $count['CONTA'];
 					$numeracion = NumerarPaginas($page_number, $filas, PATH_USERS, $limitbottom, PAGINAS);
 				$query = 'SELECT p.*,c.nombre AS CLASE ,c.imagen FROM personaje p JOIN clase c USING ( idClase ) 
-				WHERE p.clan = '.$id.' ORDER BY nivel DESC LIMIT '.$limitbottom.', '.PAGINAS;;
+				WHERE p.clan = '.$id.' AND SubClassFrom = 0 ORDER BY nivel DESC LIMIT '.$limitbottom.', '.PAGINAS;;
 						$membersq = $db->sql_query($query);
 						$template->assign_var('NUMERACION', $numeracion);
 						$num = ( $page_number - 1 ) * PAGINAS;

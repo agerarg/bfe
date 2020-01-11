@@ -27,8 +27,6 @@ if($gameCore['war']==0 && $gameCore['warTime']>time() && $pj['clan']>0)
 	 $template->assign_var('TIEMPOGUERRA', $gameCore['warTime']-time()+30);
 }
 
-
-
 /*
 $defensa=3000;
 $monster['nivel']=90;

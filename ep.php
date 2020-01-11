@@ -26,14 +26,13 @@ function textIntoSql2($text)
 	return $text;
 }
 //*TEST
-
+/*
 $db = new sql_db;
 $log = new LOGuser;
-$log->logear(2);
+$log->logear(6);
 die();
-
+*/
 //
-/*
 $db = new sql_db;
 session_start();
 $log = new LOGuser;
@@ -43,7 +42,7 @@ $k=textIntoSql2($_GET['k']);
 	$pag = file_get_contents('https://www.battleforembolia.com/getAccess.php?k='.$k);
 
 	 $srchuser = intval($pag);
-
+	
 	if($srchuser>0)
 		{
 			 $query = "SELECT * FROM cuenta WHERE mainId = '".$srchuser."'";
@@ -61,5 +60,5 @@ $k=textIntoSql2($_GET['k']);
 		{
 			die("Error Loco!");
 		}
-	*/
+	
 ?> 

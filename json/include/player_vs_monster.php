@@ -664,12 +664,13 @@ if($pj['antiBot']>$now)
 									$monster['mapBoss']=0;
 								}
 								$goblinHunt--;
+								
 								if($goblinHunt<=0)
 								{
 										$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,deQuien) 
 														VALUES("242","2",
 														"'.$mundo['id'].'","100",'.$log->get("pjSelected").')');
-										$goblinHunt = mt_rand(50,300);
+										$goblinHunt = mt_rand(100,500);
 										systemLog("party","<div class=bossKilling>Aparecio Santa!!!</div>") ;	
 								}
 

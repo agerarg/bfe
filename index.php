@@ -15,32 +15,12 @@ include('system/login.php');
 $template = new Template;
 $log = new LOGuser;
 $now = tiempoReal();
-$template->assign_var('RAND', time() );//time() 18
+$template->assign_var('RAND',15 );//time() 18
 define('ADMIN', 1);
 $mantenimiento=false;
 
 
-					/*$query = 'SELECT *
-							FROM skill
-							WHERE idRealSkill >= 149 AND idRealSkill <= 164 ORDER BY idRealSkill';
-						$skildsq = $db->sql_query($query);
-						$repeatId=0;
-						while($skill = $db->sql_fetchrow($skildsq))
-						{
-
-							if($repeatId!=$skill['idSkillReal'])
-							{
-								echo "DELETE FROM aura WHERE idSkillReal = ".$skill['idSkillReal'].";<br>";
-								$repeatId=$skill['idSkillReal'];
-							}
-						}*/
-	/*for($i=149;$i<=164;$i++)
-	{
-		echo "DELETE FROM aura WHERE idSkillReal = ".$i.";<br>";
-		echo "DELETE FROM skilllearn WHERE idRealSkill = ".$i.";<br>";
-	}					
-	echo "UPDATE personaje SET paragonAcc=0, paragonNow=0 ;";
-*/
+					
 	if(!$mantenimiento OR $log->get("idCuenta")==1)
 	{
 		$query = 'SELECT * FROM gameactive';

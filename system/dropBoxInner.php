@@ -458,7 +458,7 @@ function createDrop($especif,$idBox,$tier,$dropGrado,$especial)
 			
 	switch ($especial) {
 		case 1:
-			$dropGrado=10;
+			$dropGrado=mt_rand(7,10);
 		break;
 	}
 
