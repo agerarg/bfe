@@ -1,0 +1,23 @@
+<script>
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var monsterDrop={MONSTID};
+</script>
+<script src="js/verdrops.js?{RAND}" type="text/javascript"></script>
+
+<div id="sectCustom">
+	<div class="sectCustomTitle">Drop de Bichos</div>
+    <div class="monstFill">
+     <div><img src="images/mobs/{MONSIMG}" width="50" height="50" /></div>
+      <div>{MONSTNAME}</div>
+     </div>
+     <br>
+	<div id="inventario_bot">
+    <div id="tusItems" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armaduras</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> <br /> <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> - <a href="javascript:filtro('misc');">Otros</a></div>
+
+        <div id="item_list"></div>
+        <div id="item_paginacion"></div>
+    </div>
+</div>

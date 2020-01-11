@@ -1,0 +1,168 @@
+<link href="css/jqModal.css?{RAND}" rel="stylesheet" type="text/css" />
+<link type='text/css' href='css/box/basic.css' rel='stylesheet' media='screen' />
+<!--[if lt IE 7]>
+<link type='text/css' href='css/basic_ie.css' rel='stylesheet' media='screen' />
+<![endif]-->
+<script>
+singleTargetMob=true;
+</script>
+<script type="text/javascript" src="js/antiBot.js?{RAND}"></script>
+<script type="text/javascript" src="js/monster.js?{RAND}"></script>
+<script type="text/javascript" src="js/skill.js?{RAND}"></script>
+<script type='text/javascript' src='js/box/jquery.simplemodal.js'></script>
+<script>
+var mundo=1;
+var currentMonsterLife=0;
+var pagina = 0;
+var idUsuario={ID_P};
+var focusChats=0;
+var tipoTarget=0;
+var monster_hash="";
+var allowHotKey=false;
+function setMundoEvent(eve)
+{
+	if(eve==1)
+	{
+		jAlert("Instancia terminada", 'Dungeon!',function(r) {
+					if(r)
+					{
+						location.href='index.php?sec=dungeonRank&id='+dungeon;
+					}
+		});
+	}
+	if(eve==2)
+	{
+		jAlert("Aparecen nuevos enemigos!", 'Dungeon!',function(r) {
+					if(r)
+					{
+						location.href='index.php?sec=mundo&mundo='+mundo;
+					}
+		});
+	}
+}
+$(document).ready(function(){	
+		
+		$(document).keypress(function(e) {
+			if(!$("#chatImputer").is(":focus"))
+				 if(allowHotKey)
+				 {
+					 switch(e.which)
+					 {
+						case 32:
+						 useskill(0,5,0);
+						break;
+						  <!-- BEGIN KEYBIND -->
+							case {KEYBIND.KEY}:
+							 useskill({KEYBIND.ID},{KEYBIND.CD},{KEYBIND.TAR});
+							break;
+							<!-- END KEYBIND -->
+					 }
+				 }
+			});
+	
+
+
+	goldChange({NEWGOLDCHANGE});
+	$('.skill_use').cluetip({splitTitle: '|',delayedClose: 0,cluetipClass:'auras',cursor:'pointer'});
+	 <!-- BEGIN CD -->
+	 fkingCountDown('skill_'+{CD.ID},{CD.TIME},"skill",{CD.ID});
+	 $('#skill_'+{CD.ID}).addClass("skill_cooldown");
+	 
+	<!-- END CD -->
+	
+
+
+/*$( "input" ).focus(function() {
+	focusChats=1;
+  	alert("focusChat");
+});*/
+
+	{AUTOTARGET}
+	
+
+	
+	
+});
+</script>
+<div id="inmundo">
+	<div class="mundTitle">{MUNDONAME} world </div>
+    <div class="box" id="box"></div>
+    <div id="item_paginacion"></div>
+	<div class="jqmAlert" id="atacar" style="display:none">
+    <div id="jWindow" class="jqmAlertWindow">
+        <div>
+            <div class="jqmAlertTitle">
+            <div id="monsterName" class="monsterTitulo">
+            	<h1 >Loading...</h1>
+            </div>
+            <div class="monsterClose" ><a href="javascript:closeattack();" class="jqmClose"><em>Close</em></a></div>
+          </div><br />
+        </div>
+         <div id="monsterBody"  class="monsterBody" align="center" >
+          	<div id="monsterWeakness"></div>
+             <div id="monsterImg" align="center" ></div>
+             <div id="monsterLifeBar" align="center"><img src="images/iz_fin.gif" height="22" width="2" /><img id="monsterVida" src="images/life.gif" height="22" width="200"/><img id="monsterDead" src="images/dead.gif"   height="22" width="0"/><img src="images/dr_fin.gif" height="22" width="2"/><div id="monsterLifeNumber" align="center">0/0</div></div>
+        </div>
+        <div id="monsterAlone"  class="monsterBody" align="center" >
+          	<div id="monsterWeakness"></div>
+             <div id="monsterImg" align="center" ></div>
+             <div id="monsterLifeBar" align="center"><img src="images/iz_fin.gif" height="22" width="2" /><img id="monsterVida" src="images/life.gif" height="22" width="200"/><img id="monsterDead" src="images/dead.gif"   height="22" width="0"/><img src="images/dr_fin.gif" height="22" width="2"/><div id="monsterLifeNumber" align="center">0/0</div></div>
+        </div>
+        <div>
+          <br /> <br /><br />
+        <div class="attackbox">
+        <div id="listo">
+        	<div align="center" class="monsterHabilidades">Skills:</div>
+        	<div class="barraskill skillTimer" >
+             <!-- BEGIN S -->
+    <div id="skill_{S.ID}" title="{S.NOMBRE}" align="center" onclick="javascript:useskill({S.ID},{S.CD},{S.TAR});" class="skill_use" style="background: transparent url(images/skill/{S.IMG}) no-repeat;" /></div>
+    		 <!-- END S -->
+    		</div>
+       </div>
+       <div id="espera" style="display:none">     
+            <div align="center" class="monsterHabilidades"></div>
+           <div class="barraskill" ><br /><div align="center"  id="monsterResult"></div><div align="center">Espera...</div><div align="center" id="turnotime">10</div></div>
+    		</div>
+      </div>
+        <div id="loadSkill" class="GTFO" align="center">  
+        <br /><br />   
+          <img src="images/477.gif" width="80" height="77" />
+      </div>
+    </div>
+    </div>
+</div>
+</div>
+
+<div id="checkPoint" class="GTFO">
+<div id="captContent">
+			<div class="checkpointTitle">Check Point</div>
+			<div align="center">Enter the following word to continue</div>
+            <div align="center"><img class="GTFO" id="campcha" src="" /></div>
+			 <div align="center"><input id="palabra" class="checkPointImput" name="" type="text" /></div>
+             <div align="center"><input accesskey="13" id="goCheck" type="submit" value="Continuar"/></div>
+</div>
+<div id="captLoad" class="GTFO" align="center">Checking ...<br /><img src="images/477.gif" width="124" height="128" /></div>
+		</div> 
+        
+<div id="selectTarget" class="GTFO">
+<div >
+			<div class="checkpointTitle"><a href="javascript:closeTargetSkill();">Close</a> Select:</div>
+			<div id="partyTargetShow" align="center">
+				<div align="center"><img src="images/477.gif" width="124" height="128" /></div>            
+            </div>
+</div>
+</div>
+<div>
+<div class="GTFO">
+    <img src="images/attackAnimat/v1/ata1.png" width="1" height="1" />
+    <img src="images/attackAnimat/v1/ata2.png" width="1" height="1" />
+    <img src="images/attackAnimat/v1/ata3.png" width="1" height="1" />
+    <img src="images/attackAnimat/v1/ata4.png" width="1" height="1" />
+    <img src="images/attackAnimat/v1/ata5.png" width="1" height="1" />
+    <img src="images/attackAnimat/v2/ata1.png" width="1" height="1" />
+    <img src="images/attackAnimat/v2/ata2.png" width="1" height="1" />
+    <img src="images/attackAnimat/v3/ata3.png" width="1" height="1" />
+    <img src="images/attackAnimat/v4/ata4.png" width="1" height="1" />
+    <img src="images/attackAnimat/v5/ata5.png" width="1" height="1" />
+    <img src="images/attackAnimat/skill/magic.gif" width="1" height="1" /></div>
+</div>      

@@ -1,0 +1,19 @@
+.pickClase{ cursor: pointer; }
+#warrior_tap{display: none;}
+#mago_tap{display: none; padding-left: 20px;}
+#rouge_tap{display: none; padding-left: 20px;}
+.perosnajeImg{ }
+#crearPersonaje{display: none;}
+.caroSpacerino{ height: 300px; }
+.gtfo{display: none;}
+#skillList{ width: 750px; height: 800px; overflow: auto; }
+.skillList_name{ color: #FF5508; text-align: center; }
+.skillList_box{ margin-bottom: 10px; border: 1px #222222 solid; background-color: #0E0E0E; height: 200px; width: 720px; padding: 5px 5px 5px 5px; }
+.skillList_box:hover{  border: 1px white solid;  }
+
+.skillList_img{ cursor: pointer; float: left; width: 150px; height: 100px; text-align: center;}
+.skillList_desc{  width: 700px; height: 100px; border: 1px #222222 solid; }
+.skillList_runas{ padding-top: 5px; width: 700px;  background-color: #111111; border: 1px #222222 solid; }
+
+.skillList_active{ color: #26C9FF; }
+.skillList_pasive{ color: #00FF40; }

@@ -1,0 +1,429 @@
+<div  class="subClassThings" id="sectCustom">
+	<div class="sectCustomTitle">The Void</a></div>
+  <style type="text/css">
+    
+    #voidMark{
+      width: 490px;
+      height: 600px;
+      background-color: red;
+      overflow: scroll;
+      position: absolute;
+    }
+    #voidContent{
+      position: absolute;
+      background-image: url("images/thevoid/map.jpg?1");
+      width: 2254px;
+      height: 1031px;
+
+    }
+    .bossSlot{
+      position: absolute;
+      cursor: pointer;
+      width: 70px;
+      height: 65px;
+    }
+    .bossSlot:hover{
+      color: red;
+    }
+
+    .mapDisable{
+       -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+    }
+
+    #map1{
+      left: 390px;
+      top: 435px;
+      background-image: url("images/thevoid/boss/sandking.png");
+      background-repeat: no-repeat;
+      background-size:     cover;   
+    }
+    #map2{
+       left: 388px;
+      top: 550px;
+       background-image: url("images/thevoid/boss/lomkor.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+     #map3{
+       left: 451px;
+      top: 697px;
+       background-image: url("images/thevoid/boss/grunt.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+    #map4{
+       left: 745px;
+      top: 733px;
+       background-image: url("images/thevoid/boss/thebeast.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+    #map5{
+       left: 1476px;
+      top: 625px;
+       background-image: url("images/thevoid/boss/thething.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+    #map6{
+       left: 1561px;
+      top: 475px;
+       background-image: url("images/thevoid/boss/Kaiza.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+     #map7{
+       left: 1561px;
+      top: 382px;
+       background-image: url("images/thevoid/boss/Xhol.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+    #map8{
+       left: 1561px;
+      top: 268px;
+       background-image: url("images/thevoid/boss/Kaka.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+    #map9{
+       left: 588px;
+      top: 504px;
+       background-image: url("images/thevoid/boss/Borax.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+    #map10{
+       left: 647px;
+      top: 652px;
+       background-image: url("images/thevoid/boss/Darsso.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+     #map11{
+       left: 1360px;
+      top: 468px;
+       background-image: url("images/thevoid/boss/Darkness.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+     #map12{
+       left: 1371px;
+      top: 309px;
+       background-image: url("images/thevoid/boss/Mahw.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+     #map13{
+       left: 787px;
+      top: 506px;
+       background-image: url("images/thevoid/boss/Uhl.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+    #map14{
+       left: 1180px;
+      top: 382px;
+       background-image: url("images/thevoid/boss/Quill.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+    #trixie{
+       left: 981px;
+      top: 454px;
+       background-image: url("images/thevoid/boss/Trixie.png");
+       background-repeat: no-repeat;
+       background-size:     cover;  
+    }
+
+    .frontTier{
+      position: absolute;
+       background-repeat: no-repeat;
+       background-size:     cover;  
+        width: 70px;
+      height: 65px;
+    }
+    .tier1{
+       background-image: url("images/thevoid/bossTier1.png");
+    }
+    .tier2{
+      background-image: url("images/thevoid/bossTier3.png");
+    }
+    .tier3{
+      background-image: url("images/thevoid/bossTier6.png");
+    }
+    .tier8{
+       background-image: url("images/thevoid/bossTier8.png");
+    }
+
+  #mapDetail{
+    position: absolute;
+    background-image: url("images/thevoid/monsterPerfil.png");
+    width: 499px;
+    height: 506px;
+    left: -10px;
+    top: 50px;
+    padding: 2px;
+    font-size: 20px;
+    display: none;
+   font-variant: small-caps; font-size:14px; font-weight:bold; color:#49311D;
+
+  }
+  .mapName{
+    position: absolute;
+    top: 50px;
+    width: 499px;
+    text-align: center;
+    font-size: 30px;
+  }
+  .mapLevel{
+    position: absolute;
+    top: 90px;
+    width: 499px;
+    text-align: center;
+    font-size: 30px;
+  }
+  .mapFeactures{
+    position: absolute;
+    top: 130px;
+    width: 350px;
+    background-color: #513926;
+    color: white;
+    border: 2px solid #111111;
+    text-align: center;
+    font-size: 18px;
+     font-weight: normal;
+     text-align: left;
+     left: 75px;
+  }
+  .mapDrops{
+    position: absolute;
+    top: 270px;
+    width: 350px;
+    background-color: #513926;
+    color: white;
+    border: 2px solid #111111;
+    text-align: center;
+    font-size: 18px;
+     font-weight: normal;
+     text-align: left;
+     left: 75px;
+  }
+  .mapJugar{
+    position: absolute;
+    text-align: center;
+    font-size: 30px;
+    top: 390px;
+    width: 200px;
+    left: 150px;
+    background-color: #F4D476;
+    cursor: pointer;
+    border: 2px solid #111111;
+  }
+  .mapJugar:hover{
+    background-color: #9F6E47;
+  }
+
+  .mapBossName{
+    position: absolute;
+    top: 50px;
+    width: 70px;
+    text-align: center;
+  }
+
+  .mapSalir{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 425px;
+    top: 25px;
+    cursor: pointer;
+  }
+
+  </style>
+  <div id="voidMark" onscroll="ScrollMove()" onmouseout="saveScroll()" class="scrollChatter">
+      <div id="voidContent">
+          <div class="bossSlot" onclick="playMap(1)" id="map1">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">SandKing</div> 
+            </div> 
+          </div>
+          <div class="bossSlot" onclick="playMap(2)" id="map2">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">Lomkor</div> 
+          </div>
+
+        </div>
+          <div class="bossSlot" onclick="playMap(2)" id="map3">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">Grunt</div> 
+          </div>
+        </div>
+
+        </div>
+          <div class="bossSlot" onclick="playMap(2)" id="map4">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">The Beast</div> 
+          </div>
+        </div>
+
+          <div class="bossSlot" onclick="playMap(2)" id="map5">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">The Thing</div> 
+          </div>
+        </div>
+
+        <div class="bossSlot" onclick="playMap(2)" id="map6">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">Kaiza</div> 
+          </div>
+        </div>
+
+        <div class="bossSlot" onclick="playMap(2)" id="map7">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">Xhol</div> 
+          </div>
+        </div>
+
+        <div class="bossSlot" onclick="playMap(2)" id="map8">
+            <div class="frontTier tier1"> 
+              <div class="mapBossName">Kaka</div> 
+          </div>
+        </div>
+
+         <div class="bossSlot mapDisable" onclick="playMap(2)" id="map9">
+            <div class="frontTier tier2"> 
+              <div class="mapBossName">Borax</div> 
+          </div>
+        </div>
+        
+         <div class="bossSlot mapDisable" onclick="playMap(2)" id="map10">
+            <div class="frontTier tier2"> 
+              <div class="mapBossName">Darsso</div> 
+          </div>
+        </div>
+
+        <div class="bossSlot mapDisable" onclick="playMap(2)" id="map11">
+            <div class="frontTier tier2"> 
+              <div class="mapBossName">Darkness</div> 
+          </div>
+        </div>
+
+        <div class="bossSlot mapDisable" onclick="playMap(2)" id="map12">
+            <div class="frontTier tier2"> 
+              <div class="mapBossName">Mahw</div> 
+          </div>
+        </div>
+
+        <div class="bossSlot mapDisable" onclick="playMap(2)" id="map13">
+            <div class="frontTier tier3"> 
+              <div class="mapBossName">Uhl</div> 
+          </div>
+        </div>
+
+
+         <div class="bossSlot mapDisable" onclick="playMap(2)" id="map14">
+            <div class="frontTier tier3"> 
+              <div class="mapBossName">Quill</div> 
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+          <div class="bossSlot mapDisable" onclick="playMap(2)" id="trixie">
+            <div class="frontTier tier8"> 
+              <div class="mapBossName">Trixie</div> 
+          </div>
+        </div>
+
+
+
+
+
+
+        </div>
+  </div>
+  <div id="mapDetail">
+      <div class="mapName"> Boss: Borax </div>
+
+      <div class="mapLevel"> Nivel: 100 </div>
+      <div class="mapFeactures">
+        <div> Detalle:</div>
+        <div> - Monstruos tiene +50% chance de critico.</div>
+        <div> - Monstruos tiene +20% de vida.</div>
+        <div> - Monstruos hacen daño de fuego.</div>
+        <div> - Monstruos tienen 140% mas daño en critico.</div>
+    </div>
+    <div class="mapDrops">
+        <div> Drop:</div>
+        <div> - 1% chance de item Astral.</div>
+        <div> - Solo dropea armas.</div>
+        <div> - Da 150% mas oro.</div>
+        <div> - Da 350% mas experiencia.</div>
+    </div>
+      <div class="mapJugar"> Jugar </div>
+       <div class="mapSalir" onclick="closeMap()"> <img src="images/cancel.png" width="50" height="50"> </div>
+  </div>
+</div>
+  <script type="text/javascript">
+    var allowSaveScroll=false;
+    var savedPostTop=0;
+    var savedPostLeft=0;
+    var showDetail=false;
+    ScrollMove=()=>{
+       var el = document.querySelector('#voidMark');
+      if(!showDetail)
+      {
+        allowSaveScroll=true;
+        savedPostTop=el.scrollTop ;
+        savedPostLeft=el.scrollLeft;
+      }
+      else
+      {
+        el.scrollLeft = savedPostLeft;
+        el.scrollTop = savedPostTop;
+      }
+    }
+
+    saveScroll=()=>{
+      if(allowSaveScroll)
+      {
+         var el = document.querySelector('#voidMark');
+          $.ajax({
+          data: "top="+el.scrollTop+"&left="+el.scrollLeft,
+          type: "GET",
+          url: "json/voidMapSave.php",
+        });
+          allowSaveScroll=false;
+      }
+    }
+    var el = document.querySelector('#voidMark');
+    el.scrollLeft = parseInt("{VOID_LEFT}");
+    el.scrollTop = parseInt("{VOID_TOP}");
+
+   closeMap=()=>{
+        showDetail=false;
+        $("#mapDetail").hide();
+   }   
+   playMap=(id)=>{
+        showDetail=true;
+        $("#mapDetail").show();
+    }
+  </script>

@@ -1,0 +1,29 @@
+<script>
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var selectedName="";
+var mundoOverall={SELWORLD};
+var gradoOverall={GRADE}
+</script>
+<script src="js/craft.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	checkItems();
+});
+</script>
+<div id="sectCraft">
+	<div class="sectCustomTitle"></div>
+        <div class="listingThings">
+        <div class="dimencionalCrft" align="center">{DIMENCIONCR}</div>
+             <div id="overallList">
+            <div id="tusItems" align="center"><div id="tusItems" align="center"><a href="javascript:filtro('todo');">All</a> - <a href="javascript:filtro('W');">Weapon</a> - <a href="javascript:filtro('armor');">Armor</a> - <a href="javascript:filtro('foots');">Boots</a> - <a href="javascript:filtro('gloves');">Gloves</a> - <a href="javascript:filtro('head');">Helmet</a> <br /> <a href="javascript:filtro('shield');">Shield</a> - <a href="javascript:filtro('rings');">Ring</a> - <a href="javascript:filtro('necklace');">Necklace</a></div></div>
+                <div id="questBar" align="center"></div>
+                <div id="item_paginacion"></div>
+          </div>
+          <div align="center" class="GTFO" id="verCraftLoco"></div>
+               <div align="center" class="GTFO" id="LoadingCraft"><img src="images/craft.gif" width="362" height="378" /></div>
+ 	   </div>
+       
+</div>

@@ -1,0 +1,14 @@
+var userVida;
+var userVidaLimit;
+var userMana;
+var userManaLimit;
+var userExp;
+var userExpLimit;
+var userName="none";
+var userId;
+var MONSTER=0;
+var MaloId=0;
+var CANTIDAD_AURAS=0;
+var estoyEnInventario=0;
+var clockInterno=300;
+var javaActivado=1;

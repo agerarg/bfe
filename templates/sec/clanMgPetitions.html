@@ -1,0 +1,20 @@
+<script>
+function enviar()
+{
+	 $("#invitation").submit();
+}
+</script>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Clan {NOMBRECLAN} Manage</div>
+    <div class="clanManageLinks" align="center">
+    	{CLAN_ADMIN}
+   </div>
+   <div class="invittations">
+   <div class="clanSectionTitle" align="center">Invitar </div>
+    <div class="listingThings">
+    	<div align="center">{DMINLINK}</div>
+       <div class="invittations" align="center"> <form id="invitation" action="" method="post"><div>Personaje: <input name="invite" type="text"  class="boxInner" size="15"/><br /><a  href="javascript:enviar();">Enviar invitacion</a></div></form></div>
+      </div>
+     <div align="center">{NUMERACION}</div>
+    </div>
+</div>

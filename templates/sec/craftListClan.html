@@ -1,0 +1,51 @@
+<script>
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var selectedName="";
+var mundoOverall={SELWORLD};
+var gradoOverall={GRADE}
+var runz={RUNZ};
+</script>
+<script src="js/craft.js?{RAND}" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	checkItems();
+	$('#grados').change(function() {
+		runz=$('#grados').val();
+		filtro('todo');
+		volverLista();
+		$('#questBar').text("");
+		$('#item_paginacion').text("");
+		checkItems();
+	});
+});
+</script>
+<div  id="sectCraft">
+	<div class="sectCustomTitle"></div>
+        <div class="listingThings">
+        <div class="gadeChose" align="center">Grado: 
+        <select name="Grados" id="grados">
+            <option selected="selected" value="2">Lvl: 2 (Grado C Low)</option>
+            <option value="3">Lvl: 3 (Grado C Top)</option>
+            <option value="4">Lvl: 4 (Grado B Low)</option>
+            <option value="5">Lvl: 5 (Grado B Top)</option>
+            <option value="6">Lvl: 6 (Grado A Low)</option>
+            <option value="7">Lvl: 7 (Grado A Top)</option>
+            <option value="8">Lvl: 8 (Grado S)</option>
+            <option value="9">Lvl: 9 (Grado X)</option>
+            <option value="10">Lvl: 10 (Grado Y)</option>
+            <option value="11">Lvl: 11 (Grado Z)</option>
+        </select>
+		</div>
+             <div id="overallList">
+            <div id="tusItems" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armaduras</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> <br /> <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> - <a href="javascript:filtro('misc');">Otros</a></div>
+                <div id="questBar" align="center"></div>
+                <div id="item_paginacion"></div>
+          </div>
+          <div align="center" class="scrollChatter" class="GTFO" id="verCraftLoco"></div>
+               <div align="center" class="GTFO" id="LoadingCraft"><img src="images/craft.gif" width="362" height="378" /></div>
+ 	   </div>
+       
+</div>

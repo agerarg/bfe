@@ -1,0 +1,69 @@
+<style>     
+#sect_habilidades_ini{
+	width:490px;
+	height:646px;}
+</style>
+<script>
+//var points = {PUNTOS};
+const XPosInicial = 1920/2-20;
+const YPosInicial = 1200/2;
+</script>
+<script src="js/craftmap/pasivosNav.js?{RAND}" type="text/javascript"></script>
+<script src="js/craftmap/initPasiv.js" type="text/javascript"></script>
+<script>
+function passCheck(data)
+{
+	if(data['error']==0)
+		jAlert("Comienza Instancia", 'Dungeon!',function(r) {
+						if(r)
+						{
+							location.href='index.php?sec=mundo';
+						}
+					});
+	else if(data['error']==2)
+	{
+		jAlert(data['msg'], 'Nueva Habilidad');	
+		$( "#p"+data['idPas'] ).removeClass( "pasNoAprendido" );
+		$("#puntosPasv").text("Inicio - Puntos: "+data['puntos']);
+
+	}
+	else
+		jAlert(data['msg'], 'Error');	
+}
+function aprender(id)
+{
+	$(".popup").hide();
+	$.ajax({
+					data: "id="+id,
+					type: "GET",
+					dataType: "json",
+					url: "json/pasivoCheck.php",
+					success: function(data){
+					passCheck(data);
+				}
+				});
+	
+}
+</script>
+<div id="content" align="center">	
+		<div class="relative">
+			<div class="ElMap">
+				<img src="images/pasivos.jpg" class="imgMap" />
+				<div class="marker" id="yo" data-coords="940, 590">
+					<h3>Inicio de aventuras</h3>
+				</div>
+				   
+                     <!-- BEGIN S -->
+                   <div class="marker {S.IMG} {S.BLACK}" id="p{S.ID}"  data-coords="{S.COOX}, {S.COOY}">
+					<h3>{S.NAME}</h3>
+               	  <div class="content"><div>{S.DESC}</div>
+                 {S.NEW}</div>
+				</div>
+					 <!-- END S -->
+
+			</div>
+			<div class="controls">
+				<a href="#" rel="yo" id="puntosPasv">Inicio - Puntos: {ADVPUNTOS}</a>
+			</div>
+		</div>
+</div>

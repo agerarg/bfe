@@ -1,0 +1,30 @@
+<script>
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var selectedName="";
+var mundoOverall={SELWORLD};
+var gradoOverall={GRADE};
+var runz={RUNZ};
+</script>
+<script src="js/craft.js?{RAND}" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	checkItems();
+});
+</script>
+<div id="sectCraft">
+	<div class="sectCustomTitle"></div>
+        <div class="listingThings">
+        <div class="gadeChose" align="center"><a href="index.php?sec=craft&grade=1">Grado C</a> - <a href="index.php?sec=craft&grade=2">Grado B</a> - <a href="index.php?sec=craft&grade=3">Grado A</a> - <a href="index.php?sec=craft&grade=4">Grado S</a></div>
+             <div id="overallList">
+            <div id="tusItems" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armor</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> <br /> <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> - <a href="javascript:filtro('misc');">Otros</a></div>
+                <div id="questBar" align="center"></div>
+                <div id="item_paginacion"></div>
+          </div>
+          <div align="center" class="GTFO" id="verCraftLoco"></div>
+               <div align="center" class="GTFO" id="LoadingCraft"><img src="images/craft.gif" width="362" height="378" /></div>
+ 	   </div>
+       
+</div>

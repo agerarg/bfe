@@ -1,0 +1,28 @@
+<script>
+var inventl = parseInt("{INVITEPIBE}");
+$( document ).ready(function() {
+   if(inventl)
+       invitarPibe(inventl);
+});
+</script>
+<div id="sectCustom">
+    <div class="sectCustomTitle">Party: Invite</div>
+    <div class="partyButtons ">
+        <div class="menuItem left" onclick="location.href='index.php?sec=party';">Volver a Party</div>
+    </div>
+    <div class="listingThings">
+                    <form method="POST" action="">
+                       Invitar: <input class="boxInner" type="text" name="nick" > <input name="invite" value="Invitar" type="submit" />
+                    </form>
+      <div class="invitationListerino">
+      <!-- BEGIN INVITES -->
+       <div >
+              <div class="listingPjSlotInv" >
+              <div class="listingImager"><img src="images/clases/{INVITES.IMG}_{INVITES.SEXO}.jpg" alt="" width="50" height="50" /></div>
+              <div class="listingNamePet">&nbsp;<a href='index.php?sec=ver&pj={INVITES.NOMBRELINK}'>{INVITES.NOMBRE}</a> Lvl:{INVITES.LVL}<br>INVITADO!</div>
+              </div>
+       </div>  
+     <!-- END INVITES -->
+     </div>
+    </div>
+</div>

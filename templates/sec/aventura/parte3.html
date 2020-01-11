@@ -1,0 +1,380 @@
+<script src="js/ion.sound.js"></script>
+<script>
+var steps=0;
+var honor = parseInt("{HONOR}");
+var timeTrak=0;
+var char="";
+function fin(honor)
+{
+	location.href='index.php?sec=mundo';
+}
+function finalizar(con)
+{
+	$.ajax({
+		data: "pj="+con,
+		type: "GET",
+		dataType: "json",
+		url: "json/finAvent.php",
+		success: function(honor){
+		fin(honor);
+	}
+	});
+}
+$(document).ready(function(){	
+	ion.sound({
+            sounds: [
+                {name: "markulion1"},
+				{name: "markulion2"},
+				{name: "markulion3"},
+				{name: "markulion4"},
+				{name: "markulion5"},
+				{name: "markulion6"},
+				{name: "markulion7"},
+				{name: "markulion8"},
+				{name: "markulion9"},
+				{name: "markulion10"},
+				{name: "markulion11"},
+				{name: "kike1"},
+				{name: "kike2"},
+				{name: "kike3"},
+				{name: "darkolo1"},
+				{name: "darkolo2"},
+				{name: "pepe1"},
+				{name: "pepe2"}
+            ],
+            path: "audio/parte3/",
+            preload: true,
+            volume: 1.0,
+			multiplay: false
+        });
+		/*setTimeout(function() {
+			ion.sound.play("test");
+		}, 1000);	*/	
+		$( "#Opcion1" ).click(function() {
+			$("#Opcion1").hide(100);
+			$("#Opcion2").hide(100);
+			$("#Opcion3").hide(100);
+		  	switch(steps)
+			{
+				case 1:
+					char="kike";
+					$("#darkolo_boidy").hide(500);
+					$("#pepe_boidy").hide(500);
+					$("#kike_boidy").show(500);
+					$( "#kike_boidy" ).animate({ "left": "=50" }, "slow" );
+					setTimeout(function() {
+						$("#markulion_dialog").text("Bueno si tenes algunas preguntas para Kike es el momento");
+						ion.sound.play("markulion9");
+					}, 500);
+					setTimeout(function() {
+						$("#Opcion1").text("Que me podes enseñar?");
+						$("#Opcion1").show(300);
+						$("#Opcion2").text("Creo que quiero elegir a otro");
+						$("#Opcion2").show(600);
+						$("#Opcion3").text("OK eligo a Kike");
+						$("#Opcion3").show(600);
+						steps=2;
+					}, 1000);
+				break;
+				case 2:
+					setTimeout(function() {
+						$("#markulion_dialog").text("");
+						$("#kike_dialog").text("Te voy a enseñar el comlicado arte de hacer choripanes.");
+						ion.sound.play("kike3");
+					}, 500);	
+					setTimeout(function() {
+						$("#Opcion2").text("Creo que quiero elegir a otro");
+						$("#Opcion2").show(600);
+						$("#Opcion3").text("OK eligo a Kike");
+						$("#Opcion3").show(600);
+					}, 1000);
+										
+				break;
+				case 3:
+					setTimeout(function() {
+						$("#markulion_dialog").text("");
+						$("#darkolo_dialog").text("Te voy a enseñar artes oscuras amigo");
+						ion.sound.play("darkolo2");
+					}, 500);	
+					setTimeout(function() {
+						$("#Opcion2").text("Creo que quiero elegir a otro");
+						$("#Opcion2").show(600);
+						$("#Opcion3").text("OK eligo a Darkolo");
+						$("#Opcion3").show(600);
+					}, 1000);
+										
+				break;
+				case 4:
+					setTimeout(function() {
+						$("#markulion_dialog").text("");
+						$("#pepe_dialog").text("Te voy a enseñar a curar que mas puede ser");
+						ion.sound.play("pepe2");
+					}, 500);	
+					setTimeout(function() {
+						$("#Opcion2").text("Creo que quiero elegir a otro");
+						$("#Opcion2").show(600);
+						$("#Opcion3").text("OK eligo a Pepe");
+						$("#Opcion3").show(600);
+					}, 1000);
+										
+				break;
+			}
+		});
+		
+		$( "#Opcion2" ).click(function() {
+			$("#Opcion1").hide(100);
+			$("#Opcion2").hide(100);
+			$("#Opcion3").hide(100);
+		  	switch(steps)
+			{
+				case 1:
+					char="darkolo";
+					$("#kike_boidy").hide(500);
+					$("#pepe_boidy").hide(500);
+					$("#darkolo_boidy").show(500);
+					$( "#darkolo_boidy" ).animate({ "left": "+=100" }, "slow" );
+					setTimeout(function() {
+						$("#markulion_dialog").text("Bueno si tenes algunas preguntas para Darkolo es el momento");
+							ion.sound.play("markulion10");
+					}, 500);
+					setTimeout(function() {
+						$("#Opcion1").text("Que me podes enseñar?");
+						$("#Opcion1").show(300);
+						$("#Opcion2").text("Creo que quiero elegir a otro");
+						$("#Opcion2").show(600);
+						$("#Opcion3").text("OK eligo a Darkolo");
+						$("#Opcion3").show(600);
+						steps=3;
+					}, 1000);
+				break;
+				case 2:
+					setTimeout(function() {
+						$("#markulion_dialog").text("Bueno quien sera entonces?");
+					}, 500);
+					setTimeout(function() {
+						$("#Opcion2").text("Darkolo");
+						$("#Opcion2").show(600);
+						$("#Opcion3").text("Pepe");
+						$("#Opcion3").show(600);
+						steps=1;
+					}, 500);						
+				break;
+				case 3:
+					setTimeout(function() {
+						$("#markulion_dialog").text("Bueno quien sera entonces?");
+					}, 500);
+					setTimeout(function() {
+						$("#Opcion1").text("Kike");
+						$("#Opcion1").show(300);
+						$("#Opcion3").text("Pepe");
+						$("#Opcion3").show(600);
+						steps=1;
+					}, 500);						
+				break;
+				case 4:
+					setTimeout(function() {
+						$("#markulion_dialog").text("Bueno quien sera entonces?");
+					}, 500);
+					setTimeout(function() {
+						$("#Opcion1").text("Kike");
+						$("#Opcion1").show(300);
+						$("#Opcion2").text("Darkolo");
+						$("#Opcion2").show(600);
+						steps=1;
+					}, 500);						
+				break;
+			}
+		});
+		
+		
+		$( "#Opcion3" ).click(function() {
+			$("#Opcion1").hide(100);
+			$("#Opcion2").hide(100);
+			$("#Opcion3").hide(100);
+		  	switch(steps)
+			{
+				case 1:
+					char="pepe";
+					$("#kike_boidy").hide(500);
+					$("#darkolo_boidy").hide(500);
+					$("#pepe_boidy").show(500);
+					$( "#pepe_boidy" ).animate({ "left": "+=100" }, "slow" );
+					setTimeout(function() {
+						$("#markulion_dialog").text("Bueno si tenes algunas preguntas para Pepe es el momento");
+							ion.sound.play("markulion11");
+					}, 500);
+					setTimeout(function() {
+						$("#Opcion1").text("Que me podes enseñar?");
+						$("#Opcion1").show(300);
+						$("#Opcion2").text("Creo que quiero elegir a otro");
+						$("#Opcion2").show(600);
+						$("#Opcion3").text("OK eligo a Pepe");
+						$("#Opcion3").show(600);
+						steps=4;
+					}, 1000);
+				break;
+				case 2:
+					finalizar(1);								
+				break;
+				case 3:
+					finalizar(2);								
+				break;
+				case 4:
+					finalizar(3);								
+				break;
+				
+			}
+		});
+		
+		$("#cargandoCosa").show(300);
+		setTimeout(function() {
+			$("#cargandoCosa").hide(300);
+			$("#markulion_boidy").show(500);
+			$( "#markulion_boidy" ).animate({ "left": "+=150px" }, "slow" );			
+			if(honor==1)
+			{
+				$("#markulion_dialog").text("Ya tenemos el castillo ahora neceitamos que vayas a Garcalandia a vencerlos de una vez por todas");
+				ion.sound.play("markulion1");
+				$("#markulion_dialog").show(500);
+				timeTrak=1000;
+			}
+			else
+			{
+				$("#markulion_dialog").text("Vendiste la espada sos un hijo de puta, bueh");
+				ion.sound.play("markulion2");
+
+				$("#markulion_dialog").show(500);
+				setTimeout(function() {
+					$("#markulion_dialog").text("Ya tenemos el castillo ahora neceitamos que vayas a Garcalandia a vencerlos de una vez por todas");
+					ion.sound.play("markulion1");
+				}, 5000);
+				timeTrak=7000;
+			}
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("Pero no vas a ir solo, vas a elegir un compañero para que te ayude");
+				ion.sound.play("markulion3");
+			}, timeTrak+5000);			
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("");
+				$( "#markulion_boidy" ).animate({ "left": "-=130px" }, "slow" );	
+				$("#kike_dialog").show();
+				ion.sound.play("kike1");
+				$("#kike_dialog").text("Hola vieja");
+					
+				$("#kike_boidy").show(500);
+				$( "#kike_boidy" ).animate({ "left": "+=40" }, "slow" );
+			}, timeTrak+9000);	
+			
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("Kike es un boludo que sabe hacer choripanes.");
+				ion.sound.play("markulion4");
+			}, timeTrak+12000);	
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("");
+				$("#kike_dialog").text("Los mejores choris del reino vieja");
+				ion.sound.play("kike2");
+			}, timeTrak+15000);	
+			
+			setTimeout(function() {
+				$("#kike_dialog").text("");
+				$("#markulion_dialog").text("Luego lo tenemos a Darkolo");
+				$("#darkolo_boidy").show(500);
+				ion.sound.play("markulion5");
+				$( "#darkolo_boidy" ).animate({ "left": "+=0" }, "slow" );
+				
+			}, timeTrak+18000);	
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("");
+				$("#darkolo_dialog").show();
+				ion.sound.play("darkolo1");
+				$("#darkolo_dialog").text("La oscuridad es la ausencia de luminosidad");
+			}, timeTrak+21000);	
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("Bueno Darkolo ya sabemos que sos un pelotudo no hace falta la aclaración.");
+				$("#darkolo_dialog").text("");
+				ion.sound.play("markulion6");
+			}, timeTrak+24000);	
+			
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("Y pepe que es uno de esos boludos que curan");
+				$("#pepe_boidy").show(500);
+				ion.sound.play("markulion7");
+				$( "#pepe_boidy" ).animate({ "left": "-=20" }, "slow" );
+				
+			}, timeTrak+28000);	
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("");
+				$("#pepe_dialog").show(500);
+				ion.sound.play("pepe1");
+				$( "#pepe_dialog" ).text("No te hagas el vivo Markulion eh");
+			}, timeTrak+31000);	
+			
+			setTimeout(function() {
+				$("#markulion_dialog").text("Bueno elije lo que te pareza mejor.");
+				ion.sound.play("markulion8");
+				$( "#pepe_dialog" ).text("");
+			}, timeTrak+34000);	
+			
+			setTimeout(function() {
+				$("#Opcion1").text("Kike");
+				$("#Opcion1").show(300);
+				$("#Opcion2").text("Darkolo");
+				$("#Opcion2").show(600);
+				$("#Opcion3").text("Pepe");
+				$("#Opcion3").show(600);
+				steps=1;
+			}, timeTrak+33000);
+		
+		}, 5000);
+		
+		
+});
+
+</script>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Viaje a Garcalandia:</div>
+    <div id="cargandoCosa" align="center">Cargando...<br />
+   <img src="images/477.gif" width="124" height="128" /></div>
+  <div id="AdvScreen">
+      <div id="markulion_boidy" class="personaje" align="center">
+        <div class="charName">Markulion</div>
+        <div class="imgFace"><img src="images/aventura/personaje/markulion.jpg" width="100" height="150" /></div>
+        <div class="dialogo" id="markulion_dialog"></div>
+       </div>
+        
+        <div id="kike_boidy" class="personaje" align="center">
+        <div class="charName">Kike</div>
+        <div class="imgFace"><img src="images/aventura/personaje/kike.jpg" width="100" height="150" /></div>
+        <div class="dialogo" id="kike_dialog"></div>
+       </div>
+       
+        <div id="darkolo_boidy" class="personaje" align="center">
+        <div class="charName">Darkolo</div>
+        <div class="imgFace"><img src="images/aventura/personaje/darkolo.jpg" width="100" height="150" /></div>
+        <div class="dialogo" id="darkolo_dialog"></div>
+       </div>
+       
+        <div id="pepe_boidy" class="personaje" align="center">
+        <div class="charName">Pepe</div>
+        <div class="imgFace"><img src="images/aventura/personaje/pepe.jpg" width="100" height="150" /></div>
+        <div class="dialogo" id="pepe_dialog"></div>
+       </div>
+       
+       
+   </div>
+   <div id="diaOpciones">
+   <div class="dialOpciones GTFO" id="Opcion1"></div>
+   <div class="dialOpciones GTFO" id="Opcion2"></div>
+   <div class="dialOpciones GTFO" id="Opcion3"></div>
+   </div>
+</div>
+
+

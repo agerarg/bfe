@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tutorial: Battle For Embolia</title>
+<meta name="description" content="Juego de rol gratis por navegador" />
+<link rel="stylesheet" type="text/css" href="css/default.css?{RAND}" />
+<link rel="stylesheet" type="text/css" href="css/tutorial.css?{RAND}" />
+<link href="images/favicon.png" rel="shortcut icon" />
+<script>
+show = function (elem) {
+    let el = document.querySelector(elem);
+	el.style.display = 'block';
+};
+hide = function (elem) {
+    let el = document.querySelector(elem);
+	el.style.display = 'none';
+};    
+closeAllTutorials = ()=>{
+    hide("#tutorial1");
+    hide("#tutorial2");
+    hide("#tutorial3");
+    hide("#tutorial4");
+}
+showTutorial=(id)=>{
+    closeAllTutorials();
+    show("#tutorial"+id);
+}
+</script>
+</head>
+<body>
+<div id="main">
+<div id="header_logo">
+	 <img src="images/logo2.jpg" />
+        </div>
+      <div id="contenedor">
+        <div id="bienv"><img src="images/bienvenido.png" /></div>
+        <div class="TuCenterBox">
+                <div class="tutorButton " onclick="showTutorial(1)">Como comenzar el juego</div>
+                <div class="tutorButton " onclick="showTutorial(2)">Como hacer más daño y estadísticas</div>
+                <div class="tutorButton " onclick="showTutorial(3)">Como conseguir mejores items</div>
+                <div class="tutorButton" onclick="showTutorial(4)">Que tengo que saber de mi personaje</div>
+            </div>
+
+
+
+
+            <div class="GTFO"  id="tutorial4">
+                <div class="tutorialContent">
+                    <div class="tuto_title">Que tengo que saber de mi personaje</div>
+                    <div class="tuto_bloque">
+                        <div  class="tuto_texto">
+                            <p><span class="tuto_high">Zombie Tank:</span> lo recomendado es usar arma tipo <span class="tuto_high">Blunt</span > 
+                                simplemente por dos factores y es <span class="tuto_high">Perseverancia</span> y <span class="tuto_high">Bluntieitor</span>
+                                el daño puede ser descomunal contra objetivos que sean muy duros como Raid Boses.<br>A la hora de resistir daño, es conveniente rollear items 
+                            para conseguir la <span class="tuto_high">Defensa</span> ya que esta es multiplicativa cuando proviene de items.</p>
+                        </div>
+                        <div class="tuto_imagen">
+                              <img src="images/clases/zombie_tank_0.jpg" />
+                        </div>
+                     </div>
+                     <div class="tuto_bloque">
+                        <div  class="tuto_texto">
+                            <p><span class="tuto_high">Dark Mage:</span> En nivel 1 actualiza <span class="tuto_high">Soul Cannon</span>, este personaje es puramente de daño y todo proviene de el <span class="tuto_high">Ataque Magico</span> necesitas rollear items 
+                                a <span class="tuto_high">Critico Magico</span>, <span class="tuto_high">PCM</span> (Poder Critico Magico) y <span class="tuto_high">Ataque Magico</span> en ese orden,
+                                 el daño esta cuando acumulas <span class="tuto_high">Soul Cannon</span> y utilizas <span class="tuto_high">Soul Impact</span> y <span class="tuto_high">Soul Vortex</span>.<br>
+                                Trata de buscar un set que te de <span class="tuto_high">Vel Casteo</span> para poder utilizar las habilidades más seguido.</p>
+                        </div>
+                        <div class="tuto_imagen">
+                              <img src="images/clases/skeleton_mage_0.jpg" />
+                              <br>
+                              
+                        </div>
+                     </div> 
+                     <div class="tuto_bloque">
+                        <div  class="tuto_texto">
+                            <p><span class="tuto_high">Vampiro:</span> usar arma tipo <span class="tuto_high">Fist</span> tu daño aumenta con <span class="tuto_high">Magic Seal</span> y <span class="tuto_high">Blood Seeker</span>
+                                igualmente tiene habilidades para resistir por si queres ser tanke en Raid Boss.</p>
+                        </div>
+                        <div class="tuto_imagen">
+                            <img src="images/clases/vampire_1.jpg" />
+                        </div>
+                     </div> 
+
+                    
+                     <div class="tuto_bloque">
+                     <div  class="tuto_texto">
+                         <p><span class="tuto_high">Ninja:</span> usar arma tipo <span class="tuto_high">Dagger</span>, lo más importante es aprender a hacer <span class="tuto_high">COMBOS</span>
+                        , cada habilidada <span class="tuto_high">"Blow"</span> muestra un mensaje que es una abreviación de otra habilidad <span class="tuto_high">"blow"</span> si usas esa el <span class="tuto_high">COMBO</span>
+                    continua agregando daño extra, cuando el <span class="tuto_high">COMBO</span> llega al golpe 3 y 6 es <span class="tuto_high">Critico</span> y activa <span class="tuto_high">Assassination</span>. </p>
+                     </div>
+                     <div class="tuto_imagen">
+                         <img src="images/clases/ninja_0.jpg" />
+                     </div>
+                  </div>   
+
+
+                  <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p><span class="tuto_high">Marksman:</span> usar arma tipo <span class="tuto_high">Bow</span>, el daño depende mucho de los items que tenga,
+                        hay que abusar de la habilidad <span class="tuto_high">Hit & Run</span>, la evasion es la fuente de supervivencia.<br>
+                        <span class="tuto_high"> Position Absolute</span> es un cambio muy grande en el personaje, trata de aprender esa habilidad. </p>
+                    </div>
+                    <div class="tuto_imagen">
+                        <img src="images/clases/marksman_1.jpg" />
+                    </div>
+                 </div>   
+
+
+
+                 <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p><span class="tuto_high">Garca:</span> En nivel 1 actualiza <span class="tuto_high">Trankadura</span> que te va dar daño gratis al comienzo, ahora la habilidad
+                            <span class="tuto_high">Dame Eso</span> que roba habilidades es conveniente conseguir habilidades de <span class="tuto_high">Destroyer</span> o <span class="tuto_high">Ninja</span> puedes 
+                        crear tus propios combos, es conveniente usar armas <span class="tuto_high">Duales</span>.</p>
+                    </div>
+                    <div class="tuto_imagen">
+                        <img src="images/clases/garca_0.jpg" />
+                    </div>
+                 </div>  
+
+                 <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p><span class="tuto_high">Cleric:</span> si bien es un personaje que cura también hace bastante daño,
+                            busca una arma tipo <span class="tuto_high">BigBlunt</span> y aprender la habilidad <span class="tuto_high">Aura Peronista</span> te da 150% de <span class="tuto_high">Ataque Magico</span> y varias cosas más
+                            , En nivel bajo aprende <span class="tuto_high">Smite</span> que es la habilidad basica de daño.<br> Se aplican las mismas reglas que el <span class="tuto_high">Dark Mage</span> para aumentar el daño,
+                             solo que en <span class="tuto_high">Elemento</span> es preferible que sea <span class="tuto_high">Holy</span>.</p>
+                    </div>
+                    <div class="tuto_imagen">
+                        <img src="images/clases/cleric_1.jpg" />
+                    </div>
+                 </div>  
+
+
+
+                 <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p><span class="tuto_high">Shaman:</span> En nivel 1 aprende <span class="tuto_high">Puma Totem</span> y luego <span class="tuto_high">Sword Blunt Mastery</span>, no actualices tus 
+                            auras <span class="tuto_high">"Chants"</span> porque puedes comprarlas en la <span class="tuto_high">Compra de Auras</span> en nivel más alto estas auras son muy caras y ya conviene aprender algunas<br>
+                            <span class="tuto_high">Totem God</span> es un antes y despues ya que todos los totems al mismo aumentan tu daño dramáticamente.</p>
+                    </div>
+                    <div class="tuto_imagen">
+                        <img src="images/clases/shaman_1.jpg" />
+                    </div>
+                 </div>  
+
+                 <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p><span class="tuto_high">Destroyer:</span> En nivel 1 aprende <span class="tuto_high">Poder Intenso</span> trata de conseguir una <span class="tuto_high">Armadura Heavy</span> y arma <span class="tuto_high">BigSword</span>
+                            , luego la aura <span class="tuto_high">Activation</span> aumenta mucho daño.<br>
+                        El daño en este personaje depende mucho de items, trata de rollear <span class="tuto_high">Ataque</span> en todos los items, ya que tiene muchos mutiplicadores de  <span class="tuto_high">Ataque</span>.</p>
+                    </div>
+                    <div class="tuto_imagen">
+                        <img src="images/clases/destroyer_0.jpg" />
+                    </div>
+                 </div>  
+
+
+
+                </div>
+    </div>
+
+
+
+
+
+
+            <div class="GTFO"  id="tutorial3">
+                    <div class="tutorialContent">
+                        <div class="tuto_title">Como conseguir mejores items</div>
+                        <div class="tuto_bloque">
+                            <div  class="tuto_texto">
+                                <p>Existen 5 tipos de cajas, las de <span class="tuto_high">Rango 5 y Rango 4</span> se consiguen matando papas en lugares faciles.<br>
+                                Las de <span class="tuto_high">Rango 3 y 2</span> en zonas Jodidas (para party preferiblemente)<br>
+                            Y las <span class="tuto_high">Rango 1</span> matando Raid Boss (para party).<br>
+                        Mientras mejor rango sea tu caja mejores cosas puedes obtener.</p>
+                            </div>
+                            <div class="tuto_imagen">
+                                  <img src="images/newTutorial/6.jpg" />
+                            </div>
+                         </div>
+                         <div class="tuto_bloque">
+                            <div  class="tuto_texto">
+                                <p> Completa <span class="tuto_high">Retos</span> estos solo te pide items que ya no usas (de menor nivel en el que estas)<br>
+                                La recompensa de los <span class="tuto_high">Retos</span> es una <span class="tuto_high">Runa</span> aleatoria, cualquiera sea la vas a poder utilizar yendo a 
+                            la opcion <span class="tuto_high">"Runas"</span> y eligiendo la runa que hayas conseguido. <br>
+                        Las <span class="tuto_high">Runas</span> pueden aumentarte varias cosas como Ataque, Vida, Critico, Etc.</p>
+                            </div>
+                            <div class="tuto_imagen">
+                                  <img src="images/newTutorial/7.jpg" />
+                                  <br>
+                                  
+                            </div>
+                         </div> 
+                         <div class="tuto_bloque">
+                            <div  class="tuto_texto">
+                                <p>Las <span class="tuto_high">Catacumbas</span> son complicadas, tenes que tener equipamiento decente, 
+                                    pero dan como recompensa <span class="tuto_high">3 Cajas</span> de rangos jugosos ademas de <span class="tuto_high">Mucha Experiencia</span>.</p>
+                            </div>
+                            <div class="tuto_imagen">
+                                  <img src="images/newTutorial/8.jpg" />
+                            </div>
+                         </div> 
+
+                         <div class="tuto_bloque">
+                                <div  class="tuto_texto">
+                                    <p>Las <span class="tuto_high">Conquistas</span> son <span class="tuto_high">JODIDAS</span>,se necesita no solo bien equipado sino tambien una party, 
+                                        cada monstruo matado en esta instancia grupal le da <span class="tuto_high">Una piedra de Elemento</span> a cada uno de la party, no es necesario matar a todos 
+                                        para sacar provecho y terminar el dungeon no te da nada extra.</p>
+                                </div>
+                                <div class="tuto_imagen">
+                                      <img src="images/newTutorial/9.jpg" />
+                                </div>
+                             </div> 
+
+                    </div>
+        </div>
+
+
+
+            <div  class="GTFO" id="tutorial2">
+                    <div class="tutorialContent">
+                        <div class="tuto_title">Como hacer más daño y estadísticas</div>
+                        <div class="tuto_bloque">
+                            <div  class="tuto_texto">
+                                <p>El principal fuente de daño de tu personaje son los objetos, 
+                                    el <span class="tuto_high">Ataque</span> o en el caso de magos <span class="tuto_high">Ataque Magico</span>, 
+                                    todas las auras, pasivos, criticos se basan en ese ataque base, a menos que diga <span class="tuto_high">(no escalable)</span> 
+                                    lo que significa que el daño se agrega al fianl de el calculo de todos los modificadores ya mencionados.</p>
+                            </div>
+                            <div class="tuto_imagen">
+                                  <img src="images/newTutorial/3.jpg" />
+                            </div>
+                         </div>
+                         <div class="tuto_bloque">
+                            <div  class="tuto_texto">
+                                <p> Un modificador importante es el <span class="tuto_high">Critico</span> ahora <span class="tuto_high">Critico y Critico Magico</span> es el % de probablidad de 
+                                hacer un <span class="tuto_high">Critico</span> ahora el daño de este va ser teniendo en cuenta el <span class="tuto_high">PC</span> (Poder Critico) y el <span class="tuto_high">PCM</span> (Poder Critico Magico).
+                                <br>El <span class="tuto_high">PC y PCM</span> son el ultimo multiplicador lo que hace que sea la fuente más grande de daño posible, y su valor (numero) es igual a el % de daño agregado.<br>
+                                <br> Ejem: tenemos 100 de ataque, 50 de PC, en un ataque normal seria 100 y en un critico seria 150 de daño. </p>
+                            </div>
+                            <div class="tuto_imagen">
+                                  <img src="images/newTutorial/4.jpg" />
+                                  <br>
+                                  <br> <br> <br><br><br>
+                            </div>
+                         </div> 
+                         <div class="tuto_bloque">
+                            <div  class="tuto_texto">
+                                <p>El <span class="tuto_high">Elemento</span> este modificador aumenta directamente tu <span class="tuto_high">Ataque y Ataque Magico</span> por %,
+                                por ejemplo si tenemos 100 de <span class="tuto_high">Ataque</span> y 200 de <span class="tuto_high">Elemento</span> nuestro <span class="tuto_high">Ataque</span> quedara en 300, combinando <span class="tuto_high">Elemento y PC</span> se llega a un daños descomunales.</p>
+                            </div>
+                            <div class="tuto_imagen">
+                                  <img src="images/newTutorial/5.jpg" />
+                            </div>
+                         </div> 
+                   
+
+                    <div class="tuto_bloque">
+                            <div  class="tuto_texto">
+                                <p>Algo muy importante para aumentar tu daño y defensas es comprar <span class="tuto_high">Auras</span>.
+                                <br> Puedes hacerlo en <span class="tuto_high">Más Opciones</span> -> <span class="tuto_high">Compra de Auras</span> los costos dependen de tu nivel, asi que en nivel bajo son casi gratis. </p>
+                            </div>
+                            <div class="tuto_imagen">
+                                  <img src="images/newTutorial/10.jpg" />
+                            </div>
+                         </div> 
+                    </div>
+
+        </div>
+
+
+            <div class="GTFO" id="tutorial1">
+            <div class="tutorialContent">
+                <div class="tuto_title">Como comenzar el juego</div>
+                <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p><span class="tuto_high">Paso 1:</span> Lo primero que tienes que hacer es ir a <span class="tuto_high">Habilidades</span> 
+                            y elegir alguna, trate de leer las descripciones aun que al comienzo no creo que puedas entender mucho.</p>
+                        <p><span class="tuto_high">Paso 2:</span> Luego ve a el <span class="tuto_high">boton Jugar</span> y luego en el mapa entra a <span class="tuto_high">Arabia</span></p>
+                    </div>
+                    <div class="tuto_imagen">
+                          <img src="images/newTutorial/1.jpg" />
+                    </div>
+                 </div>
+                 <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p><span class="tuto_high">Paso 3:</span> Hacer un clic en una <span class="tuto_high">Papa</span> y hacer clic en el boton de <span class="tuto_high">Atacar</span>,
+                        puedes seleccionar varios monstruos y atacarlos al mismo tiempo pero su defensa se suma, esto podria hacer que hagas 1 de daño.</p>
+                        <p>La <span class="tuto_high">Papa</span> cuando es atacarda genera 5 monstruos que tienen que ser eliminados para poder seguir atacando la <span class="tuto_high">Papa</span>.</p>
+                    </div>
+                    <div class="tuto_imagen">
+                          <img src="images/newTutorial/2.jpg" />
+                    </div>
+                 </div> 
+                 <div class="tuto_bloque">
+                    <div  class="tuto_texto">
+                        <p>Una vez que mates la <span class="tuto_high">Papa</span> te dará  un Cofre donde conseguirás 
+                            <span class="tuto_high">Items</span><br>
+                            Ten en cuenta que cada 5 niveles obtienes un <span class="tuto_high">punto de habilidad</span> para utilizar.<br>
+                        Siempre ten en cuenta los carteles que salen en la parte de <span class="tuto_high">Sistema</span>.</p>
+                    </div>
+                    <div class="tuto_imagen">
+                          <img src="images/newTutorial/11.jpg" />
+                    </div>
+                 </div> 
+            </div>
+        </div> 
+    </div>
+    
+<div id="footer">
+        <div id="footext">battleforembolia.com @ 2018 Script by <a href="mailto:ager.arg@gmail.com">Ager</a> - Todas las imágenes son propiedad intelectual de sus respectivos autores</div>
+
+</div>
+</body>
+</html>

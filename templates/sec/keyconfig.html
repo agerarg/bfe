@@ -1,0 +1,54 @@
+<script src="js/ui/jquery-ui-1.8.14.custom.js"></script>
+
+<script>
+var keyaceptes=0;
+function setKeyon(id)
+{
+		 $("#key"+id).text("Presiona una tecla");
+		 setTimeout(function() {
+			 	$("#key"+id).text("");
+				
+				$.ajax({
+						data: "id="+id+"&key="+keyaceptes,
+						type: "GET",
+						url: "json/setKeyBind.php"
+					});	
+				
+			  $("#key"+id).append("->"+String.fromCharCode(keyaceptes)+" <a href='javascript:setKeyon("+id+")'>Definir tecla</a>");
+		}, 2000);
+}
+$(document).ready(function(){
+
+	 $("body").keypress(function(e){
+					 keyaceptes=e.which;
+			});
+
+	
+});
+</script>
+<style>
+#sortable ul {
+    list-style:none;
+    padding-left:0;
+	margin-left: 0;
+	list-style-position: inside;
+
+}​
+#sortable { width: 450px; }
+#sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; background-color:#000; border:solid 1px #999; }
+#sortable li { width:34px; height:34px;}
+</style>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Configurar teclas para usar hablidades</div>
+        <div class="listingThings">
+        <div>
+                     <!-- BEGIN SKILLS -->
+  <div id="{SKILLS.ID}" class="setkeyrow" > <img src="images/skill/{SKILLS.IMG} " width="32" height="32" /><span id="key{SKILLS.ID}">->{SKILLS.KEY} <a href="javascript:setKeyon({SKILLS.ID})">Definir tecla</a></span></div> 
+  				 <!-- END SKILLS -->
+</div>
+<br /><br /><br /><br />
+<div>
+<a href="index.php?sec=opciones">Volver a opciones</a></div>
+ 	   </div>
+       
+</div>

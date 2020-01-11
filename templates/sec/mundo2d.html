@@ -1,0 +1,542 @@
+﻿<style type="text/css">
+    #dosdMarco {
+        width: 450px;
+        height: 350px;
+        position: relative;
+      overflow: hidden;
+       margin-left: 20px;
+    }
+    #mapWatcher{
+        width: 2650px;
+        height: 2650px;
+        position: absolute;
+    }
+    #dosdMap{
+        width: 2500px;
+        height: 2500px;
+        margin-top: 150px;
+        margin-left: 200px;
+        background-color: black;
+        background-image: url("images/2dWorld/floor/pasto.png");
+          background-size: 50px 50px;
+         position: absolute;
+    }
+
+    .slotMap{
+          width: 50px;
+          height: 50px;
+          text-align: center;
+          position: absolute;
+          cursor: pointer;
+           z-index: 0;
+           transition: all 0.5s;
+
+    }
+    .dangerMap{
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          background-color: red;
+          opacity: 0.5;
+    }
+    .effectMap{
+          width: 48px;
+          height: 48px;
+          position: absolute;
+          opacity: 0.5;
+          border: 1px solid white;
+          background-color: grey;
+          
+    }
+    #playerHold{
+      position: absolute;
+      top: 150px;
+      left: 200px;
+    }
+    #new2dSkillbar{
+      position: absolute;
+      top: 350px;
+    }
+
+    .objLifeBar{
+      position: absolute;
+      top: -10px;
+      width: 50px;
+      height: 10px;
+      border: 1px solid #222222;
+      background-color: #5A5043;
+    }
+    .innerLifeBar{
+      background-color: red;
+      height: 10px;
+      width: 0%;
+       transition: width 0.5s;
+    }
+
+
+    .textMsg{
+      z-index: 9999;
+      position: absolute;
+
+    }
+    .textMsg-enter-active, .textMsg-leave-active {
+      transition: all 1s;
+    }
+    .textMsg-enter /* .list-leave-active below version 2.1.8 */ {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .textMsg-leave-to /* .list-leave-active below version 2.1.8 */ {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+
+    .messageDmgBx{
+        width: 50px;
+        height: 20px;
+        position: absolute;
+        text-align: center;
+        z-index: 9999;
+    }
+    .TXT_normalDmg{
+      background-color: red;
+
+    }
+
+    .floatObjets{
+      position: absolute;
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="dosdWorld"> 
+  <div align="center">Posicion: X: {{ positionX }} / Y: {{ positionY }}</div>
+    		<div id="dosdMarco"  >
+                <div id="mapWatcher" :style="windowPosition">
+                  <div id="dosdMap"> 
+                      
+                     
+                      <div class="floatObjets" v-for="(slot, index) in slots" :key="index" >
+                          <div class="slotMap" :style="mapDispleyObj(slot.posX,slot.posY)" @click="ClickPlace(index)" >
+                            <img :src="'images/2dWorld/'+ slot.img" width="50" height="50">
+                          </div>
+                      </div>
+
+                       <div class="floatObjets" v-for="(monster, index) in monsters" @click="ClickMonster(index)" >
+                          <div class="slotMap" :style="mapDispleyObj(monster.posX,monster.posY)">
+                                  <div class='objLifeBar'>
+                                   <div  :id="'mobLife'+monster.id" :style="lifeCalculator(monster.life,monster.lifeLimit)" class="innerLifeBar"></div>
+                                </div>
+                                <div>
+                                   <img :src="'images/2dWorld/'+ monster.img" width="50" height="50">
+                                </div>
+                          </div>
+                      </div>
+
+
+                       <div class="floatObjets" v-for="danger in dangerousAreas" >
+                          <div class="dangerMap" :style="mapDispleyObj(danger.posX,danger.posY)" >
+                           
+                          </div>
+                      </div>
+
+                       <div class="floatObjets" v-for="effect in effectAreas" >
+                          <div class="effectMap" :style="mapDispleyObj(effect.posX,effect.posY)" >
+                           
+                          </div>
+                      </div>
+
+
+                       <transition-group name="textMsg" tag="p">
+                        <div class="floatObjets" v-for="message in messages" v-bind:key="message.id">
+                           <div v-bind:class="message.style" class="messageDmgBx" :style="mapDispleyObj(message.posX,message.posY)"> {{ message.text }} </div>
+                        </div>
+                      </transition-group>
+
+                  </div>
+              </div>
+                 <div id="playerHold"><img src="images/2dWorld/player/Destroyer_frame.png" width="50" height="50"></div>     
+            </div>
+ 
+</div>   
+
+<script type="text/javascript">
+
+var attackerino = ()=>{
+  alert("FUCK YOU");
+}
+
+var world = [];
+var allowMovement=true;
+var cdSk_1=0;
+var cdSk_2=0;
+var cdSk_3=0;
+var cdSk_4=0;
+var cdSk_5=0;
+/*var i=0;
+    var j=0;
+        for(i=0;i<50;i++)
+            for(j=0;j<50;j++)
+                world.push({'posX':i, 'posY':j, 'walk':true, 'img':""});*/
+
+var map = new Vue({
+  el: '#dosdWorld',
+  data: {
+    positionX: 30,
+    positionY: 30,
+    fromX: 30,
+    fromY: 30,
+    speed: 5,
+    windowPosition: { top: '0px', left: '0px' },
+    slots: world,
+    dangerousAreas: [],
+    monsters: [],
+    monsterId:1,
+    damageAplly: [],
+    effectAreas: [],
+    allowMovement: true,
+    lastMove: "right",
+    messages: [],
+    msgId:1
+  },
+   
+   created() {
+     let leftCalc = this.positionX*50;
+     let topCalc = this.positionY*50;
+    this.windowPosition = { top: '-'+topCalc+'px', left: '-'+leftCalc+'px' }
+    window.addEventListener('keydown', (e) => {
+     //alert(e.key);
+          if(allowMovement)
+          {
+            switch(e.key)
+            {
+              case 'a':
+              case 'A':
+              case 'ArrowLeft':
+               this.moveToLeft();
+               this.lastMove="left";
+              break;
+              case 'd':
+              case 'D':
+              case 'ArrowRight':
+                 this.moveToRight();
+                 this.lastMove="right";
+              break;
+               case 'w':
+               case 'W':
+               case 'ArrowUp':
+                this.moveToTop();
+                  this.lastMove="up";
+              break;
+               case 's':
+                case 'S':
+                case 'ArrowDown':
+                this.moveToDown();
+                this.lastMove="down";
+              break;
+            }
+          if(this.positionX != this.fromX || this.positionY != this.fromY )
+            this.calcPosition();
+        }
+        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+        }
+    });
+    //Create un elemento vacio que sea id 0 (vacio)
+      this.slots.push({'posX':-5, 'posY':-5, 'walk':true,'type':'void', 'img':"empty.gif"});
+    //
+    let alther=this.getSlotId(25,25);
+    if(alther<0)
+    {
+      let newSlot = {'posX':25, 'posY':25, 'walk':true,'type':'piso', 'img':"floor/piso.png"};
+      this.slots.push(newSlot);
+    }
+    /// creating monster
+
+            $.ajax({
+            data: "",
+            type: "GET",
+            dataType: "json",
+            url: "json/lostgark/loadMobs.php",
+            success: (data)=>{
+              this.addMobs(data);
+          }
+          });
+
+    //
+
+     // danger areas
+    setInterval(() => {
+          // danger areas ///////////////
+          let i=0;
+          while(this.dangerousAreas[i])
+          {
+            this.dangerousAreas[i].time--;
+            if(this.dangerousAreas[i].time<0)
+              this.dangerousAreas.splice(i, 1);
+            i++;
+          }
+      }, 1000);  
+
+
+
+  },
+  methods: {
+    monsterHit(X,Y,dmg){
+
+      this.effectAreas.push({'posX':X, 'posY':Y});
+        setTimeout(()=>{
+           this.effectAreas = [];
+        }, 300); 
+      let checkMOnst = this.checkIfMonster(X,Y);
+              if(checkMOnst>=0)
+              {
+                  if(this.monsters[checkMOnst])
+                  {
+                   this.monsters[checkMOnst].life-=dmg;
+                   this.setMsgOnObj(X,Y,dmg,{"TXT_normalDmg":true});
+                   if(this.monsters[checkMOnst].life<=0)
+                   {
+                      let mBody = this.srcBody(this.monsters[checkMOnst].id,"monsterBody");
+                      if(mBody>=0)
+                      {
+                        // MOnster Dayuing
+                        this.slots.splice(mBody, 1);
+                      }
+                      this.monsters.splice(checkMOnst, 1);
+                   }
+               }
+             }
+    },
+    setMsgOnObj(X,Y,textl,style)
+    {
+       this.messages.push({
+        id:this.msgId,
+        text:textl,
+        style:style,
+        'posX': X,
+        'posY': Y
+      });
+        this.msgId++;
+        setTimeout(()=>{
+           this.messages.shift();
+        }, 1000); 
+    },
+    lifeCalculator(life,liteLimit)
+    {
+      var percent = life*100/liteLimit;
+      return { width : percent+"%" }
+    },
+    addMobs(data){
+           let i=0;
+            while(data.mobs[i])
+            {
+              let monsterX=parseInt(data.mobs[i]['posX']);
+              let monsterY=parseInt(data.mobs[i]['posY']); 
+              let monsterLife=parseInt(data.mobs[i]['vida']); 
+              let monsterLifeLimit=parseInt(data.mobs[i]['vidaLimit']); 
+              let monsterId=parseInt(data.mobs[i]['idInmundo']); 
+              let monsterImage=data.mobs[i]['imagen']; 
+              switch(data.mobs[i]['tipo'])
+              {
+                case 'monster':
+                  let newMonster = {'id':monsterId,'posX':monsterX, 'posY':monsterY, 'life':monsterLife, 'lifeLimit':monsterLifeLimit,'walkTime':5, 'type':'monster', 'img':"monsters/"+monsterImage};
+                  this.monsters.push(newMonster);
+                  this.slots.push({'id':monsterId,'posX':monsterX, 'posY':monsterY, 'walk':false,'type':'monsterBody', 'img':"empty.gif"});
+                break;
+              }
+              i++;
+            }
+
+
+    },
+    checkIfMonster(X,Y){
+         return this.monsters.findIndex(monster => {
+        return monster.posX === X && monster.posY === Y;
+      });
+    },
+    srcBody(id,type){
+         return this.slots.findIndex(slot => {
+        return slot.id === id && slot.type === type;
+      });
+    },
+    newEffectArea(X,Y){
+      let newEffectArea = {'posX':X, 'posY':Y, 'damage':1500, 'time':1};
+      this.effectAreas.push(newEffectArea);
+    },
+    ClickMonster(index)
+    {
+      if(this.monsters[index])
+      {
+           let X = this.monsters[index].posX;
+          let Y = this.monsters[index].posY;
+          if((this.positionX+1 == X || this.positionX-1 == X || this.positionX == X) && (this.positionY+1 == Y || this.positionY-1 == Y || this.positionY == Y))
+          {
+           
+                 alert("atacar x:"+X+" y:"+Y+"");
+             
+           /* let tipo = this.slots[index].type;
+           alert("cliqueaste en x:"+X+" y:"+Y+" tipo: "+tipo);*/
+          }
+     }
+    },
+    ClickPlace(index){
+      let X = this.slots[index].posX;
+      let Y = this.slots[index].posY;
+      if((this.positionX+1 == X || this.positionX-1 == X || this.positionX == X) && (this.positionY+1 == Y || this.positionY-1 == Y || this.positionY == Y))
+      {
+        switch(this.slots[index].type)
+        {
+          case 'monster':
+             alert("atacar x:"+X+" y:"+Y+" tipo: "+tipo);
+          break;
+          default:
+              let tipo = this.slots[index].type;
+            alert("cliqueaste en x:"+X+" y:"+Y+" tipo: "+tipo);
+          break;
+        }
+       /* let tipo = this.slots[index].type;
+       alert("cliqueaste en x:"+X+" y:"+Y+" tipo: "+tipo);*/
+      }
+
+    },
+    mapDispleyObj(X,Y){
+        return  { top: +Y*50+'px', left: +X*50+'px' };
+    },
+    getSlotId(X,Y)
+    {
+      return this.slots.findIndex(slot => {
+        return slot.posX === X && slot.posY === Y;
+      });
+    },
+    checkSomeThingIsThere(X,Y)
+    {
+      let ss = this.getSlotId(X,Y);
+      return this.slots[ss];
+    },
+    moveToRight(){
+       let imGoingX=this.positionX + 1;
+       let imGoingY=this.positionY;
+       let block = this.checkSomeThingIsThere(imGoingX,imGoingY);
+       let allowToGo=false;
+       if(!block)
+           allowToGo=true;
+        else if(block.walk)
+           allowToGo=true;
+
+         if(allowToGo)
+       {
+          if(this.positionX<49)
+            this.positionX=imGoingX;
+        }
+
+    },
+    moveToLeft(){
+
+       let imGoingX=this.positionX - 1;
+       let imGoingY=this.positionY;
+       let block = this.checkSomeThingIsThere(imGoingX,imGoingY);
+
+       let allowToGo=false;
+       if(!block)
+           allowToGo=true;
+        else if(block.walk)
+           allowToGo=true;
+
+         if(allowToGo)
+       {
+          if(this.positionX>0 && this.positionX<50)
+            this.positionX=imGoingX;
+        }
+    
+
+    },
+     moveToTop(){
+       let imGoingX=this.positionX;
+       let imGoingY=this.positionY - 1;
+       let block = this.checkSomeThingIsThere(imGoingX,imGoingY);
+
+      let allowToGo=false;
+       if(!block)
+           allowToGo=true;
+        else if(block.walk)
+           allowToGo=true;
+
+         if(allowToGo)
+       {
+           if(this.positionY>0 && this.positionY<55)
+       this.positionY=imGoingY;
+        }
+
+    },
+    moveToDown(){
+       let imGoingX=this.positionX;
+       let imGoingY=this.positionY + 1;
+       let block = this.checkSomeThingIsThere(imGoingX,imGoingY);
+
+      let allowToGo=false;
+       if(!block)
+           allowToGo=true;
+        else if(block.walk)
+           allowToGo=true;
+
+         if(allowToGo)
+       {
+            if(this.positionY>=0 && this.positionY<49)
+         this.positionY=imGoingY;     
+        }
+
+    },
+    calcPosition(){
+        let leftCalc = this.positionX*50;
+        let topCalc = this.positionY*50;
+        
+        let fromXPx = this.fromX*50;
+       let toXPx = this.positionX*50;
+
+      let fromYPx = this.fromY*50;
+       let toYPx = this.positionY*50;
+
+       let steps=5;
+
+        var polling = setInterval(() => {
+           // if(leftCalc!=windowPosition.top)
+           if(fromXPx<toXPx)
+           {
+              fromXPx+=steps;
+              this.windowPosition.left = '-'+fromXPx+'px';
+           }
+            if(fromXPx>toXPx)
+           {
+              fromXPx-=steps;
+              this.windowPosition.left = '-'+fromXPx+'px';
+           }
+            if(fromYPx<toYPx)
+           {
+              fromYPx+=steps;
+              this.windowPosition.top = '-'+fromYPx+'px';
+           }
+            if(fromYPx>toYPx)
+           {
+              fromYPx-=steps;
+              this.windowPosition.top = '-'+fromYPx+'px';
+           }
+
+           if(fromXPx==toXPx && fromYPx==toYPx)
+           {
+             this.fromX=this.positionX;
+             this.fromY=this.positionY;
+
+             allowMovement=true;
+            clearInterval(polling);
+           }
+
+          
+      }, this.speed);
+        allowMovement=false;
+    }
+  }
+  
+})
+</script>
+

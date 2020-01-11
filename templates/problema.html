@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="resources/demos/style.css">
+<script>
+var parte=1;
+function checkServer(data)
+{
+	if(data['back']==8974)
+	{
+		$("#pruebaButn").text("");
+		$("#pruebaButn").append("<a href='index.php'>El servidor ya esta restaurado <br>Click para actualizar la pagina</a>");
+		$("#prueba").hide(1000);
+		$("#testLog").hide(1000);
+	}
+	else
+	{
+		$("#testLog").text("Realizando pruebas "+parte+"/5");
+		if(parte==6)
+		{	
+			$("#pruebaButn").text("");
+		$("#pruebaButn").append("<a href='index.php'>El servidor ya esta restaurado <br>Click para actualizar la pagina</a>");
+			$("#prueba").hide(1000);
+			$("#testLog").hide(1000);
+		}
+		else
+		{
+			parte++;
+			if(data['back']>0)
+			{
+				setTimeout(function(){
+					prueba(parte,data['back']);
+					},1000);
+			}
+		}
+	}
+}
+function prueba(parte,code)
+{
+	var progress=0;
+	$("#pruebaButn").text("Si la barra se detiene es que el servidor sigue con inconvenientes intenta mas tarde.");
+	progress = parte*20;
+	$( "#prueba" ).progressbar({
+      value: progress
+    });
+	$.ajax({
+				data: "paso="+parte+"&tempo="+code,
+				type: "GET",
+				dataType: "json",
+				url: "json/serverDeMierda.php",
+				success: function(data){
+				checkServer(data);
+			}
+			}); 
+}
+$(document).ready(function(){	
+ $("#prueba").bind('progressbarchange', function(event, ui) {
+        var selector = "#" + this.id + " > div";
+        var value = this.getAttribute( "aria-valuenow" );
+        if (value < 10){
+            $(selector).css({ 'background': 'Red' });
+        } else if (value < 30){
+            $(selector).css({ 'background': 'Orange' });
+        } else if (value < 50){
+            $(selector).css({ 'background': 'Yellow' });
+        } else{
+            $(selector).css({ 'background': 'LightGreen' });
+        }
+    });
+ });
+</script>
+<div>
+        
+<div id="showProblem" align="center">
+        <div><img src="images/asd.png" width="235" height="251" /></div>
+<div class="mensajeProblema">El servidor esta funcionando lento, en forma de prevenir inconvenientes automaticamente se ah cerrado el juego.</div>
+         <div class="mensajeProblema">Usted puede realizar esta prueba si la prueba finaliza correctamente el juego se restablece completamente.</div>
+         <br />
+       <br />
+       	<div id="pruebaButn" align="center"><a href="javascript:prueba(1,0);">Ejecutar prueba al servidor</a></div>
+       	<div id="prueba" align="center"></div>
+        <div id="testLog" class="mensajeProblema" align="center"></div>
+        <br />
+       <br />
+       <a href="foro" target="_blank">Entrar al foro.</a>
+       <br />
+       <br />
+       <br />
+       <br />
+       <br />
+        </div>
+</div>

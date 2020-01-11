@@ -1,0 +1,71 @@
+#bienv{ text-align: center; }
+#contenedor{ height: auto; margin-bottom: 20px;}
+.tutorButton{ 
+    width: 200px; 
+    height: 50px; 
+    border: 1px black solid;
+    cursor: pointer;
+    background-color: #0D2A26;
+    float: left;
+    font-size: 20px;
+text-align: center;
+font-variant: small-caps; 
+font-weight:bold; 
+    margin: auto;
+     }
+.tutorButton:hover{
+    background-color: #3E6242;
+    border: white;
+    color: #0D2A26;
+
+}     
+.TuCenterBox{
+    background-color: #21121B;
+    border: 1px solid #283F2B;
+    width: 820px;
+    height: 60px;
+    padding: 20px;
+    margin-left: 125px;
+}     
+.tutorialContent{
+    background-color: #0D2B29;
+    border: 1px solid #283F2B;
+    width: 820px;
+    padding: 20px;
+    margin-left: 125px;
+}
+.tuto_title{
+    font-size: 25px;
+    text-align: center;
+font-variant: small-caps; 
+font-weight:bold; 
+
+}
+.tuto_bloque{
+    border: 1px solid #020202;
+    background-color: #1E625C;
+    margin-bottom: 20px;
+}
+.tuto_bloque:hover{
+    background-color: #154641;
+}
+.tuto_texto{
+    float: left;
+    padding: 5px;
+    width: 400px;
+    border: 1px solid #020202;
+    font-variant: small-caps; 
+font-weight:bold; 
+    font-size: 15px;
+   margin-top: 25px;
+   margin-left: 25px;
+    background-color: #14413D;
+}
+.tuto_imagen{
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #020202;
+}   
+.tuto_high{
+    color: orangered;
+}

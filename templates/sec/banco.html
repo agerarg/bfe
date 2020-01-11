@@ -1,0 +1,35 @@
+<script src="js/banco.js?{RAND}" type="text/javascript"></script>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Banco Central de la nación Emboliana</div>
+   
+  <div id="banco_all">
+    <div class="coinhold">
+        <div class="bancoPreciosT">Precios:</div>
+        <div title="{reroll}" class="cotizacion">ReRoll: {rerollOP}{rerollChange}</div>
+        <div title="{chaos}" class="cotizacion">Chaos: {chaosOP}{chaosChange}</div>
+        <div title="{upulus}" class="cotizacion">Upulus: {upulusOP}{upulusChange}</div>
+        <div title="{exodimo}" class="cotizacion">Exodimo: {exodimoOP}{exodimoChange}</div>
+        <div title="{alchemist}" class="cotizacion">Alquimist: {alchemistOP}{alchemistChange}</div>
+        <div title="{corruption}" class="cotizacion">Corruption: {corruptionOP}{corruptionChange}</div>
+
+        <div class="comprarBank">
+                <span class="boxInnerCant">Cantidad:</span> <input type="text" id="CantidadMonedC" value="1" size="3"  class="boxInner" />
+            <select  class="boxInner"  id="MonedaSelected">
+                <option selected precio="{reroll}" value="ReRoll">ReRoll</option> 
+                <option value="Chaos" precio="{chaos}">Chaos</option>
+                <option value="Upulus" precio="{upulus}">Upulus</option>
+                <option value="Exodimo" precio="{exodimo}">Exodimo</option>
+                <option value="Alquimist" precio="{alchemist}">Alquimist</option>
+                <option value="Corruption" precio="{corruption}">Corruption</option>
+         </select>
+       <br>
+        <button onclick="comprar();" class="boxInner" style="cursor: pointer">Comprar</button>
+        
+        </div>
+
+    </div>
+  </div>
+
+  </div>
+
+

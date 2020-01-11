@@ -1,0 +1,475 @@
+<script src="js/verPj.js?{RAND}" type="text/javascript"></script>
+<script>
+var itemsCatch = new Array();
+const idPjMirando = parseInt("{IDPJ2}");
+function itemSearch(idSr)
+{
+	var i=0;
+	while(itemsCatch[i])
+			{
+				if(itemsCatch[i]['idInventario']==idSr)
+				{
+					return i;
+					break;
+				}
+				i++;
+			}
+}
+function injertoTardio()
+{
+	var id=0;
+	var desc="";
+	$('.showSetInfo').each(function() {
+		id = itemSearch($(this).attr("idItem"));
+		desc="";
+		desc=makeDesc(itemsCatch[id],"<br>");
+		var enchant="";
+		if(itemsCatch[id]['enchant']>0)
+					enchant=" +"+itemsCatch[id]['enchant'];
+				else
+					enchant="";	
+				
+		title= itemsCatch[id]['Nombre']+enchant+"|<div class=ComunDesc>Atributos:<br>"+desc+"</div>";
+		 setInfo= "showSetInfo";	
+		if(itemsCatch[id]['armorset']>0)
+		{
+			 idItemTrue = itemsCatch[id]['armorset'];
+			  title+= "<div class=ComunDescSet><div class=SetName>Set "+itemsCatch[id]['Nombre']+"</div><div class=raidDrop>Requiere:<br>"+descArmor[idItemTrue]['req']+"</div>";
+			title+= "<div>Bonus:<br>"+descArmor[idItemTrue]['desc']+"</div></div>";
+			 
+		}
+
+
+	
+		if(itemsCatch[id]['tipo']=="W")
+		{
+
+			if(itemsCatch[id]['manoIzquierda']==1)	
+			{	
+				$("#slot_W").text("");
+				$("#slot_"+itemsCatch[id]['tipo']).append("<a href='javascript:quitarItem("+id+");'><img border='0' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' title='"+title+"' class='"+setInfo+"' width='35' height='35' /></a>");	
+			}
+
+			if(itemsCatch[id]['manoDerecha']==1)
+			{
+					thereIsDerW=1;
+					$("#slot_shield").text("");
+					$("#slot_shield").append("<a href='javascript:quitarItem("+id+");'><img border='0' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' title='"+title+"' class='"+setInfo+"' width='35' height='35' /></a>");
+				
+			}
+			if(itemsCatch[id]['manoIzquierda']==0 && itemsCatch[id]['manoDerecha']==0)
+			{
+					$("#slot_W").text("");
+					$("#slot_"+itemsCatch[id]['tipo']).append("<a href='javascript:quitarItem("+id+");'><img border='0' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' title='"+title+"' class='"+setInfo+"' width='35' height='35' /></a>");	
+			}
+			if(itemsCatch[id]['hand']==2)
+			{
+				$("#slot_W").text("");
+				$("#slot_"+itemsCatch[id]['tipo']).append("<a href='javascript:quitarItem("+id+");'><img border='0' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' title='"+title+"' class='"+setInfo+"' width='35' height='35' /></a>");	
+				$("#slot_shield").text("");
+				$("#slot_shield").append("<img class='selectedImg' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' width='35' height='35' />");
+			}
+		}
+		else
+		{
+			$("#slot_"+itemsCatch[id]['tipo']).text("");
+			$("#slot_"+itemsCatch[id]['tipo']).append("<a href='javascript:quitarItem("+id+");'><img border='0' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' title='"+title+"' class='"+setInfo+"' width='35' height='35' /></a>");	
+		}
+/*
+		$("#slot_"+itemsCatch[id]['tipo']).text("");
+		$("#slot_"+itemsCatch[id]['tipo']).append("<a href='javascript:quitarItem("+id+");'><img border='0' src='images/item/"+itemsCatch[id]['subtipo']+"/"+itemsCatch[id]['imagen']+"' title='"+title+"' class='"+setInfo+"' width='35' height='35' /></a>");	*/
+		
+	});
+		$('.showSetInfo').cluetip({splitTitle: '|',delayedClose: 0,cursor:'pointer'});
+}
+function itemlist(data) {
+		$("#error").text(data['error']);
+		itemsCatch = data.litem;
+		var i=0;
+		var desc="";
+		var setInfo="";
+		var title="";
+		var idItemTrue=0;
+		while(itemsCatch[i])
+			{
+				var fondoparaitem =(itemsCatch[i]['enVenta']==0 && itemsCatch[i]['trade']==0)?("itemObjOPEN"):("itemObjSALE");
+				var cantidad = itemsCatch[i]['cantidad'];
+				var cant_show="";
+				var enchant="";
+				if(itemsCatch[i]['enchant']>0)
+					enchant=" +"+itemsCatch[i]['enchant'];
+				else
+					enchant="";	
+				setInfo= "setInfo";	
+			
+			if(itemsCatch[i]['SA']==1)
+				itemsCatch[i]['Nombre']	= "<spam class=SAname>"+itemsCatch[i]['Nombre']+"</spam>";
+				 title= itemsCatch[i]['Nombre']+enchant+"|<div class=ComunDesc>Atributes:<br>"+makeDesc(itemsCatch[i],"<br>")+"</div>";
+				if(itemsCatch[i]['armorset']>0)
+				{
+					 idItemTrue = itemsCatch[i]['armorset'];	
+					 title+= "<div class=ComunDescSet><div class=SetName>Set "+itemsCatch[i]['Nombre']+"</div><div class=raidDrop>Requires:<br>"+descArmor[idItemTrue]['req']+"</div>";
+					 title+= "<div>Bonus:<br>"+descArmor[idItemTrue]['desc']+"</div></div>";
+				}
+				i++;
+			}
+		$('.setInfo').cluetip({splitTitle: '|',delayedClose: 0});
+		injertoTardio();
+}
+function checkItems()
+	{
+		$.ajax({
+			data: "id={IDPJ2}",
+			type: "GET",
+			dataType: "json",
+			url: "json/miron.php",
+			success: function(data){
+			itemlist(data);
+		}
+		});
+	}
+$(document).ready(function(){	
+	checkItems();	
+	perfilMostrar($("#EmptySection"));
+});
+perfilMostrar =(elem)=>{
+	$("#perfilSection").hide();
+	$("#EmptySection").hide();
+	$("#skillSection").hide();
+	elem.show();
+}
+mostrarGear = ()=>{
+	if($("#perfilSection").is(":hidden"))
+		perfilMostrar($("#perfilSection"));
+	else
+		perfilMostrar($("#EmptySection"));
+}
+mostrarSkils = ()=>{
+	if($("#skillSection").is(":hidden"))
+		perfilMostrar($("#skillSection"));
+	else
+		perfilMostrar($("#EmptySection"));
+}
+</script>
+<style type="text/css">
+	.inv_stats_fix{
+		position: absolute;
+		top: 110px;
+
+	}
+	.inv_equpo_fix{
+		position: absolute;
+		top: 100px;
+		left: 10px;
+	}
+	.runasBox_fix{
+		position: absolute;
+		top: 230px;
+	}
+	.inv_top_fix{
+		margin-top: 0px;
+	}
+	#skillSection{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		background-color: black;
+	}
+	#EmptySection{
+		width: 200px;
+		height: 50px;
+		position: absolute;
+		top: 100px;
+		left: 175px;
+	}
+</style>
+<style>     
+	#skillVerReview{
+		margin-top: -70px;
+	}
+#sect_habilidades_ini{ background-image:url('images/skilltree/{FONDIMAG}');
+	background-repeat:no-repeat;
+	
+	width:490px;
+	height:646px;
+	background-position: 0px -47px;
+	display: block;
+	z-index: 99999;
+
+}
+</style>
+<script>
+var crapSaved = 1;
+var slotState = new Array();
+var slotClikeable = new Array();
+var slotIdem = new Array();
+var slotFrozen = new Array();
+var slotLvlAble = new Array();
+var slotName = new Array();
+var slotImg = new Array();
+var slotDesc = new Array();
+function setSlot(slot,img,id,active,able,name,req)
+{
+	$('#slot'+slot).text("");
+	$('#slot'+slot).append("<a href='javascript:activeSlot("+'"'+slot+'"'+","+id+");'><img title='"+name+"'  class='skillnorml' id='skillimg"+slot+"' src='images/skill/"+img+"' />");
+	slotState[id]=active;
+	slotIdem[id]=slot;
+	slotLvlAble[id]=req;
+	slotName[id]=name;
+	slotImg[id]="images/skill/"+img+"";
+	if(able==1)
+		slotAble(id,slot);
+	if(active)
+		$('#skillimg'+slot).removeClass("skill_cooldown");
+	else
+		$('#skillimg'+slot).addClass("skill_cooldown");
+}
+function openSlot(slot)
+{
+	crapSaved=0;
+	$('#skillimg'+slot).removeClass("skill_cooldown");
+}
+function closeSlot(slot)
+{
+	$('#skillimg'+slot).addClass("skill_cooldown");
+}
+function slotAble(id)
+{
+	$('#skillimg'+slotIdem[id]).addClass("skillimgable");
+	$('#skillimg'+slotIdem[id]).removeClass("skillnorml");
+	slotClikeable[id]=1;
+}
+function slotNoAble(id)
+{
+	$('#skillimg'+slotIdem[id]).removeClass("skillimgable");
+	$('#skillimg'+slotIdem[id]).addClass("skillnorml");
+	slotClikeable[id]=0;
+}
+function activeSlot(slot,id)
+{
+	return false;
+}
+
+
+function showTheShit(id)
+{
+	$('#skillReview').text("");
+	$('#skillReview').append("<div class='skilltitle'><img src='"+slotImg[id]+"' /></div>");
+	$('#skillReview').append("<div class='skilldesc'><font class='skillname'>"+slotName[id]+":</font> "+slotDesc[id]+"</div>");
+}
+
+
+$(document).ready(function(){
+	
+				  <!-- BEGIN S -->
+				setSlot("{S.SPOT}","{S.IMG}",{S.ID},{S.NEW},{S.ABLE},"{S.NAME}",{S.CANDO});
+				slotFrozen[{S.ID}]={S.NEW};
+				slotDesc[{S.ID}]='{S.DESC}';
+				$("#slot{S.SPOT}").hover(
+				  function () {
+					showTheShit({S.ID});
+				  });
+				<!-- END S -->
+});
+</script>
+
+<div id="sectCustom" style="background-image:url(images/perfiles/{BASEIMAGE}_{SEXO}.jpg);">
+
+	<div class="sectCustomTitle"> <div class="nombrePj" align="center">{NOMBRE_P2} Nivel: {LVL_P2}</div></div>
+	<div class="perfilButtons">
+		<div class="menuItem left" onclick="javascript:mostrarGear();">Equipo</div>
+		<div class="menuItem left" onclick="javascript:mostrarSkils();">Habilidades</div>
+	</div>
+	<div id="EmptySection"> </div>
+	<div id="HistorySection"> </div>
+   	<div id="perfilSection">	  
+		<div id="inv_top" class="inv_top_fix">
+	    	<div id="inv_equipo" class="inv_equpo_fix">
+	        	<div id="slot_W">{S_ARMA}</div>
+	            <div id="slot_armor">{S_ARMADURA}</div>
+	            <div id="slot_foots">{S_BOTAS}</div>
+	            <div id="slot_rings">{S_RINGS}</div>
+	            <div id="slot_shield">{S_ESCUDO}</div>
+	            <div id="slot_gloves">{S_GUANTES}</div>
+	            <div id="slot_head">{S_HEAD}</div>
+	            <div id="slot_necklace">{S_ERRINGS}</div>
+	        </div>
+	        <div id="inv_stats" class="inv_stats_fix">
+	        	<div class="stat_column">
+	                <div id="atr_VidaLimit">Vida: {VIDA_L_P2}</div>
+	                <div id="atr_ManaLimit">Mana: {MANA_L_P2}</div>
+	                <div id="atr_Ataque">Ataque: {ATA_P2}</div>
+	               <div id="atr_AtaqueMagico">Ataque Magico: {ATA_M_P2}</div>
+	                <div id="atr_Defensa">Defensa: {DEF_P2}</div>
+	                 <div id="atr_DefensaMagica">Defensa Magica: {DEF_M_P2}</div>
+	              <div id="atr_Critico">Critico: {CR_P2}%</div>
+	                <div id="atr_PC" title="Poder Critico">PC: {PC_P2}%</div>
+	                <div id="atr_CriticoMagico">Critico Magico: {CR_M_P2}%</div>
+	                <div id="atr_PCMagico" title="Poder Critico Magico">PCM: {PC_M_P2}%</div>
+	            </div>
+	            <div class="stat_column">
+	    			 <div id="atr_atkSpeed" title="Velocidad de Ataque" >Vel Ataque: {ATKSPEED2} seg</div>
+	                  <div id="atr_castSpeed" title="Velocidad de Casteo">Vel Casteo: {CASTSPEED2} seg</div>
+	                  <div id="atr_elemento" >Elemento: {ELEMENTO2}</div>
+	                   <div id="atr_elementodmg" >Daño elemental: {ELEMENTODMG2}</div>
+	                   <div id="atr_baseDps" >Item Power: {BASEDPS2}</div>
+	                 <div class="pvpatr" title="Personaje vs Personaje">PVP: {PVP2}</div>
+	                <div  class="pkatr" title="Personajes Asesinado">PK: {PK2}</div>
+	            </div>
+	        </div>
+
+			<div id="runasBox" class="runasBox_fix">
+					<div id="runa_1">
+					   
+					</div>
+					<div id="runa_2">
+						  
+						</div>
+					<div id="runa_3">
+						  
+						</div>  
+					<div id="runa_4">
+							
+						</div>    
+					<div id="runa_5">
+							
+						</div>           
+					
+		
+				</div>
+
+
+	        </div>
+	    </div>
+	    </div>
+
+	      <div id="skillSection">
+	      
+	        	<div id="sect_habilidades_ini"> 
+	        <div class="secSkillPerfilButt"><div class="menuItem" onclick="javascript:mostrarSkils();">Volver al Perfil</div></div>
+            <div class="title_spacer"></div>
+    		<div id="skillVerReview">
+        <div id="skillReview"></div>
+        <div id="skilltree">
+        <div class="skillline" >
+        	<div id="slot1_1" class="skillslot"></div>
+            <div id="slot1_2" class="skillslot"></div>
+            <div id="slot1_3" class="skillslot"></div>
+            <div id="slot1_4" class="skillslot"></div>
+            <div id="slot1_5" class="skillslot"></div>
+            <div id="slot1_6" class="skillslot"></div>
+            <div id="slot1_7" class="skillslot"></div>
+            <div id="slot1_8" class="skillslot"></div>
+            <div id="slot1_9" class="skillslot"></div>
+            <div id="slot1_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot2_1" class="skillslot"></div>
+            <div id="slot2_2" class="skillslot"></div>
+            <div id="slot2_3" class="skillslot"></div>
+            <div id="slot2_4" class="skillslot"></div>
+            <div id="slot2_5" class="skillslot"></div>
+            <div id="slot2_6" class="skillslot"></div>
+            <div id="slot2_7" class="skillslot"></div>
+            <div id="slot2_8" class="skillslot"></div>
+            <div id="slot2_6" class="skillslot"></div>
+            <div id="slot2_10" class="skillslot"></div>
+        </div>
+        <div class="skillline">
+        	<div id="slot3_1" class="skillslot"></div>
+            <div id="slot3_2" class="skillslot"></div>
+            <div id="slot3_3" class="skillslot"></div>
+            <div id="slot3_4" class="skillslot"></div>
+            <div id="slot3_5" class="skillslot"></div>
+            <div id="slot3_6" class="skillslot"></div>
+            <div id="slot3_7" class="skillslot"></div>
+            <div id="slot3_8" class="skillslot"></div>
+            <div id="slot3_9" class="skillslot"></div>
+            <div id="slot3_10" class="skillslot"></div>
+        </div>
+        <div class="skillline">
+        	<div id="slot4_1" class="skillslot"></div>
+            <div id="slot4_2" class="skillslot"></div>
+            <div id="slot4_3" class="skillslot"></div>
+            <div id="slot4_4" class="skillslot"></div>
+            <div id="slot4_5" class="skillslot"></div>
+            <div id="slot4_6" class="skillslot"></div>
+            <div id="slot4_7" class="skillslot"></div>
+            <div id="slot4_8" class="skillslot"></div>
+            <div id="slot4_9" class="skillslot"></div>
+            <div id="slot4_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot5_1" class="skillslot"></div>
+            <div id="slot5_2" class="skillslot"></div>
+            <div id="slot5_3" class="skillslot"></div>
+            <div id="slot5_4" class="skillslot"></div>
+            <div id="slot5_5" class="skillslot"></div>
+            <div id="slot5_6" class="skillslot"></div>
+            <div id="slot5_7" class="skillslot"></div>
+            <div id="slot5_8" class="skillslot"></div>
+            <div id="slot5_9" class="skillslot"></div>
+            <div id="slot5_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot6_1" class="skillslot"></div>
+            <div id="slot6_2" class="skillslot"></div>
+            <div id="slot6_3" class="skillslot"></div>
+            <div id="slot6_4" class="skillslot"></div>
+            <div id="slot6_5" class="skillslot"></div>
+            <div id="slot6_6" class="skillslot"></div>
+            <div id="slot6_7" class="skillslot"></div>
+            <div id="slot6_8" class="skillslot"></div>
+            <div id="slot6_9" class="skillslot"></div>
+            <div id="slot6_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot7_1" class="skillslot"></div>
+            <div id="slot7_2" class="skillslot"></div>
+            <div id="slot7_3" class="skillslot"></div>
+            <div id="slot7_4" class="skillslot"></div>
+            <div id="slot7_5" class="skillslot"></div>
+            <div id="slot7_6" class="skillslot"></div>
+            <div id="slot7_7" class="skillslot"></div>
+            <div id="slot7_8" class="skillslot"></div>
+            <div id="slot7_9" class="skillslot"></div>
+            <div id="slot7_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot8_1" class="skillslot"></div>
+            <div id="slot8_2" class="skillslot"></div>
+            <div id="slot8_3" class="skillslot"></div>
+            <div id="slot8_4" class="skillslot"></div>
+            <div id="slot8_5" class="skillslot"></div>
+            <div id="slot8_6" class="skillslot"></div>
+            <div id="slot8_7" class="skillslot"></div>
+            <div id="slot8_8" class="skillslot"></div>
+            <div id="slot8_9" class="skillslot"></div>
+            <div id="slot8_10" class="skillslot"></div>
+        </div>
+          <div class="skillline">
+        	<div id="slot9_1" class="skillslot"></div>
+            <div id="slot9_2" class="skillslot"></div>
+            <div id="slot9_3" class="skillslot"></div>
+            <div id="slot9_4" class="skillslot"></div>
+            <div id="slot9_5" class="skillslot"></div>
+            <div id="slot9_6" class="skillslot"></div>
+            <div id="slot9_7" class="skillslot"></div>
+            <div id="slot9_8" class="skillslot"></div>
+            <div id="slot9_9" class="skillslot"></div>
+            <div id="slot9_10" class="skillslot"></div>
+        </div>
+</div>
+</div>
+</div>
+	        </div>
+		<div id="PJranker">
+			  <!-- BEGIN RANK -->
+			  <div class="RrankBlock {RANK.RANK}">
+					<div class="RrankNRO">TOP: {RANK.NRO} </div>
+					<div class="RrankTipo">EN: {RANK.NOMBRE}</div>
+				</div>
+	           <!-- END RANK -->
+			
+		</div>
+</div>

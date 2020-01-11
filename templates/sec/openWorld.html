@@ -1,0 +1,48 @@
+<script src="js/context.js"></script>
+<script src="js/messi.min.js"></script>
+<link rel="stylesheet" href="css/messi.css?{RAND}" />
+<script>
+var mainCharacter="{IMG_P}";
+var worldDimencion=300;
+var world=1;
+var base = "pasto";
+var ourPositionX = 6;
+var ourPositionY = 6;
+var dynPosX = 0;
+var dynPosY = 0;
+var mapLimit=12;
+var movePj=false;
+var movePx=0;
+var frames=0;
+var keyLock=true;
+var screenStartX=(ourPositionX*50);
+var screenStartY=(ourPositionY*50);
+var logedIn=1;
+var charRopaPreview = 0;
+var sectTrack="";
+var freeMovement=true;
+var monsterImg="";
+var iOpen=false;
+var iViewerId=0;
+$(document).ready(function(){
+	$('#entorno').animate( { scrollLeft: '+='+screenStartX,scrollTop: '+='+screenStartY, }, 0);
+	startWorld();
+});
+</script>
+<script src="js/jsWorld.js?{RAND}" type="text/javascript"></script>
+<script src="js/builder.js?{RAND}" type="text/javascript"></script>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Mundo Libre:</div>
+ 	<div id="test"></div>
+    <div id="contenedor" align="left">
+      	  <div id='pj'><img src='images/clases/{IMG_P}' width="40" height="40"></div>
+  		  <div id="entorno">
+            <div id="world"></div>
+          </div>
+  </div>
+
+ 
+ 
+  </div>
+
+

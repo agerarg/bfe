@@ -1,0 +1,21 @@
+<script>
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+</script>
+<script src="js/tienda.js?{RAND}" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	checkItems();
+});
+</script>
+<div id="sect_tienda">
+	<div class="title_spacer">
+    </div>
+	<div id="tienda_opt">
+    	<div id="tusItems" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armaduras</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> <br /> <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> - <a href="javascript:filtro('misc');">Otros</a></div>
+        <div id="item_list_tienda"></div>
+        <div id="item_paginacion"></div>
+    </div>
+</div>

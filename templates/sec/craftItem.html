@@ -1,0 +1,26 @@
+<div id="sectCustom">
+	<div class="sectCustomTitle">Craft asdasda</div>
+    <div class="scrollChatter" class="monstFill">
+     <div><img src="images/item/{MONSIMG}" /></div>
+      <div>{MONSTNAME}</div>
+         <div class="costo">Costo: {COST}</div>
+     </div>
+    <div align="center"><a href="index.php?sec=craft&fill={FILL}&page={PAGE}&mundo={SELWORLD}&grade={GRADE}">Volver a craft</a></div>
+    <div class="listingThings">
+    Requiere los siguientes items:
+      <!-- BEGIN DROP -->
+       <div class="questBar">
+       <div class="monstListImg">
+       <img src="images/item/{DROP.IMG}" width="30" height="30" />
+       </div>
+       <div class="craftListName">
+      {DROP.NOMBRE}<br />
+      
+       </div>
+         <div >Cantidad: {DROP.CANT}<br />
+         Posees: {DROP.HAVE}</div>
+       </div>  
+	 <!-- END DROP -->
+    </div>
+    <div class="crearButton" align="center">.<a href="?sec=craft&id={CRAT}&fill={FILL}&page={PAGE}&mundo={SELWORLD}&grade={GRADE}&crear">CREAR</a>.</div>
+</div>

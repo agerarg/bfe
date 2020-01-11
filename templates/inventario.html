@@ -1,0 +1,187 @@
+<script src="js/ui/jquery.ui.core.js"></script>
+<script src="js/ui/jquery.ui.widget.js"></script>
+<script src="js/ui/jquery.ui.mouse.js"></script>
+<script src="js/ui/jquery.ui.draggable.js"></script>
+<script src="js/ui/jquery.ui.droppable.js"></script>
+<script>
+estoyEnInventario=1;
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var stats= new Array();
+stats['Vida']={VIDA_P};
+stats['Mana']={MANA_P};
+stats['VidaLimit']={VIDA_L_P};
+stats['ManaLimit']={MANA_L_P};
+stats['Ataque']={ATA_P};
+stats['AtaqueMagico']={ATA_M_P};
+stats['Defensa']={DEF_P};
+stats['DefensaMagica']={DEF_M_P};
+stats['Critico']={CR_P};
+stats['PC']={PC_P};
+stats['CriticoMagico']={CR_M_P};
+stats['PCMagico']={PC_M_P};
+
+var I_ventasCount = parseInt("{MYSELLCOUNT}");
+const I_ventasLimit = parseInt("{MYSELLLIMIT}");
+const I_itemLimit = parseInt("{MYINVLIIT}");
+</script>
+<script src="js/inventario.js?{RAND}" type="text/javascript"></script>
+<div id="inventario">
+	<div class="title_spacer">
+    </div>
+	<div id="inv_top">
+    	<div id="inv_equipo">
+        	<div id="slot_W">{S_ARMA}</div>
+            <div id="slot_armor">{S_ARMADURA}</div>
+            <div id="slot_foots">{S_BOTAS}</div>
+            <div id="slot_rings">{S_RINGS}</div>
+            <div id="slot_shield">{S_ESCUDO}</div>
+            <div id="slot_gloves">{S_GUANTES}</div>
+            <div id="slot_head">{S_HEAD}</div>
+            <div id="slot_necklace">{S_ERRINGS}</div>
+        </div>
+        <div id="inv_stats">
+        	<div class="stat_column">
+                <div id="atr_VidaLimit">Vida: {VIDA_P} / {VIDA_L_P}</div>
+                <div id="atr_ManaLimit">Mana: {MANA_P} / {MANA_L_P}</div>
+                <div id="atr_Ataque">Ataque: {ATA_P}</div>
+               <div id="atr_AtaqueMagico">Ataque Magico: {ATA_M_P}</div>
+                <div id="atr_Defensa">Defensa: {DEF_P}</div>
+                 <div id="atr_DefensaMagica">Defensa Magica: {DEF_M_P}</div>
+              <div id="atr_Critico">Critico: {CR_P}%</div>
+                <div id="atr_PC" title="Poder Critico">PC: {PC_P}%</div>
+                <div id="atr_CriticoMagico">Critico Magico: {CR_M_P}%</div>
+                <div id="atr_PCMagico" title="Poder Critico Magico">PCM: {PC_M_P}%</div>
+            </div>
+            <div class="stat_column">
+            	<div id="atr_hpRegen" title="Regeneracion de Vida" >Reg Vida: {HPREGEN_P}</div>
+                <div id="atr_mpRegen" title="Regeneracion de Mana" >Reg Mana: {MPREGEN_P}</div>
+    			 <div id="atr_atkSpeed" title="Velelocidad de Ataque" >Vel. de Ataque: {ATKSPEED}seg</div>
+                  <div id="atr_castSpeed"itle="Velelocidad de Casteo" >Vel. de Casteo: {CASTSPEED}seg</div>
+                   <div id="atr_elemento" >Elemento: {ELEMENTO}</div>
+                   <div id="atr_elementodmg" >Daño elemental: {ELEMENTODMG}</div>
+                   <div id="atr_baseDps" >Item Power: {BASEDPS}</div>
+                 <div class="pvpatr" title="Personaje vs Personaje">PVP: {PVP}</div>
+                <div  class="pkatr" title="Personaje Asesinado">PK: {PK}</div>
+                 <div><a href="javascript:regalarOro();"> Regalar Oro</a></div>
+            </div>
+        </div>
+    </div>
+	<div id="inventario_bot">
+    <br />
+    	<div id="tusItems">Mis items:</div>
+        <div class="filto_items" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armaduras</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> <br /> <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> - <a href="javascript:filtro('runa');">Runas</a> - <a href="javascript:filtro('stone');">Stones</a> - <a href="javascript:filtro('misc');">Otros</a></div>
+        <div id="item_list"> </div>
+        <div id="item_paginacion"></div>
+        <div id="showOptionsObj">
+            <div id="IshowIDetail" class="scrollChatter"> </div>
+            <div id="IshowIOptions"> </div>
+            <div onclick="closeOptionUi();" id="IitemClose"><img src="images/cancel.png" width="25" height="25"> </div>
+        </div>
+    </div>
+</div>
+<div id="INVlimpiar"><a href="javascript:showLimpieza()">Limpiar</a></div>
+
+<div id="enchantBoxSucces" class="GTFO">El item ha mejorado a +<span id="Wpower"></span>!<br /><img src="images/good.gif" width="400" height="300" /></div>
+<div id="enchantBoxFail" class="GTFO">El encantamiento fallo! el arma perdio todo su poder<br /><img src="images/bad.gif" width="260" height="146" /></div>
+
+<div id="VentaDeItem">
+
+    <div id="VentaTitleI"></div>
+
+    <div class="VentaTipoMoneda">
+        <div class="ventaDrow">
+            Moneda:
+        <select id="ventaMoneda" class="boxInner">
+                    <option value="0" selected>Oro</option>
+                    <option value="613">ReRoll</option>
+                    <option value="614">Chaos</option>               
+                    <option value="617">Alquimist</option>
+                    <option value="616">Exodimo</option>
+                    <option value="618">Corruption</option>
+                    <option value="615">Upulus</option>
+            </select> 
+    </div>
+    <div id="VentaCantidadui" class="ventaDrow">
+            Cantidad:
+        <input id="ventaCant" class="boxInner" size="3" type="text" value="1">
+    </div>
+    <div  class="ventaDrow">
+         <span id="ventaPrecioTExt">Precio:</span> 
+        <input id="ventaPrecio" class="boxInner" size="10" type="text" value="1">
+    </div>
+</div>
+ <div class="menuItem btnVentaV" onclick="doVenta()">Vender</div>
+<div class="menuItem btnVentaC" onclick="closeVentaWin()">Cancelar</div>
+<div id="ventaLimiteitor"></div>
+</div>
+<div id="ItemSelectorInv">
+        
+    <div id="ItemSelectTitle"></div>
+
+    <div class="VentaTipoMoneda">
+            <div  class="ventaDrow itemSelectorform">
+                ITEM:  <select  class="boxInner"  id="DoSelected">
+                        <option id="op_arma" selected value="W">Arma</option> 
+                        <option value="armor">Armadura</option>
+                        <option value="head">Casco</option>
+                        <option value="foots">Botas</option>
+                        <option value="gloves">Guantes</option>
+                        <option value="rings">Anillo</option>
+                        <option value="necklace">Collar</option>
+                        <option value="shield">Escudo</option>
+        </select>
+        </div>
+    </div>
+    <div class="menuItem btnVentaV" onclick="doUsar()">Usar</div>
+    <div class="menuItem btnVentaC" onclick="closeDo()">Cancelar</div>
+</div>
+
+
+<div id="ItemEnchantInv">
+        
+    <div id="ItemEnchantTitle"></div>
+
+    <div class="VentaTipoMoneda">
+            <div  class="ventaDrow itemSelectorform">
+                ITEM:  <select  class="boxInner"  id="toEnchantSelected">
+                        <option selected value="armor">Armadura</option>
+                        <option value="head">Casco</option>
+                        <option value="foots">Botas</option>
+                        <option value="gloves">Guantes</option>
+                        <option value="rings">Anillo</option>
+                        <option value="necklace">Collar</option>
+                        <option value="shield">Escudo</option>
+        </select>
+        </div>
+    </div>
+    <div class="menuItem btnVentaV" onclick="doEnchant()">Enchantear</div>
+    <div class="menuItem btnVentaC" onclick="closeDo()">Cancelar</div>
+</div>
+
+    <div id="INVlimpiarSelector">
+        
+    <div class="tituloItemSelcs">Quieres destruir todos los 
+        items de el grado 
+        seleccionado?</div>
+
+    <div class="VentaTipoMoneda">
+            <div  class="ventaDrow itemSelectorform">
+                ITEMS:  <select  class="boxInner"  id="LimpiezaItms">
+                        <option selected value="1">Lvl 1: Grado NG</option> 
+                        <option value="2">Lvl 20: Grado D</option>
+                        <option value="3">Lvl 40: Grado C</option>
+                        <option value="4">Lvl 51: Grado B</option>
+                        <option value="5">Lvl 61: Grado A</option>
+                        <option value="6">Lvl 76: Grado S</option>
+                        <option value="7">Lvl 80: Grado X</option>
+                        <option value="8">Lvl 86: Grado Y</option>
+                        <option value="9">Lvl 100: Grado Z</option>
+        </select>
+        </div>
+    </div>
+    <div class="menuItem btnVentaV" onclick="doLimpieza()">Limpiar</div>
+    <div class="menuItem btnVentaC" onclick="closeCST('INVlimpiarSelector')">Cancelar</div>
+</div>

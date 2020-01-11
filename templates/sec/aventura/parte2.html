@@ -1,0 +1,217 @@
+<script src="js/ion.sound.js"></script>
+<script>
+var steps=0;
+var honor = parseInt("{HONOR}");
+function fin(honor)
+{
+	setTimeout(function() {
+		location.href='index.php?sec=mundo';
+	}, 2000);
+	
+}
+function toCastle()
+{
+	$.ajax({
+		data: "",
+		type: "GET",
+		dataType: "json",
+		url: "json/finAvent.php",
+		success: function(data){
+		fin(data);
+	}
+	});
+}
+function dameEspadaCuliaw()
+{
+	$.ajax({
+		type: "GET",
+		dataType: "json",
+		url: "json/aprenderAvent.php",
+	});
+}
+$(document).ready(function(){	
+	ion.sound({
+            sounds: [
+                {name: "markulion1"},
+				{name: "jhony1"},
+				{name: "markulion2"},
+				{name: "markulion3"},
+				{name: "markulion4"},
+				{name: "jhony2"},
+				{name: "markulion5"},
+				{name: "jhony3"},
+				{name: "markulion6"},
+				{name: "markulion7"},
+				{name: "markulion8"},
+				{name: "markulion9"},
+				{name: "markulion10"},
+				{name: "jhony4"},
+				{name: "markulion11"}
+            ],
+            path: "audio/parte2/",
+            preload: true,
+            volume: 1.0,
+			multiplay: false
+        });
+		$("#cargandoCosa").show(300);
+		setTimeout(function() {
+			$("#cargandoCosa").hide(300);
+			$("#markulion_boidy").show(500);
+			setTimeout(function() {
+				$( "#markulion_boidy" ).animate({ "left": "+=30px" }, "slow" );
+					setTimeout(function() {
+						ion.sound.play("markulion1");
+						$("#markulion_dialog").text("Vamos a visitar un viejo amigo");
+						$("#markulion_dialog").show(500);
+						
+						setTimeout(function() {
+								$("#markulion_dialog").hide();
+								$( "#Johnny_boidy" ).animate({ "left": "+=280px" }, 0);
+								$("#Johnny_boidy").show(500);
+								$( "#Johnny_boidy" ).animate({ "left": "-=150px" }, "slow");
+								
+								$("#Johnny_dialog").text("Hey Mark como va tu vida sexual?");
+								ion.sound.play("jhony1");
+								$("#Johnny_dialog").show(500);
+								
+								setTimeout(function() {
+										$("#Johnny_dialog").hide();
+										ion.sound.play("markulion2");
+										$("#markulion_dialog").text("Em bien Johnny... gracias por preguntar...");
+										$("#markulion_dialog").show(500);
+								}, 4000);
+								
+								
+								setTimeout(function() {
+										$("#Johnny_dialog").hide();
+										ion.sound.play("markulion3");
+										$("#markulion_dialog").text("Estamos buscando los planos para entrar al castillo, yo se que tienes una copia");
+										$("#markulion_dialog").show(500);
+								}, 7000);
+								
+								setTimeout(function() {
+										$("#markulion_dialog").hide();
+											ion.sound.play("jhony2");
+										$("#Johnny_dialog").text("Oh si porsupuesto, y ademas tengo una sorpresita mas para ustedes");
+										$("#Johnny_dialog").show(500);
+								}, 11000);
+								
+								setTimeout(function() {
+										$("#Johnny_dialog").hide();
+										ion.sound.play("markulion4");
+										$("#markulion_dialog").text("no tenemos tiempo para tus boludeces Johnny");
+										$("#markulion_dialog").show(500);
+								}, 15000);
+								
+								setTimeout(function() {
+										$("#markulion_dialog").hide();
+										ion.sound.play("jhony3");
+										$("#Johnny_dialog").text("Tengo la espada de la Grosura Infinita");
+										$("#Johnny_dialog").show(500);
+								}, 17500);
+								
+								if(honor==1)
+								{
+										setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion5");
+											$("#markulion_dialog").text("ohh bueno nos va ser de mucha ayuda, gracias Johnny");
+											$("#markulion_dialog").show(500);
+											dameEspadaCuliaw();
+									}, 21000);
+									
+										setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion6");
+											$("#markulion_dialog").text("bien la espada es tulla guerrero, pero no la vayas a vender en la tienda, no esas hijo de puta");
+											$("#markulion_dialog").show(500);
+									}, 25000);
+									
+										setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion7");
+											$("#markulion_dialog").text("dejemos de perder el tiempo y vamos por el castillo");
+											$("#markulion_dialog").show(500);
+											toCastle();
+											
+									}, 30000);
+								}
+								else
+								{
+									setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion8");
+											$("#markulion_dialog").text("mmm no vamos a poder aceptarla");
+											$("#markulion_dialog").show(500);
+									}, 21000);
+									
+									setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion9");
+											$("#markulion_dialog").text("hace un tiempo le enseñe a este tipo como pelear y todo");
+											$("#markulion_dialog").show(500);
+									}, 23000);
+									
+									setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion10");
+											$("#markulion_dialog").text("y despues le di una mision de matar unos guardias y se fue a la mierda");
+											$("#markulion_dialog").show(500);
+									}, 26000);
+									
+									setTimeout(function() {
+										$("#markulion_dialog").hide();
+										ion.sound.play("jhony4");
+										$("#Johnny_dialog").text("Pero que hijo de puuuta");
+										$("#Johnny_dialog").show(500);
+									}, 31000);
+									
+									setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion11");
+											$("#markulion_dialog").text("asi que no le vamos a dar una mierda no confio en el");
+											$("#markulion_dialog").show(500);
+									}, 34000);
+									
+									setTimeout(function() {
+											$("#Johnny_dialog").hide();
+											ion.sound.play("markulion7");
+											$("#markulion_dialog").text("dejemos de perder el tiempo y vamos por el castillo");
+											$("#markulion_dialog").show(500);
+											toCastle();
+									}, 38000);
+								}
+						}, 2000);
+						
+					}, 1000);
+			}, 500);
+		}, 3000);
+		
+		
+});
+
+</script>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Tomar Castillo Garca:</div>
+    <div id="cargandoCosa" align="center">Cargando...<br />
+   <img src="images/477.gif" width="124" height="128" /></div>
+  <div id="AdvScreen">
+      <div id="markulion_boidy" class="personaje" align="center">
+        <div class="charName">Markulion</div>
+        <div class="imgFace"><img src="images/aventura/personaje/markulion.jpg" width="100" height="150" /></div>
+        <div class="dialogo" id="markulion_dialog"></div>
+       </div>
+       <div id="Johnny_boidy" class="personaje" align="center">
+        <div class="charName">Johnny</div>
+        <div class="imgFace"><img src="images/aventura/personaje/jhony.jpg" width="100" height="150" /></div>
+        <div class="dialogo" id="Johnny_dialog"></div>
+       </div>
+   </div>
+   <div id="diaOpciones">
+   <div class="dialOpciones GTFO" id="Opcion1"></div>
+   <div class="dialOpciones GTFO" id="Opcion2"></div>
+   <div class="dialOpciones GTFO" id="Opcion3"></div>
+   </div>
+</div>
+
+

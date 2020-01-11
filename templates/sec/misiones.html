@@ -1,0 +1,36 @@
+<script>
+function activeishon(id)
+{
+	window.location = "index.php?sec=misiones&id="+id;
+}
+$(document).ready(function(){						   
+	$(".misionImgInn").mouseover(function(){
+           $(this).attr('src', 'images/mision2.png');
+   });
+   $(".misionImgInn").mouseout(function(){
+           $(this).attr('src', 'images/mision.png');
+   });
+   $('.misionImg').hover(function() {
+	$(this).css('cursor','pointer');
+	}, function() {
+	$(this).css('cursor','auto');
+	});
+});
+</script>
+<div id="sectMisiones">
+    <div id="misionBox">
+    {NOMISION}
+      <!-- BEGIN M -->
+            <div class="misionItem">
+                <div class="misionImg"  onclick="javascript:activeishon({M.ID});">
+                	<img class="misionImgInn" id="misionImg" src="images/mision.png" width="72" height="95" />
+                </div>
+                <div class="misionNombre"><a href="index.php?sec=misiones&id={M.ID}">{M.NOMBRE}</a></div>
+                <div class="misionLvl">Require Nivel {M.LVL} {M.MAX} <span class="misionTime">{M.TIME}</span></div>
+                <div class="misionEspacio"><img src="images/blank.gif" width="1" height="1" /></div>
+                <div class="misionDesc">{M.DESC}</div>
+      </div>  
+	 <!-- END M -->
+ <div>{NUMERACION}</div>     
+    </div>
+</div>

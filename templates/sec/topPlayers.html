@@ -1,0 +1,23 @@
+<div id="sectCustom">
+	<div class="sectCustomTitle">Top Jugadores</div>
+    <div align="center">
+    <a href="index.php?sec=top&id=1">Zombie Tank</a>-<a href="index.php?sec=top&id=2">Dark Mage</a>-<a href="index.php?sec=top&id=3">Ninja</a>-<a href="index.php?sec=top&id=4">Marksman</a>-<a href="index.php?sec=top&id=5">Shaman</a>-<a href="index.php?sec=top&id=6">Vampire</a>-<a href="index.php?sec=top&id=7">Destroyer</a>-<a href="index.php?sec=top&id=8">Cleric</a>-<a href="index.php?sec=top&id=10">Garca</a><br />
+    	<div class="topDPS">
+            <div class="Facil"><strong>Top DPS {CLASE}</strong></div>
+              <!-- BEGIN ZO -->
+               <div class="topBoxo" >
+                      <div >&nbsp;&nbsp;<strong>{ZO.NUM}</strong>&nbsp;<img src="images/clases/{ZO.IMG}" width="15" height="15" /> &nbsp;<a href="index.php?sec=ver&pj={ZO.NOMBRE}">{ZO.NOMBRE}</a> &nbsp;DPS: {ZO.DPS}</div>
+               </div>  
+             <!-- END ZO -->
+        </div>
+       <div class="topRanked {DIFSHOW}">
+            <div ><strong>Top Nivel {CLASE}:</strong></div>
+              <!-- BEGIN INF -->
+               <div class="topBoxo" >
+                      <div >&nbsp;&nbsp;<strong>{INF.NUM}</strong>&nbsp;<img src="images/clases/{INF.IMG}" width="15" height="15" /> &nbsp;<a href="index.php?sec=ver&pj={INF.NOMBRE}">{INF.NOMBRE}</a> &nbsp;Nivel: {INF.RANG}</div>
+               </div>  
+             <!-- END INF -->
+        </div>
+       
+    </div>
+</div>

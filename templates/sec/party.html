@@ -1,0 +1,21 @@
+<div id="sectCustom">
+    <div class="sectCustomTitle">Party</div>
+    <div class="partyButtons {SHOWPARTY}">
+        <div id="meQuieroIrParty" class="menuItem left" onclick="location.href='index.php?sec=party&salir';">Salir de Party</div>
+        <div id="invitarParty" class="menuItem left {PARTYINVITES}" onclick="location.href='index.php?sec=partyInvite';">Invitar</div>
+    </div>
+    <div class="partyButtons {SHOWCREATEPARTY}">
+            <div id="meQuieroIrParty" class="menuItem left" onclick="location.href='index.php?sec=party&crear';">Crear Party</div>
+        </div>
+    <div class="listingThings">
+      <!-- BEGIN PARTY -->
+       <div >
+              <div class="listingPjSlotPet" >
+              <div class="listingImager"><img src="images/clases/{PARTY.IMG}_{PARTY.SEXO}.png" alt="" width="50" height="50" /></div>
+              <div class="listingNamePet">&nbsp;{PARTY.NOMBRE} <br>&nbsp;<a href='index.php?sec=ver&pj={PARTY.NOMBRELINK}'>{MASC.NOMBRE}</a></div>
+              <div class="listingSubtitlPet">&nbsp;Level: {PARTY.LVL} Op: {PARTY.KICK}</div>
+              </div>
+       </div>  
+	 <!-- END PARTY -->
+    </div>
+</div>

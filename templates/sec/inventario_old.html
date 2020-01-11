@@ -1,0 +1,90 @@
+<script src="js/ui/jquery.ui.core.js"></script>
+<script src="js/ui/jquery.ui.widget.js"></script>
+<script src="js/ui/jquery.ui.mouse.js"></script>
+<script src="js/ui/jquery.ui.draggable.js"></script>
+<script src="js/ui/jquery.ui.droppable.js"></script>
+<script>
+estoyEnInventario=1;
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var stats= new Array();
+stats['Vida']={VIDA_P};
+stats['Mana']={MANA_P};
+stats['VidaLimit']={VIDA_L_P};
+stats['ManaLimit']={MANA_L_P};
+stats['Ataque']={ATA_P};
+stats['AtaqueMagico']={ATA_M_P};
+stats['Defensa']={DEF_P};
+stats['DefensaMagica']={DEF_M_P};
+stats['Critico']={CR_P};
+stats['PC']={PC_P};
+stats['CriticoMagico']={CR_M_P};
+stats['PCMagico']={PC_M_P};
+
+</script>
+<script src="js/inventario.js?{RAND}" type="text/javascript"></script>
+<div id="inventario">
+	<div class="title_spacer">
+    </div>
+	<div id="inv_top">
+    	<div id="inv_equipo">
+        	<div id="slot_W">{S_ARMA}</div>
+            <div id="slot_armor">{S_ARMADURA}</div>
+            <div id="slot_foots">{S_BOTAS}</div>
+            <div id="slot_rings">{S_RINGS}</div>
+            <div id="slot_shield">{S_ESCUDO}</div>
+            <div id="slot_gloves">{S_GUANTES}</div>
+            <div id="slot_head">{S_HEAD}</div>
+            <div id="slot_necklace">{S_ERRINGS}</div>
+        </div>
+        <div id="inv_stats">
+        	<div class="stat_column">
+                <div id="atr_VidaLimit">Vida: {VIDA_P} / {VIDA_L_P}</div>
+                <div id="atr_ManaLimit">Mana: {MANA_P} / {MANA_L_P}</div>
+                <div id="atr_Ataque">Ataque: {ATA_P}</div>
+               <div id="atr_AtaqueMagico">Ataque Magico: {ATA_M_P}</div>
+                <div id="atr_Defensa">Defensa: {DEF_P}</div>
+                 <div id="atr_DefensaMagica">Defensa Magica: {DEF_M_P}</div>
+              <div id="atr_Critico">Critico: {CR_P}%</div>
+                <div id="atr_PC" title="Poder Critico">PC: {PC_P}%</div>
+                <div id="atr_CriticoMagico">Critico Magico: {CR_M_P}%</div>
+                <div id="atr_PCMagico" title="Poder Critico Magico">PCM: {PC_M_P}%</div>
+            </div>
+            <div class="stat_column">
+            	<div id="atr_hpRegen" title="Regeneracion de Vida" >Reg Vida: {HPREGEN_P}</div>
+                <div id="atr_mpRegen" title="Regeneracion de Mana" >Reg Mana: {MPREGEN_P}</div>
+    			 <div id="atr_atkSpeed" title="Velelocidad de Ataque" >Vel. de Ataque: {ATKSPEED}seg</div>
+                  <div id="atr_castSpeed"itle="Velelocidad de Casteo" >Vel. de Casteo: {CASTSPEED}seg</div>
+                   <div id="atr_elemento" >Elemento: {ELEMENTO}</div>
+                   <div id="atr_elementodmg" >Daño elemental: {ELEMENTODMG}</div>
+                   <div id="atr_baseDps" >Item Power: {BASEDPS}</div>
+                 <div class="pvpatr" title="Personaje vs Personaje">PVP: {PVP}</div>
+                <div  class="pkatr" title="Personaje Asesinado">PK: {PK}</div>
+                 <div><a href="javascript:regalarOro();"> Regalar Oro</a></div>
+            </div>
+        </div>
+    </div>
+	<div id="inventario_bot">
+    <br />
+    	<div id="tusItems">Mis items:</div>
+        <div class="filto_items" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armaduras</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> <br /> <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> - <a href="javascript:filtro('misc');">Otros</a></div>
+        <div id="item_list"></div>
+        <div id="item_paginacion"></div>
+    </div>
+</div>
+<div id="enchantBoxSucces" class="GTFO">El item ha mejorado a +<span id="Wpower"></span>!<br /><img src="images/good.gif" width="400" height="300" /></div>
+<div id="enchantBoxFail" class="GTFO">El encantamiento fallo! el arma perdio todo su poder<br /><img src="images/bad.gif" width="260" height="146" /></div>
+<div id="enchantBoxChose" class="GTFO">Elegi la parte que queres mejorar:<br />
+<select  class="boxInner"  id="EnchantSector"> 
+    <option value="armor">Armadura</option>
+    <option value="head">Casco</option>
+    <option value="boot">Botas</option>
+    <option value="glove">Guantes</option>
+    <option value="ring">Anillo</option>
+    <option value="neck">Collar</option>
+</select>
+<br /><br />
+<a href="javascript:enchantor();">Mejorar este item</a>
+</div>

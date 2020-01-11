@@ -1,0 +1,183 @@
+
+
+.control-panel {
+  box-shadow: 0 4px 12px 2px black;
+  margin-bottom: 4rem;
+  max-width: 30rem;
+  width: 100%;
+}
+.control-panel input {
+  color: black;
+}
+
+.action {
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px 0px black;
+  cursor: pointer;
+  float: left;
+  margin: 0 1rem 2rem 0;
+  outline: 0;
+  position: relative;
+  transition: 100ms;
+}
+.action:after {
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+.action:hover, .action.active {
+  border: 1px solid #fdffad;
+  box-shadow: 0 0 6px 1px #fdffad;
+}
+.action:last-child {
+  margin-right: 0;
+}
+
+.action-internal {
+  background: transparent;
+  border-radius: 5px;
+  box-sizing: content-box;
+  color: white;
+  font-size: 1.2em;
+  height: 5rem;
+  overflow: hidden;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 5rem;
+}
+.action-internal:after {
+  box-shadow: 0 34px 16px -16px rgba(255, 255, 255, 0.4) inset;
+  bottom: 0;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+.action-internal:before {
+  bottom: 0;
+  box-shadow: 0 1px 1px -1px white inset, 0 2px 1px 0px rgba(255, 255, 255, 0.4) inset, 0 -1px 2px -1px rgba(255, 255, 255, 0.4) inset;
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+.action-internal .contents {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+.action-internal .contents img {
+  display: block;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+.action-internal canvas {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+}
+.action-internal:last-child {
+  margin-right: 0;
+}
+
+.panel-header {
+  background-color: #5d5d5d;
+  background: linear-gradient(to bottom, #5d5d5d, #292929);
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  position: relative;
+}
+.panel-header h3 {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+.panel-header:after {
+  background-color: #50614d;
+  background: linear-gradient(to right, #50614d, #435c40, transparent 60%);
+  bottom: 0;
+  box-shadow: 0 5px 5px -5px white inset;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.panel-body {
+  background: linear-gradient(to bottom, #212121, #151815);
+  padding: 1.25rem 1rem 1.25rem;
+}
+
+.option {
+  display: table;
+  font-size: 15px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.option .label {
+  display: table-cell;
+  vertical-align: middle;
+  width: 9rem;
+}
+.option .input {
+  display: table-cell;
+  vertical-align: middle;
+}
+.option:last-child {
+  margin-bottom: 0;
+}
+.option input[type="text"] {
+  color: white;
+  font-size: 15px;
+  padding: 0.25rem;
+  width: 4rem;
+}
+.option .unit {
+  font-size: 13px;
+  padding-left: 0.25rem;
+}
+.option input {
+  background-color: #070705;
+  border: 2px solid #2a2a27;
+  font-family: 'Roboto', sans-serif;
+  outline-color: #fdffad;
+}
+
+.key {
+  font: 700 1.4em 'Roboto Condensed', sans-serif;
+  left: 0.75rem;
+  position: absolute;
+  text-shadow: -1px -1px 0 #000,   1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  top: -0.8rem;
+  z-index: 3;
+}

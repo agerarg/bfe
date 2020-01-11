@@ -1,0 +1,151 @@
+<script>
+var dif=1;
+var grado=2;
+function setDrop(grado,dif)
+{
+	//LIMIT
+	grado=parseInt(grado);
+	dif=parseInt(dif);
+	switch(grado)
+	{
+	
+		case 3:
+			$("#limit").text("Limite de nivel: 60");
+			$("#minim").text("Minimo de nivel: 40");
+		break;
+		case 4:
+			$("#limit").text("Limite de nivel: 60");
+			$("#minim").text("Minimo de nivel: 40");
+		break;
+		case 5:
+			$("#limit").text("Limite de nivel: 70");
+			$("#minim").text("Minimo de nivel: 50");
+		break;
+		case 6:
+			$("#limit").text("Limite de nivel: 70");
+			$("#minim").text("Minimo de nivel: 50");
+		break;
+		case 7:
+			$("#limit").text("Limite de nivel: 80");
+			$("#minim").text("Minimo de nivel: 60");
+		break;
+		case 8:
+			$("#limit").text("Limite de nivel: 86");
+			$("#minim").text("Minimo de nivel: 70");
+		break;
+		case 9:
+			$("#limit").text("Limite de nivel: 120");
+			$("#minim").text("Minimo de nivel: 70");
+		break;
+		case 10:
+			$("#limit").text("Limite de nivel: 120");
+			$("#minim").text("Minimo de nivel: 80");
+		break;
+	}
+	// PARTES
+	switch(dif)
+	{
+		case 1:
+			$("#partes").text("Partes: 3");
+		break;
+		case 2:
+			$("#partes").text("Partes: 4");
+		break;
+		case 3:
+			$("#partes").text("Partes: 5");
+		break;
+		case 4:
+			$("#partes").text("Partes: 6");
+		break;
+		case 5:
+			$("#partes").text("Partes: 7");
+		break;
+		case 6:
+			$("#partes").text("Partes: 8");
+		break;
+	}
+	
+	var per=0;
+	//ITEM MAGICO
+	per = parseInt((200/grado)*dif);
+	if(per>100)
+		per=100;
+	$("#itemMagico").text("Chance drop Item Magico: "+per+"%");
+	
+	//ITEM RARO
+	per = parseInt((100/grado)*dif);
+	if(per>100)
+		per=100;
+	$("#itemRaro").text("Chance drop Item Raro: "+per+"%");
+	
+	//ITEM EPICO
+	per = parseInt((50/grado)*dif);
+	if(per>100)
+		per=100;
+	$("#itemEpico").text("Chance drop Item Epico: "+per+"%");
+	
+	//ITEM LEG
+	per = parseInt((20/grado)*dif);
+	if(per>100)
+		per=100;
+	$("#itemLeg").text("Chance drop Item Legendario: "+per+"%");
+	
+}
+$(document).ready(function(){			
+
+	$('#grado').change(function() {
+		grado=this.value;
+	  	setDrop(grado,dif);
+		
+	});
+	$('#dificultad').change(function() {
+		dif=this.value;
+	  	setDrop(grado,dif);
+		
+	});
+	
+});
+</script>
+
+<div id="sectCustom">
+	<div class="sectCustomTitle">Party Dungeon</div>
+   <form action="" method="post"> <div class="listingThings">
+       <div class="dungeonBox">
+       <div class="dungTitle">Configurar Dungeon:</div>
+      <div>Grado de Recompenza: <select id="grado" name="grado">
+          <option value="3" selected="selected">Grado C (Lvl 40 Low)</option>
+          <option value="4">Grado C (Lvl 50 Top)</option>
+          <option value="5">Grado B (Lvl 55 Low)</option>
+          <option value="6">Grado B (Lvl 60 Top)</option>
+          <option value="7">Grado A (Lvl 65 Low)</option>
+          <option value="7">Grado A (Lvl 70 Top)</option>
+          <option value="8">Grado S (Lvl 76 Low)</option>
+          <option value="9">Grado S (Lvl 80 Top)</option>
+          <option value="10">Grado X (Lvl 80)</option>
+      </select></div>
+       <div>Dificultad: <select id="dificultad" name="dificultad">
+          <option value="1" selected="selected">Muy Fácil</option>
+          <option value="2">Fácil</option>
+          <option value="3">Moderado</option>
+          <option value="4">Difícil</option>
+          <option value="5">Muy Difícil</option>
+          <option value="6">Extremo</option>
+          </select></div>
+    </div>
+    
+    
+    <div class="dungeonBox">
+       <div class="dungTitle">Información:</div>
+        <div id="limit">Limite de nivel: 60</div>
+         <div id="minim">Minimo de nivel: 40</div>
+        <div id="partes">Partes: 3</div>
+      	<div id="itemMagico">Chance drop Item Magico: 40%</div>
+      	 <div id="itemRaro">Chance drop Item Raro:  15%</div>
+         <div id="itemEpico">Chance drop Item Epico:  5%</div>
+         <div id="itemLeg">Chance drop Item Legendario:  0%</div>
+    </div>
+     <div class="dungeonBox">
+       <div align="center" ><input value="Entrar al dungeon" type="submit" /></div>
+       </div>
+    
+</div></form></div>

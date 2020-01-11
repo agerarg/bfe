@@ -1,0 +1,37 @@
+<script>
+function tradeRest(data)
+{
+	if(data['error']==0)
+		jAlert("Usted ah iniciado una trasnferencia con "+data['nombre'], 'Inicio de Transferencia',function (){
+			window.location = "index.php?sec=trade";
+		});
+	else
+		jAlert(data['error'], 'Error');
+}
+$(document).ready(function(){						   
+	$('#doTrade').hover(function() {
+	$	(this).css('cursor','pointer');
+	}, function() {
+		$(this).css('cursor','auto');
+	});
+	$('#doTrade').click(function() {
+		$.ajax({
+			data: "usr="+$('#nombrePj').val(),
+			type: "GET",
+			dataType: "json",
+			url: "json/tradeSrc.php",
+			success: function(data){
+			tradeRest(data);
+		}
+		});
+	});
+	
+});
+</script>
+<div id="sectTradeSrc">
+    <div id="boxesSrc">
+        <input name="nombre" class="boxInner" size="15" type="text" id="nombrePj"/>
+        <br />
+    	<input type="submit" name="button" id="doTrade" value="Trade" />
+     </div>
+</div>

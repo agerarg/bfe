@@ -1,0 +1,8 @@
+#login{ display: none; }
+#registro{ display: none; width: 100%;}
+#antiBoludos{ background-color: #2E2E2E; border: #6E6E6E 1px solid; }
+#problemResult{width: 100%;}
+#cartel{overflow: auto;}
+#terminos{  background-color: #08298A; border: #6E6E6E 1px solid; padding-top: 5px; }
+.gtfo{ display: none; }
+.condBox{ border: 1px #444444 solid; margin: 2px  background-color: #00238C;}

@@ -1,0 +1,20 @@
+<script>
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var questOn=parseInt("{QUESTUP}");
+</script>
+<script src="js/veritems.js?{RAND}" type="text/javascript"></script>
+
+<div id="verItems">
+	<div class="title_spacer">
+    </div>
+	<div id="inventario_bot">
+		<div align="center"><a href="javascript:showTier(0);">Normal</a> - <a href="javascript:showTier(1);">Granhan</a></div>
+    <div id="tusItems" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armaduras</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> <br /> <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> - <a href="javascript:filtro('misc');">Otros</a></div>
+
+        <div id="item_list"></div>
+        <div id="item_paginacion"></div>
+    </div>
+</div>

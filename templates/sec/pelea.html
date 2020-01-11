@@ -1,0 +1,143 @@
+<script>
+function miniLifebar(vida,vida_limit,imgvida,imgdead,velocidad) {
+	var per=0;
+	per = vida / vida_limit;
+	per = per*90;
+	per=per;
+	vida=0;
+	vida_limit=0;
+	for(i=0;i<90;i++)
+	{
+		(per > i)?(vida++):(vida_limit++);
+	}
+	$("#"+imgvida).animate({
+		width: vida,
+	  }, velocidad );
+		
+	$("#"+imgdead).animate({
+		width: vida_limit,
+	  }, velocidad );	  
+}
+var personaje1 = parseInt("{ID1}");
+var personaje2 = parseInt("{ID2}");
+var fin=0;
+var showing=0;
+var vidaLimit1 = 0;
+var vidaLimit2 = 0;
+var vida = new Array();
+function mostrarPelea()
+{
+	setTimeout(function() {
+			if(showing<fin)
+			{
+				miniLifebar(vida[showing][0],vidaLimit1,"userVidal1","userDeadl1",300);
+				 miniLifebar(vida[showing][1],vidaLimit2,"userVidal2","userDeadl2",300);
+				 $("#userVidalNum").text(vida[showing][0]+"/"+vidaLimit1);
+				  $("#userVida2Num").text(vida[showing][1]+"/"+vidaLimit2);
+				 $("#Pshow"+showing).show(300);
+				 showing++;
+				 mostrarPelea();
+			}
+		}, 600);
+}
+function pelea(data)
+{
+	var i=0;
+	var limits=0;
+	var dmg="";
+	while(data.H[i])
+	{
+		if(limits==0)
+		{
+			vidaLimit1=data.H[i]['VIDA1'];
+			vidaLimit2=data.H[i]['VIDA2'];
+			limits=1
+		}
+		vida[i] = new Array(data.H[i]['VIDA1'],data.H[i]['VIDA2']);
+		if(data.H[i]['DMG']>0)
+			dmg=data.H[i]['DMG'];
+		else
+			dmg="";
+			if(data.H[i]['PJ']==personaje1)
+			{
+				$("#pelea").prepend("<div id='Pshow"+i+"' class='stomp GTFO'><img src='images/clases/{IMG1}' width='25' height='25' />   <img src='images/skill/"+data.H[i]['IMG']+"' width='25' height='25' />  "+dmg+"</div>");
+			}
+			else
+			{
+				$("#pelea").prepend(" <div  id='Pshow"+i+"' class='stomp GTFO'>"+dmg+" <img src='images/skill/"+data.H[i]['IMG']+"' width='25' height='25' />  <img src='images/clases/{IMG2}' width='25' height='25' /></div>");
+			}
+		i++;
+	}
+	fin=i;
+	mostrarPelea();
+}
+
+
+$(document).ready(function(){	
+	$.ajax({
+					data: "id={PElEAID}",
+					type: "GET",
+					dataType: "json",
+					url: "json/verPelea.php",
+					success: function(data){
+					pelea(data);
+				}
+				});
+	
+	
+	miniLifebar(100,100,"userVidal1","userDeadl1",1);
+	miniLifebar(100,100,"userVidal2","userDeadl2",1);
+});
+</script>
+<style>
+.pelaskill{ width:25px; height:25px;}
+.pejPel{ width:25px; height:25px;}
+#peleaCol1{ float:left; width:100px; height:600px; }
+#peleaCol2{ float:left; width:280px; height:600px; }
+#peleaCol3{ float:left; width:100px; height:600px; }
+.stomp{ background-color:#333; border:2px #000 solid; padding-top:3px; color:#F00; font-size:24px;}
+.personajePelea{ background-color:#069; border: 1px #333 solid; }
+.peleaBox{ margin-left:5px;}
+</style>
+<div id="sectCustom" align="center">
+	<div class="sectCustomTitle">Batalla {NOMBRE1} VS {NOMBRE2}<br />Torneo: <a href="index.php?sec=torneo&id={TORNEOID}">{TORNEO}</a></div>
+   <div class="peleaBox">
+  	  <div id="peleaCol1">
+ 		  <div class="personajePelea">
+            <div>
+               <strong> {NOMBRE1}</strong>
+            <div ><img src="images/clases/{IMG1}" alt="" width="50" height="50" /></div>
+            <div class="vidal1"><img src="images/iz_fin.gif" height="22" width="2" /><img id="userVidal1" src="images/life.gif" height="22" width="0"/><img id="userDeadl1" src="images/dead.gif" height="22" width="20"/><img src="images/dr_fin.gif" height="22" width="2"/></div><div class="vidaDelLoco" id="userVidalNum">0</div>
+            </div>
+            <div >
+           </div>
+           <div  title="{CLASE_P_INFO}">
+            Class: {CLASE1}
+           </div>
+             <div >
+            Lvl: {LVL1}
+           </div>
+           </div>
+   	  </div>
+      <div id="peleaCol2">
+ 	 	 <div id="pelea"></div>
+  	 </div>
+      <div id="peleaCol3">
+ 		 <div class="personajePelea">
+            <div>
+             <strong> {NOMBRE2}</strong>
+            <div ><img src="images/clases/{IMG2}" alt="" width="50" height="50" /></div>
+            <div class="vidal1"><img src="images/iz_fin.gif" height="22" width="2" /><img id="userVidal2" src="images/life.gif" height="22" width="0"/><img id="userDeadl2" src="images/dead.gif" height="22" width="20"/><img src="images/dr_fin.gif" height="22" width="2"/></div><div class="vidaDelLoco" id="userVida2Num">0</div>
+            </div>
+            <div >
+           </div>
+           <div  title="{CLASE_P_INFO}">
+           Class: {CLASE2}
+           </div>
+             <div >
+             Lvl: {LVL2}
+           </div>
+           </div>
+   	  </div>
+   </div>
+</div>

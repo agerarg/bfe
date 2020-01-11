@@ -1,0 +1,37 @@
+.mapSlot{
+	display:block;
+	/*text-indent:-9999px;*/
+	width:50px;
+	height:50px;
+	outline:none;
+	cursor:pointer;
+	/*background-image:url(../images/dungeon/piso/pasto.jpg);*/
+	border: solid 1px #333;
+}
+
+.mapPasto{
+	/*background-image:url(../images/dungeon/piso/pasto.jpg);*/
+}
+.mapSlot hover{
+	border: solid 1px #CCC;
+	
+}
+.skilleffect{
+	z-index:999999;}
+#cont_map{ margin-left:25px;}
+.ElMap{
+float:left;
+	background-image:url(../images/dungeon/piso/pasto.jpg);
+
+width:450px;
+height:550px;
+-moz-box-shadow:0 0 5px #ddd;
+-webkit-box-shadow:0 0 5px #ddd;
+box-shadow:0 0 5px #ddd;
+}
+.mSkillBar{
+	display:block;
+	width:480px;
+	background-color:#999;
+	border: solid 1px #333;
+	}

@@ -1,0 +1,30 @@
+<script>
+function show_button()
+{
+	if($("#termsCheck").val()==1)
+	{
+		$("#sendButton").show(1000);
+		$("#terms").val(0);
+	}
+	else
+	{
+		$("#sendButton").hide(1000);
+		$("#termsCheck").val(1);
+	}
+}
+function enviar()
+{
+	 $("#forma").submit();
+}
+</script>
+<div id="sectOutMsg">
+	<form action="" id="forma" name="forma"  method="post"><input name="queopina" type="hidden" value="meimportauncarajotedije" /></form>
+    <div ID="boxError">
+        Antes de ingresar al juego verifique si está de acuerdo con el aviso legal<br />
+           <div ><a href="index.php?sec=terms" target="_blank">Leer aviso legal</a></div>
+                   <div>He leido el aviso legal <input onclick="show_button()" id="termsCheck" name="terms" type="checkbox" value="1" /></div>
+               <div id="sendButton" style="display:none">
+               	 <a href="javascript:enviar();">Jugar</a>
+               </div>
+    </div>
+</div>

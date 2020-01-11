@@ -1,0 +1,16 @@
+.mapSlot{
+	display:block;
+	text-indent:-9999px;
+	width:50px;
+	height:50px;
+	outline:none;
+	cursor:pointer;
+	background-color:#000;
+	border: solid 1px #333;
+}
+.mapPasto{
+	background-image:url(../images/dungeon/piso/pasto.jpg);
+}
+.mapSlot hover{
+	border: solid 1px #CCC;
+}

@@ -1,0 +1,22 @@
+<script language="JavaScript" src="js/FusionCharts.js"></script>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Raid Report {RAIDNAME}</div>
+    
+    <div>
+    <br /> 
+  <div id="chartdiv" align="center"> 
+        FusionCharts. </div>
+      <script type="text/javascript">
+		   var chart = new FusionCharts("FCF_Bar2D.swf", "ChartId", "450", "350");
+		   chart.setDataURL("Bar2D.php?id={RAIDID}");		   
+		   chart.render("chartdiv");
+		</script> 
+    </div>
+    <div class="listingThings">
+     <div align="center" class="dropListRaid">Lista de Drops</div>
+      <!-- BEGIN D -->
+              <div class="dropUser droperFond{D.NUM}" ><a href="index.php?sec=ver&pj={D.NOMBRE}">{D.NOMBRE}</a> gano {D.ITEM}</div>
+	 <!-- END D -->
+     <div align="center">{NUMERACION}</div>
+    </div>
+</div>

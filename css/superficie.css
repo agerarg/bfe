@@ -1,0 +1,37 @@
+#chat{
+	width:430px;
+	height:330px;
+	padding:5px;
+	margin-left:5px;
+		}
+#enviar{
+	width:40px;
+	height:25px;
+}
+#ch_mensajes{
+	height:430px;
+	width:390px;
+	padding-left:6px;
+	text-align:left;
+}
+.unMensaje{ 
+font-size:14px;
+}
+.msg_nombre{
+	color:#F60;
+	font-weight:bold;
+	float:left;
+	}
+.msg_texto{
+}
+#ch_titulo{
+	font-size:18px;
+	font-weight:bold;
+	color:#CF0;
+	height:30px;
+	width:100%;
+	padding-top:5px;
+}
+#ch_escrivir{
+	width:100%;
+}

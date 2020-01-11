@@ -1,0 +1,58 @@
+<script src="js/ui/jquery-ui-1.8.14.custom.js"></script>
+
+<script>
+function skillSaved(data)
+{
+	jAlert("Order guardado", 'Order guardado');	
+}
+function guardar()
+{
+  var idsInOrder = $("#sortable").sortable("toArray");
+   //-----------------^^^^
+   //console.log("envio:"+idsInOrder);
+	$.ajax({
+							data: "ord="+idsInOrder,
+							type: 'GET',
+							dataType: "json",
+							url: "json/skillOrder.php",
+							success: function(data){
+							skillSaved(data);
+						}
+						});
+}
+$(document).ready(function(){
+
+	$( "#sortable" ).sortable({
+      placeholder: "ui-state-highlight"
+    });
+    $( "#sortable" ).disableSelection();
+	
+});
+</script>
+<style>
+#sortable ul {
+    list-style:none;
+    padding-left:0;
+	margin-left: 0;
+	list-style-position: inside;
+
+}​
+#sortable { width: 450px; }
+#sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; background-color:#000; border:solid 1px #999; }
+#sortable li { width:34px; height:34px;}
+</style>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Configurar el orden de habilidades</div>
+        <div class="listingThings">
+        <div>
+       			<ul id="sortable" >
+                     <!-- BEGIN SKILLS -->
+  <li id="{SKILLS.ID}" > <img src="images/skill/{SKILLS.IMG} " width="32" height="32" /></li> 
+  				 <!-- END SKILLS -->
+</ul></div>
+<br /><br /><br /><br />
+<div>
+<a href="javascript:guardar();">Guardar Cambios</a> - <a href="index.php?sec=opciones">volver a opciones</a></div>
+ 	   </div>
+       
+</div>

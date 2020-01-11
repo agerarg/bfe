@@ -1,0 +1,59 @@
+<script type="text/javascript">
+godLevelDone=(data)=>{
+    $("#godLvlGred").show();
+    $("#godlvlLoad").hide();
+
+    if(data['error']==0)
+    {
+      $("#godlvl_"+data['id']).text("").append(data['newText']);
+      $("#godlvlPoints").text("Habilideds God Level Puntos: "+data['puntos']);
+    }
+    else
+    {
+      jAlert(data['error_msg'], 'Error');  
+    }
+}  
+learnSkill=(id)=>{
+   $("#godLvlGred").hide();
+    $("#godlvlLoad").show();
+
+    $.ajax({
+      data: "id="+id,
+      type: "GET",
+      dataType: "json",
+      url: "json/godLvl.php",
+      success: function(data){
+      godLevelDone(data);
+    }
+    });
+}
+
+</script>
+<div  class="subClassThings" id="sectCustom">
+	<div class="sectCustomTitle" id="godlvlPoints">Habilideds God Level Puntos: {PUNTOS} </div>
+  <div id="godlvlLoad" align="center">Cargando....<br>
+    <img src="images/477.gif">
+  </div>
+  <div id="godLvlGred">
+           <div class="godlvlskill">
+              <div id="godlvl_1" class="godlvlDesc">{GODLVL_ATAQUES}</div>
+                <div onclick="learnSkill(1)" class="godlvlButt"></div>
+           </div>
+            <div class="godlvlskill">
+              <div id="godlvl_2" class="godlvlDesc">{GODLVL_CRITICO}</div>
+                <div onclick="learnSkill(2)" class="godlvlButt"></div>
+           </div>
+             <div class="godlvlskill">
+              <div id="godlvl_3" class="godlvlDesc">{GODLVL_DEFENSAS}</div>
+                <div onclick="learnSkill(3)" class="godlvlButt"></div>
+           </div>
+            <div class="godlvlskill">
+              <div id="godlvl_4" class="godlvlDesc">{GODLVL_VIDA}</div>
+                <div onclick="learnSkill(4)" class="godlvlButt"></div>
+           </div>
+            <div class="godlvlskill">
+              <div id="godlvl_5" class="godlvlDesc">{GODLVL_ELEM}</div>
+                <div onclick="learnSkill(5)" class="godlvlButt"></div>
+           </div>
+</div>   
+</div>

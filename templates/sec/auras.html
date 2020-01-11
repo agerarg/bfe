@@ -1,0 +1,45 @@
+<script type="text/javascript">
+function buffresult(data)
+{
+	if(data['error']!=0)
+		jAlert(data['error'], 'Error');	
+	else
+	{
+		jAlert('Aura comprada!');
+		goldChange(data['gold']);
+		addAura(data['id'],1,3600,0);
+	}
+}
+	function buffeame(id)
+	{
+		$.ajax({
+							data: "&id="+id,
+							type: "GET",
+							dataType: "json",
+							url: "json/buffeame.php",
+							success: function(data){
+							buffresult(data);
+						}
+						});
+	}	
+</script>
+<div id="verauras">
+	<div class="title_spacer">
+    </div>
+    <div align="center">
+    <div class="customBoxFFS" align="center">Las auras solo tienen efecto solo en tu personaje</div>
+    </div>
+    <div class="listingThings">
+      <!-- BEGIN BUFF -->
+        <div >
+              <div class="listingPjSlot" >
+              <div class="listingImager"><img src="images/skill/{BUFF.IMG}" width="50" height="50" /></div>
+              <div class="listingNameBuff">&nbsp;<a href="javascript:buffeame({BUFF.ID})">{BUFF.NOMBRE}</a></div>
+              <div class="listingBuff">&nbsp;{BUFF.DESC} Cost: {BUFF.COST} gold </div>
+              </div>
+       </div>  
+       <div class="fixertop"><img src="images/blank.gif" width="1" height="1" /></div>
+	 <!-- END BUFF -->
+     <div align="center">{NUMERACION}</div>
+    </div>
+</div>

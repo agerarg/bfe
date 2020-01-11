@@ -1,0 +1,327 @@
+<style>     
+#sect_habilidades_ini{ background-image:url('images/skilltree/{FONDIMAG}');
+	background-repeat:no-repeat;
+	margin-left:60px;
+	width:490px;
+	height:700px;}
+.elegirClase{ width:490px; margin-left:60px;}
+.elegirClase a{ font-size:24px; }
+</style>
+<script>
+var crapSaved = 1;
+var points = 0;
+var slotState = new Array();
+var slotClikeable = new Array();
+var slotIdem = new Array();
+var slotFrozen = new Array();
+var slotLvlAble = new Array();
+var slotName = new Array();
+var slotImg = new Array();
+var slotDesc = new Array();
+function setSlot(slot,img,id,active,able,name,req)
+{
+	$('#slot'+slot).text("");
+	$('#slot'+slot).append("<img title='"+name+"'  class='skillnorml' id='skillimg"+slot+"' src='images/skill/"+img+"' />");
+	slotState[id]=active;
+	slotIdem[id]=slot;
+	slotLvlAble[id]=req;
+	slotName[id]=name;
+	slotImg[id]="images/skill/"+img+"";
+	if(able==1)
+		slotAble(id,slot);
+	$('#skillimg'+slot).removeClass("skill_cooldown");
+
+}
+function openSlot(slot)
+{
+	crapSaved=0;
+	$('#skillimg'+slot).removeClass("skill_cooldown");
+}
+function closeSlot(slot)
+{
+	$('#skillimg'+slot).addClass("skill_cooldown");
+}
+function showpts(pts)
+{
+	$('#puntos').text("Habilidades");
+}
+function slotAble(id)
+{
+	$('#skillimg'+slotIdem[id]).addClass("skillimgable");
+	$('#skillimg'+slotIdem[id]).removeClass("skillnorml");
+	slotClikeable[id]=1;
+}
+function slotNoAble(id)
+{
+	$('#skillimg'+slotIdem[id]).removeClass("skillimgable");
+	$('#skillimg'+slotIdem[id]).addClass("skillnorml");
+	slotClikeable[id]=0;
+}
+function activeSlot(slot,id)
+{
+	if(slotClikeable[id]==1)
+	{
+		if(points>0)
+		{
+			if(slotState[id]==0)
+			{
+				if(slotLvlAble[id]==1)
+				{
+					points--;
+					slotState[id]=1;
+					openSlot(slot);
+					switch(id)
+					{
+						<!-- BEGIN SUPSLOT -->
+						case {SUPSLOT.ID}:
+							{SUPSLOT.DO}
+						break;
+						<!-- END SUPSLOT -->
+					}
+				}
+				else
+				{
+					jAlert("Esta habilidad necesita que tengas mas nivel", 'Necesitas mas nivel!');	
+				}
+			}
+			else
+			{
+				if(slotFrozen[id]==0)
+				{
+					slotState[id]=0;
+					closeSlot(slot);
+					points++;
+					switch(id)
+					{
+						<!-- BEGIN SDOWNSLOT -->
+						case {SDOWNSLOT.ID}:
+							{SDOWNSLOT.DO}
+						break;
+						<!-- END SDOWNSLOT -->
+					}
+				}
+			}
+		}
+		else
+		{
+			if(slotState[id]==1)
+			{
+				if(slotFrozen[id]==0)
+				{
+					slotState[id]=0;
+					closeSlot(slot);
+					points++;
+					switch(id)
+					{
+						<!-- BEGIN SDOWNSLOT -->
+						case {SDOWNSLOT.ID}:
+							{SDOWNSLOT.DO}
+						break;
+						<!-- END SDOWNSLOT -->
+					}
+				}
+			}
+		}
+	}
+	showpts();
+}
+function learnSkill(data)
+{
+	$('#sectErrorVolver').show();
+	$('#sectErrorMsg').text(data['msg']);
+	if(data['frozen']==1)
+		$.each( slotState, function( key, value ) {
+			if(value==1)
+				slotFrozen[key]=1;
+	});
+	if(data['auraCheck'])
+		{
+			var p=0;
+			while(data.aura[p])
+			{
+				addAura(data.aura[p]['idSkill'],data.aura[p]['lvl'],data.aura[p]['auraTimeOut'],1);
+				p++;
+			}
+		}
+}
+function guardar()
+{
+	var text;
+	crapSaved=1;
+	$.each( slotState, function( key, value ) {
+	  text += "skill"+key+"="+ value+"&";
+	});
+	$('#sectErrorMsg').text("");
+	$('#sectErrorMsg').append("Loading...<br><img src='images/477.gif' width='75' height='75' />");
+	$('#sectMessage').show(1000);
+	$('#sectErrorVolver').hide();
+	$('#sect_habilidades_ini').hide(500);
+	$.ajax({
+					data: text,
+					type: "POST",
+					dataType: "json",
+					url: "json/learnSkill.php",
+					success: function(data){
+					learnSkill(data);
+				}
+				});	
+	
+}
+function showTheShit(id)
+{
+	$('#skillReview').text("");
+	$('#skillReview').append("<div class='skilltitle'><img src='"+slotImg[id]+"' /></div>");
+	$('#skillReview').append("<div class='skilldesc'><font class='skillname'>"+slotName[id]+":</font> "+slotDesc[id]+"</div>");
+}
+function showOffTheShit()
+{
+	
+}
+function volver()
+{
+	$('#sectMessage').hide(500);
+	$('#sect_habilidades_ini').show(1000);
+}
+$(document).ready(function(){
+		
+		window.onbeforeunload = function() {
+			if(crapSaved==0)
+    			return 'Los cambios en las habilidades no se guardaron.';
+			else
+				return  null;
+			};
+		
+				  <!-- BEGIN S -->
+				setSlot("{S.SPOT}","{S.IMG}",{S.ID},{S.NEW},{S.ABLE},"{S.NAME}",{S.CANDO});
+				slotFrozen[{S.ID}]={S.NEW};
+				slotDesc[{S.ID}]='{S.DESC}';
+				$("#slot{S.SPOT}").hover(
+				  function () {
+					showTheShit({S.ID});
+				  });
+				<!-- END S -->
+
+
+
+				showpts();
+});
+</script>
+<div align="center" class="elegirClase"><a href="index.php?sec=namer&id={CLASE}">Elegir esta clase</a> o <a href="index.php?sec=crearPj">Volver a elegir clase</a></div>
+<div id="sect_habilidades_ini">
+            <div class="title_spacer">
+    </div>
+    	<div align="center" id="puntos"></div>
+        <div id="skillReview"></div>
+        <div id="skilltree">
+        <div class="skillline" >
+        	<div id="slot1_1" class="skillslot"></div>
+            <div id="slot1_2" class="skillslot"></div>
+            <div id="slot1_3" class="skillslot"></div>
+            <div id="slot1_4" class="skillslot"></div>
+            <div id="slot1_5" class="skillslot"></div>
+            <div id="slot1_6" class="skillslot"></div>
+            <div id="slot1_7" class="skillslot"></div>
+            <div id="slot1_8" class="skillslot"></div>
+            <div id="slot1_9" class="skillslot"></div>
+            <div id="slot1_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot2_1" class="skillslot"></div>
+            <div id="slot2_2" class="skillslot"></div>
+            <div id="slot2_3" class="skillslot"></div>
+            <div id="slot2_4" class="skillslot"></div>
+            <div id="slot2_5" class="skillslot"></div>
+            <div id="slot2_6" class="skillslot"></div>
+            <div id="slot2_7" class="skillslot"></div>
+            <div id="slot2_8" class="skillslot"></div>
+            <div id="slot2_6" class="skillslot"></div>
+            <div id="slot2_10" class="skillslot"></div>
+        </div>
+        <div class="skillline">
+        	<div id="slot3_1" class="skillslot"></div>
+            <div id="slot3_2" class="skillslot"></div>
+            <div id="slot3_3" class="skillslot"></div>
+            <div id="slot3_4" class="skillslot"></div>
+            <div id="slot3_5" class="skillslot"></div>
+            <div id="slot3_6" class="skillslot"></div>
+            <div id="slot3_7" class="skillslot"></div>
+            <div id="slot3_8" class="skillslot"></div>
+            <div id="slot3_9" class="skillslot"></div>
+            <div id="slot3_10" class="skillslot"></div>
+        </div>
+        <div class="skillline">
+        	<div id="slot4_1" class="skillslot"></div>
+            <div id="slot4_2" class="skillslot"></div>
+            <div id="slot4_3" class="skillslot"></div>
+            <div id="slot4_4" class="skillslot"></div>
+            <div id="slot4_5" class="skillslot"></div>
+            <div id="slot4_6" class="skillslot"></div>
+            <div id="slot4_7" class="skillslot"></div>
+            <div id="slot4_8" class="skillslot"></div>
+            <div id="slot4_9" class="skillslot"></div>
+            <div id="slot4_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot5_1" class="skillslot"></div>
+            <div id="slot5_2" class="skillslot"></div>
+            <div id="slot5_3" class="skillslot"></div>
+            <div id="slot5_4" class="skillslot"></div>
+            <div id="slot5_5" class="skillslot"></div>
+            <div id="slot5_6" class="skillslot"></div>
+            <div id="slot5_7" class="skillslot"></div>
+            <div id="slot5_8" class="skillslot"></div>
+            <div id="slot5_9" class="skillslot"></div>
+            <div id="slot5_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot6_1" class="skillslot"></div>
+            <div id="slot6_2" class="skillslot"></div>
+            <div id="slot6_3" class="skillslot"></div>
+            <div id="slot6_4" class="skillslot"></div>
+            <div id="slot6_5" class="skillslot"></div>
+            <div id="slot6_6" class="skillslot"></div>
+            <div id="slot6_7" class="skillslot"></div>
+            <div id="slot6_8" class="skillslot"></div>
+            <div id="slot6_9" class="skillslot"></div>
+            <div id="slot6_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot7_1" class="skillslot"></div>
+            <div id="slot7_2" class="skillslot"></div>
+            <div id="slot7_3" class="skillslot"></div>
+            <div id="slot7_4" class="skillslot"></div>
+            <div id="slot7_5" class="skillslot"></div>
+            <div id="slot7_6" class="skillslot"></div>
+            <div id="slot7_7" class="skillslot"></div>
+            <div id="slot7_8" class="skillslot"></div>
+            <div id="slot7_9" class="skillslot"></div>
+            <div id="slot7_10" class="skillslot"></div>
+        </div>
+         <div class="skillline">
+        	<div id="slot8_1" class="skillslot"></div>
+            <div id="slot8_2" class="skillslot"></div>
+            <div id="slot8_3" class="skillslot"></div>
+            <div id="slot8_4" class="skillslot"></div>
+            <div id="slot8_5" class="skillslot"></div>
+            <div id="slot8_6" class="skillslot"></div>
+            <div id="slot8_7" class="skillslot"></div>
+            <div id="slot8_8" class="skillslot"></div>
+            <div id="slot8_9" class="skillslot"></div>
+            <div id="slot8_10" class="skillslot"></div>
+        </div>
+          <div class="skillline">
+        	<div id="slot9_1" class="skillslot"></div>
+            <div id="slot9_2" class="skillslot"></div>
+            <div id="slot9_3" class="skillslot"></div>
+            <div id="slot9_4" class="skillslot"></div>
+            <div id="slot9_5" class="skillslot"></div>
+            <div id="slot9_6" class="skillslot"></div>
+            <div id="slot9_7" class="skillslot"></div>
+            <div id="slot9_8" class="skillslot"></div>
+            <div id="slot9_9" class="skillslot"></div>
+            <div id="slot9_10" class="skillslot"></div>
+        </div>
+</div>
+<br />
+<div  class="elegirClase"><a href="index.php?sec=namer&id={CLASE}">Elegir esta clase</a> o <a href="index.php?sec=crearPj">Volver a elegir clase</a></div>
+</div>

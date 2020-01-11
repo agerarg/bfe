@@ -1,0 +1,51 @@
+<script src="js/ui/jquery.ui.core.js"></script>
+<script src="js/ui/jquery.ui.widget.js"></script>
+<script src="js/ui/jquery.ui.mouse.js"></script>
+<script src="js/ui/jquery.ui.draggable.js"></script>
+<script src="js/ui/jquery.ui.droppable.js"></script>
+<script>
+var itemsCatch = new Array();
+var elOtroItemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var cantidadTrade=0;
+var estadoTrade={OFFER};
+var oroGuardado=0;
+</script>
+<script src="js/trade.js?{RAND}" type="text/javascript"></script>
+<script>
+function itemsReady()
+ {
+  <!-- BEGIN OUR -->
+ addMyItems({OUR.ID});
+  <!-- END OUR -->
+ }
+$(document).ready(function(){	
+checkOtherItems();
+});
+</script>
+<div id="trade">
+	<div class="title_spacer">
+    </div>
+	<div id="itemsForTrade">
+    <div id="yourtrade">{MYNICK}</div>
+    <div id="histrade">{OTHERNICK}</div>
+    <div id="myitems"></div>
+    <div id="hisitems"></div>
+    <div id="mytradegold">
+      <div class="goldChanger" id="poniendoGuita"><img src="images/Coin.png" width="32" height="32" /></div>
+      <div id="myFkingGold" class="goldCuanty">{MYGOLD}</div>
+     </div>
+     <div id="histradegold"> 
+          <div class="goldCuantyRight" id="herGold">{HISGOLD}</div>
+          
+      </div>
+    </div>
+    <div id="botonTrade"></div><div id="botonCancel" class="Tcancelar"></div>
+    <div><img src="images/blank.gif" width="1" height="1" /></div>
+<div id="trade_bot">
+<div id="tusItems" align="left">Tus ítems:</div>
+        <div id="item_list"></div>
+        <div id="item_paginacion"></div>
+    </div>
+</div>

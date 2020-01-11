@@ -1,0 +1,46 @@
+<script>
+function comprar(id)
+{
+	location.href='index.php?sec=mundo&mundo={MUNDO}&guards&id='+id+'&cant='+cantidadd;
+}
+var cantidadd = 1;
+$(document).ready(function(){	
+
+	$('#cantidad').keyup(function(e) {
+		var precio = 0;
+		cantidadd = parseInt($('#cantidad').val());
+		$( ".monstCostList" ).each(function() {
+				precio = parseInt($( this ).attr("costo"));
+		  	$( this ).text("Costo: "+String(cantidadd*precio) );
+			
+		});
+    });
+});
+</script>
+<div id="sectCustom">
+	<div class="sectCustomTitle">Guardias</div>
+    <br />
+   <div class="guardsCount" align="center">
+   	Cantidad de Guardias<br />{GUARDS}
+   </div>
+     <div align="center" class="cantidadCompra">
+       <form>Cantidad a comprar:<input class="boxInner" id="cantidad" name="" value="1" size="3" type="text" /></form>
+       </div>
+   <div class="listingThings">
+      <!-- BEGIN MONS -->
+       <div class="questBar">
+       <div class="monstListImg">
+       <img src="images/mobs/{MONS.IMG}" width="30" height="30" />
+       </div>
+       <div class="monstListName">
+       {MONS.NOMBRE}
+       </div>
+         <div class="monstListDesc">
+       <div>Nivel: {MONS.LVL} -  Vida: {MONS.HP}</div>
+       <div class="monstCostList" costo="{MONS.COST} ">Costo: {MONS.COST}</div><div class="monstBuyLink"><a href="javascript:comprar({MONS.ID});">Crear</a></div>
+       </div>
+       </div>  
+	 <!-- END MONS -->
+    </div>
+   <div align="center"><a href="index.php?sec=mundo&mundo={MUNDO}"> Volver</a></div>
+</div>

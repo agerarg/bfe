@@ -1,0 +1,104 @@
+<link rel="stylesheet" type="text/css" href="default.css?{RAND}" />
+<script>
+function animale(elemt)
+{
+	$(elemt).hover(
+  function() {
+	 $( this ).removeClass( "hoverRace" );
+	 $( this ).animate({
+		width: "215",
+		height: "211"
+	  }, 1500 );
+	 
+  }, function() {
+     $( this ).addClass( "hoverRace" );
+	  $( this ).animate({
+		width: "150",
+		height: "135"
+	  }, 1500 );
+  }
+);
+}
+function mostrarRaza(raza)
+{
+	$( "#raceSelection" ).fadeOut( 2000, function() {
+    	 $( "#"+raza ).fadeIn(1000);
+  	});
+}
+function izderImgs(izq,der,img)
+{
+	  $("#"+izq).attr('src', 'images/clases/'+img+'_0.png');
+	 $("#"+der).attr('src', 'images/clases/'+img+'_1.png');
+}
+function backMaim(mak)
+{
+	 $( "#"+mak ).fadeOut( 2000, function() {
+    	 $( "#raceSelection" ).fadeIn(1000);
+  	});
+}
+function claseSelect(id)
+{
+	$( "#personajes" ).fadeOut( 2000, function() {
+    	 window.location = "index.php?sec=verclase&id="+id;
+  	});
+}
+$(document).ready(function(){						   
+	animale("#undead");
+	animale("#human");
+	animale("#orc");
+	
+	
+	
+});
+</script>
+<div id="personajes">
+<div id="raceSelection" class="raceSelection">
+    <div align="center">Elegi la raza:</div>
+    <div align="center">
+        <a href="javascript:mostrarRaza('UndeadClass');"><img class="hoverRace" src="images/undead.png" id="undead" width="150" height="135" /></a> 
+         <a href="javascript:mostrarRaza('HumanClass');"><img class="hoverRace" src="images/humanos.png" id="human" width="150" height="135" /></a>
+         <a href="javascript:mostrarRaza('OrcClass');"><img class="hoverRace" src="images/orcos.png" id="orc" width="150" height="135" /></a>
+    </div>
+</div>
+
+<div class="GTFO" id="UndeadClass" align="center">
+ <a href="javascript:backMaim('UndeadClass');"><img src="images/undead.png" width="80" height="75" /></a>
+<div class="contenedorClases">
+    <div class="ClaseImgRight" ><img id="undeadClassDer" src="images/clases/nothing.png"/></div>
+    <div class="ClaseImgCenter" ><br /><br />
+    <a onclick="javascript:claseSelect(1);" href="#" onmouseover="javascript:izderImgs('undeadClassDer','undeadClassIzq','zombie_tank');">Zombie Tank</a><br />
+    <a onclick="javascript:claseSelect(2);" href="#" onmouseover="javascript:izderImgs('undeadClassDer','undeadClassIzq','skeleton_mage');">Dark Mage</a><br />
+    <a onclick="javascript:claseSelect(6);" href="#" onmouseover="javascript:izderImgs('undeadClassDer','undeadClassIzq','vampire');">Vampire</a>
+    </div>
+    <div class="ClaseImgRight" ><img id="undeadClassIzq"  src="images/clases/nothing.png"/></div>
+</div>
+</div>
+<div class="GTFO" id="HumanClass" align="center">
+ <a href="javascript:backMaim('HumanClass');"><img src="images/humanos.png" width="80" height="75" /></a>
+<div class="contenedorClases">
+    <div class="ClaseImgRight" ><img id="undeadClassDer2" src="images/clases/nothing.png"/></div>
+    <div class="ClaseImgCenter" ><br /><br />
+    <a onclick="javascript:claseSelect(3);" href="#" onmouseover="javascript:izderImgs('undeadClassDer2','undeadClassIzq2','ninja');">Ninja</a><br />
+    <a onclick="javascript:claseSelect(4);" href="#" onmouseover="javascript:izderImgs('undeadClassDer2','undeadClassIzq2','marksman');">Marksman</a><br />
+    <a onclick="javascript:claseSelect(10);" href="#" onmouseover="javascript:izderImgs('undeadClassDer2','undeadClassIzq2','garca');">Garca</a>
+  <br />
+    <a onclick="javascript:claseSelect(8);" href="#" onmouseover="javascript:izderImgs('undeadClassDer2','undeadClassIzq2','cleric');">Cleric</a></div>
+    <div class="ClaseImgRight" ><img id="undeadClassIzq2"  src="images/clases/nothing.png"/></div>
+</div>
+</div>
+<div class="GTFO" id="OrcClass" align="center">
+ <a href="javascript:backMaim('OrcClass');"><img src="images/orcos.png" width="80" height="75" /></a>
+<div class="contenedorClases">
+    <div class="ClaseImgRight" ><img id="undeadClassDer3" src="images/clases/nothing.png"/></div>
+    <div class="ClaseImgCenter" ><br /><br />
+    <a onclick="javascript:claseSelect(5);" href="#" onmouseover="javascript:izderImgs('undeadClassDer3','undeadClassIzq3','shaman');">Shaman</a><br />
+     <a onclick="javascript:claseSelect(7);" href="#" onmouseover="javascript:izderImgs('undeadClassDer3','undeadClassIzq3','destroyer');">Destroyer</a>
+   </div>
+    <div class="ClaseImgRight" ><img id="undeadClassIzq3"  src="images/clases/nothing.png"/></div>
+</div>
+
+</div>
+<br />
+
+<div align="center"><a href="index.php">Volver a mis personajes</a></div>
+</div>

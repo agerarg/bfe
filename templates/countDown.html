@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="js/countdown/reset.css" />
+<link rel="stylesheet" href="js/countdown/styles.css" />
+<div id="countdownOpening">        
+        <!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+<!-- JS -->
+<script src="js/countdown.js"></script>
+<script>
+	
+		$(document).ready(function(){
+			$("#countdown").countdown({
+				date: "25 april 2015 18:00:00",
+				format: "on"
+			},
+			
+			function() {
+				// callback function
+			});
+		});
+	
+	</script>
+<div class="timer-area">
+<h1>Inicio del juego en: </h1>
+<ul id="countdown">
+<li> <span class="days">00</span>
+<p class="timeRefDays">días</p>
+</li>
+<li> <span class="hours">00</span>
+<p class="timeRefHours">horas</p>
+</li>
+<li> <span class="minutes">00</span>
+<p class="timeRefMinutes">minutos</p>
+</li>
+<li> <span class="seconds">00</span>
+<p class="timeRefSeconds">segundos</p>
+</li>
+</ul>
+<h1><a target="_blank" href="foro">Click aquí para ir al foro</a></h1>
+</div>
+
+</div>

@@ -1,0 +1,82 @@
+<script>
+var paraPoint =  parseInt("{PUNTOS}");
+
+var vidaBase = parseInt("{VIDAPARG}");
+var defensaBase = parseInt("{DEFPARAG}");
+var ataqueBase = parseInt("{ATAPARAG}");
+
+var vida = 0;
+var defensa = 0;
+var ataque = 0;
+function setParagon()
+{
+	
+	$("#paragonPts").text("Paragon STATS "+(paraPoint-(vida+defensa+ataque)));
+}
+$(document).ready(function(){
+	
+	$("#vida").keyup(function(){ 
+  		vida =  parseInt($("#vida").val());
+		if((paraPoint-(vida+defensa+ataque))<0)
+		{
+			vida=0;
+			$("#vida").val(0);
+			jAlert("No tienes suficientes puntos", 'Error');	
+		}
+		if(!vida)
+			vida=0;
+		setParagon();
+		$("#vidaBonus").text("Bonus actual: "+((vida+vidaBase)*25));
+	});
+	$("#defensa").keyup(function(){ 
+  		defensa =  parseInt($("#defensa").val());
+		if((paraPoint-(vida+defensa+ataque))<0)
+		{
+			defensa=0;
+			$("#defensa").val(0);
+			jAlert("No tienes suficientes puntos", 'Error');	
+		}
+		if(!defensa)
+			defensa=0;
+		setParagon();
+		$("#defensaBonus").text("Bonus actual: "+(defensa+defensaBase));
+	});
+	$("#ataque").keyup(function(){ 
+  		ataque =  parseInt($("#ataque").val());
+		if((paraPoint-(vida+defensa+ataque))<0)
+		{
+			ataque=0;
+			$("#ataque").val(0);
+			jAlert("No tienes suficientes puntos", 'Error');	
+		}
+		if(!ataque)
+			ataque=0;
+		setParagon();
+		$("#ataqueBonus").text("Bonus actual: "+(ataque+ataqueBase));
+	});
+	
+	
+});
+</script>
+<div id="sectCustom">
+	<div class="sectCustomTitle" id="paragonPts">Paragon STATS {PUNTOS}</div>
+   <div class="listingThings" align="center">
+    <div class="customBoxFFS" align="left">
+    	<div align="center">Requiere alguna de las habilidades de paragon aprendidas.</div>
+    </div>
+    <form action="" method="post"><div class="listingThings">
+      <!-- BEGIN BUFF -->
+        <div >
+              <div class="listingPjSlot" >
+              <div class="listingImager"><img src="images/skill/{BUFF.IMG}" width="50" height="50" /></div>
+              <div class="listingNameBuff">&nbsp;{BUFF.NOMBRE}</div>
+              <div class="listingBuff">&nbsp;{BUFF.DESC} </div>
+              </div>
+       </div>  
+       <div class="fixertop"><img src="images/blank.gif" width="1" height="1" /></div>
+	 <!-- END BUFF -->
+     
+     <input name="puntos" value="Guardar" type="submit" />
+</div></form>
+    </div>
+</div>

@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Battle For Embolia</title>
+<link href="images/favicon.png" rel="shortcut icon" />
+<meta name="description" content="free-to-play fantasy MMORPG juego web gratis RPG" />
+<link rel="stylesheet" type="text/css" href="css/default.css?{RAND}" />
+<link rel="stylesheet" type="text/css" href="css/superficie.css?{RAND}" /> 
+{FIXER}
+<script> var chatSelector="{CHAT_DEF}"; 
+var buscandoParty=parseInt("{LFP_P}");
+var varCol =parseInt("{COL_P}");  
+const userImagen="{IMG_P}"; </script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script src="js/jquery.alerts.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/logros.js?{RAND}"></script>
+<script type="text/javascript" src="js/inicio.js?{RAND}"></script>
+<script type="text/javascript" src="js/soketIO.js?{RAND}"></script>
+<script type="text/javascript" src="js/lifebar.js?{RAND}"></script>
+<script type="text/javascript" src="js/globals.js?{RAND}"></script>
+<script type="text/javascript" src="js/runasInfo.js?{RAND}"></script>
+<script type="text/javascript" src="js/tonsOfSkills.js?{RAND}"></script>
+<script type="text/javascript" src="js/armorSetInfo.js?{RAND}"></script>
+<script type="text/javascript" src="js/auras.js?{RAND}"></script>
+<script type="text/javascript" src="js/npcMaster.js?{RAND}"></script>
+<script src="js/chat.js?{RAND}" type="text/javascript"></script>
+<script src="js/newChat.js?{RAND}" type="text/javascript"></script>
+<script type="text/javascript" src="js/party.js?{RAND}"></script>
+<script src="js/warClock.js?{RAND}" type="text/javascript"></script>
+<script src="js/lightbox.js" type="text/javascript"></script>
+<script src="js/tips/jquery.cluetip.min.js?{RAND}" type="text/javascript"></script>
+<script src="js/ui/jquery.ui.core.js"></script>
+<script src="js/ui/jquery.ui.widget.js"></script>
+<script src="js/ui/jquery.ui.mouse.js"></script>
+<script src="js/ui/jquery.ui.draggable.js"></script>
+<script src="js/ui/jquery.ui.droppable.js"></script>
+<script>partBoludo=parseInt("{BLDID}");</script>
+<script src="js/boludo.js?{RAND}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/Tips.css?{RAND}" /> 
+<link href="css/jquery.alerts.css?{RAND}" rel="stylesheet" type="text/css" media="screen" />
+<script>
+userVida=parseInt("{VIDA_P}");
+userVidaLimit=parseInt("{VIDA_L_P}");
+userMana=parseInt("{MANA_P}");
+userManaLimit=parseInt("{MANA_L_P}");
+userExp=parseInt("{EXP_P}");
+userExpLimit=parseInt("{EXP_L_P}");
+userOro=parseInt("{USR_ORO}");
+userActivo="{USR_STAT}";
+userNombre = "{NOMBRE_P}";
+userDPScal=0;
+var ChatBans="{CHAT_SILENCE}";
+var origAvatar="{IMG_P}";
+var partyOwener = parseInt("{PARTYOWENER}");
+var partyId=parseInt("{PARTYID}");
+var clanId=parseInt("{CLANID}");
+var clanOwener = parseInt("{CLANLIDER}");
+var clanOpStat=0;
+var monsterCuant=36;
+var singleTargetMob=false;
+var userLevelp=parseInt("{LVL_P}");
+var rankedSrc = parseInt("{RANKEDSRC}");
+var idPersonaje=parseInt("{ID_P}");
+var sexo=parseInt("{SEXO_P}");
+var autoCloseDeath=parseInt("{AUTOCLOSE_P}");
+var getOutFMP=parseInt("{GETOUTFROMMYPT}");
+var idPersonajeBase = parseInt("{ID_PBASE}");
+var reloadOnClean=true;
+var NPCauraLvls = {NPCAURALVL};
+function showClanOptions()
+{
+	if(!clanOpStat)
+	{
+		$("#hiddenClanOptions").show(1000);
+		clanOpStat=1;
+	}
+	else
+	{
+		$("#hiddenClanOptions").hide(1000);
+		clanOpStat=0;
+	}
+}
+if(userOro!=parseInt("{REALGOLD}"))
+	goldChange(parseInt("{REALGOLD}"));
+
+partyToDown=()=>
+{
+  var fxtop=850;
+  $("#partyFlotante").css({ top: fxtop+'px', left: "50px" });
+  $.ajax({
+        data: "top="+fxtop+"&left=50",
+        type: "GET",
+        url: "json/newPartyPosition.php",
+      });
+}
+
+$(document).ready(function(){	
+    //updateRealChat(null);
+		goldChange(parseInt("{REALGOLD}"));
+    dpsMeterShow(parseInt("{REALDPS_P}"));
+		inactiveCount();
+		setVida();
+		setMana();
+		setExp();
+		checkAuras();
+        disparadorDeEventos();
+         new clock("tiempoGuerra",parseInt("{TIEMPOGUERRA}"),"Al Bardo!");
+		{SET_ARMOR}
+		setTimeout(function(){
+      	 refreshChat();
+           }, 3000);	
+        setTimeout ('userExpUpdate()', 1000);
+$( "#timeShower" ).click(function() {window.location = "index.php?sec=verOnlines";});
+$("#partyFlotante").draggable({
+    // Find position where image is dropped.
+    stop: function(event, ui) {
+
+    	// Show dropped position.
+    	var Stoppos = $(this).position();
+    	//alert("STOP: \nLeft: "+ Stoppos.left + "\nTop: " + Stoppos.top);
+		$.ajax({
+				data: "top="+Stoppos.top+"&left="+Stoppos.left,
+				type: "GET",
+				url: "json/newPartyPosition.php",
+			});
+    }
+});
+	{ADVSHOW}
+	{SKILLTIME}
+        {AVATARCHANGER}
+	$( "#"+chatSelector ).css( "content", "url('images/"+chatSelector+"2.png')" );
+});
+var s=0;
+function mostrarOps()
+{
+	if(s==0)
+	{
+		$("#mostrarOP").text("Menos Opciones <-");
+		$("#opcionesSystem").hide(500);
+		$("#opcionesDerecha").show(500);
+		s=1;
+	}
+	else
+	{
+		s=0;
+		$("#mostrarOP").text("Más Opciones ->");
+		$("#opcionesSystem").show(500);
+			$("#opcionesDerecha").hide(500);
+	}
+}
+
+</script>
+<style>	
+#chatFlotante{ position:absolute; top:{CHAT_TOP}px; left:{CHAT_LEFT}px; border:#666 2px solid; background-color:#000; padding:3px 3px 3px 3px;}
+#chatTittle{position:absolute;  margin-bottom:"30px"; background-color:#000; width:265px; height:34px; }
+#partyFlotante{position:absolute; top:{PARTY_TOP}px; left:{PARTY_LEFT}px; }
+#timeShower{cursor: pointer;}
+</style>
+
+</head>
+<body>
+
+<div id="main">
+        <div id="tiempoGuerra"> </div>
+        <div onclick="window.open('https://www.facebook.com/groups/battleforembolia/');" id="facebooGroupButton"> </div>
+<div id="header">
+  <div id="header_logo">
+      <div><a href="index.php"> <img src="images/{MAIN_LOGO}?{RAND}" /></a></div>
+  </div>
+  <div id="header_userbar"><div class="user" id="DpsMeter">0</div><div class="user" id="Oro">{USR_ORO}</div><div  class="user activeUser" id="Activo">Active</div><div class="user" id="ServTime"><div id="timeShower">{ONLINE}</div></div><div class="user" id="Location"><div id="timeShower">{USR_LOCATION}</div></div></div>
+ </div>
+<div id="auraShow" class="skillTimer"></div>
+<div id="3marias"> 
+        <div id="lcol">
+            <div id="personaje">
+            <div>
+            <div id="pj_img"><img src="images/clases/{IMG_P}" alt="" width="50" height="50" /></div>
+            </div>
+            <div id="pj_name">
+            {NOMBRE_P}
+           </div>
+           <div id="pj_clase" title="{CLASE_P_INFO}">
+            Class: {CLASE_P}
+           </div>
+             <div id="pj_nivel">
+            Lvl: {LVL_P}
+           </div>
+          
+        <div id="userInfo" align="left">
+         <div id="userLifeBar" title="Life Regeneration: {HPREGEN_P}" align="left"><img src="images/iz_fin.gif" height="22" width="2" /><img id="userVida" src="images/life.gif" height="22" width="0"/><img id="userDead" src="images/dead.gif"   height="22" width="100"/><img src="images/dr_fin.gif" height="22" width="2"/></div><div id="LifeNumber" align="center">0/0</div><div id="userManaBar" title="Mana Regeneration: {MPREGEN_P}" align="left"><img src="images/iz_fin.gif" height="22" width="2" /><img id="userMana" src="images/life2.gif" height="22" width="0"/><img id="userManaOff" src="images/dead.gif"   height="22" width="100"/><img src="images/dr_fin.gif" height="22" width="2"/></div><div  id="ManaNumber" align="center">0/0</div><div id="userExpBar" align="left"><img src="images/iz_fin.gif" height="22" width="2" /><img id="userExp" src="images/life3.gif" height="22" width="0"/><img id="userExpOff" src="images/dead.gif"   height="22" width="100"/><img src="images/dr_fin.gif" height="22" width="2"/></div><div  id="ExpNumber" align="center">0/0</div> 
+        </div>
+    </div>
+    <div>
+        <div id="botonJugar" class="menuItem" onclick="location.href='index.php?sec=mundo';">Jugar</div>
+        <div class="menuItem" onclick="location.href='index.php?sec=inventario';">Inventario</div>
+        <div class="menuItem" onclick="location.href='index.php?sec=habilidades';">Habilidades</div>
+        <div class="menuItem" onclick="location.href='index.php?sec=runas';">Runas</div>
+        <div class="menuItem3 {SUBCLASS_OPTION}" onclick="location.href='index.php?sec=subclass';">SubClase</div>
+        <div class="menuItem3 {TWITCHON}" onclick="window.open('https://www.twitch.tv/agerarg', '_blank')">Twitch On</div>
+        <div class="menuItem {LOGRO_ALLOW1}" onclick="location.href='index.php?sec=recompensas';">Recompensas</div>
+        <div class="menuItem {LOGRO_ALLOW2}" onclick="location.href='index.php?sec=top';">TOP Players</div> 
+         <div class="menuItem {LOGRO_ALLOW2}" onclick="location.href='index.php?sec=descansar';">Descansar</div> 
+        <div class="menuItem" id="mostrarOP" onclick="javascript:mostrarOps()">Más Opciones -></div>
+         
+    </div>
+    </div>
+        <div id="rcol">
+            <div id="rcontent">
+                {CONTENT_HTML}
+
+            </div>
+        </div>
+    <div id="otracol">
+  
+        <div >
+            <div id="chat" align="left";> 
+                  <div class="scrollChatter" id="chatBoxer">
+                      
+                  </div>
+                
+                 <div id="mostrarItemSh">
+                  <div class="itemRulerSh"> 
+               
+                  </div>
+                </div>
+
+                  <div  id="chatInput">
+                     <select id="chatChannel" class="chatInputer">
+                      <option selected="selected" value="1">Todo</option>
+                      <option value="2">Party</option>
+                      <option value="3">Clan</option>
+
+                    </select>
+                    <input id="chatImputer" class="chatInputer" type="text" name="chat"> 
+                    <button id="chatEnviar" class="chatEnvio">Enviar</button>
+                  </div>
+                  <div id="partyOptions">
+                      <div onclick="PartyOptionClose();" id="partyOptionsCloseBtn"></div>
+                      <div id="partyOptionsTitle"></div>
+                       <div id="partyOptionsOptions"></div>
+                  </div>
+            </div> 
+</div>
+<div id="opcionesDerecha" class="GTFO">
+<div id="firstopt">
+      <div id="partyButton" class="menuItem" onclick="location.href='index.php?sec=party';">Party</div>
+          <div class="menuItem {LOGRO_ALLOW3}" onclick="location.href='index.php?sec=clan';">Lista Clanes</div>
+           <div class="menuItem2" style="display:{CLANOPTIONS}" onclick="location.href='index.php?sec=clanmanage';">Clan</div>
+        
+</div>
+<div id="sectopt">
+        <div class="menuItem {SALIRDUNGEON}" onclick="location.href='index.php?sec=salirDungeon';">Salir Dungeon</div>
+          <div class="menuItem" onclick="window.open('https://www.facebook.com/groups/battleforembolia/');">FaceBook</div>
+   <div class="menuItem3" onclick="location.href='index.php?sec=opciones';">Opciones</div>
+      <div class="menuItem3" onclick="location.href='index.php?sec=cambiarPj';">Salir a Personajes</div>
+</div>
+ </div>
+     
+ <div id="opcionesSystem" align="left" >
+	<div class="scrollChatter" id="ch_mensajes_sistema" style=" margin-left:5px; overflow:scroll; height:255px; width:430px; overflow-x: hidden;">
+    <br /><br />
+  	  <div align="center">Cargando...<br />
+  	    <img src="images/477.gif" alt="" width="124" height="128" /></div>
+  </div>
+ </div>    
+     
+     
+     
+</div>
+         
+    </div>
+    <div><img src="images/blank.gif" alt="" width="1" height="1" /></div>
+
+ 
+<div id="showItem_box">
+   <div id="showItem_close"><img src="images/cancel.png" width="25" height="25"> </div>
+  <div id="showItem_dropItems">
+      <div id="SD_drop1" itemId="123" class="showItem_dropBox">
+       
+      </div>
+      <div id="SD_drop2" itemId="123" class="showItem_dropBox">
+          
+      </div>
+      <div id="SD_drop3" itemId="123" class="showItem_dropBox">
+          
+      </div>
+      <div id="SD_drop4" itemId="123" class="showItem_dropBox">
+          
+      </div>
+       <div id="SD_drop5" itemId="123" class="showItem_dropBox">
+          
+      </div>
+
+      <div id="SD_GET">
+        <div> Elige tres items! </div>
+        <div id="SD_GET_BUT" class="menuItem" onclick="">Obtener</div>
+    </div>
+  </div>
+  <div id="showItem_boxUnopen"></div>
+</div>
+
+<div id="LogroShow">
+    <div id="LogroText" class="logroText">PUTO EL QUE LEE</div>
+    <div id="LogroButton" class="logroButton"> </div>
+</div>
+
+<div align="center">
+    <div id="footer">
+        <div id="footext"><div >BattleForEmbolia.com @ 2020 Script by <a href="mailto:ager.arg@gmail.com">Ager</a> - Todas las imágenes son propiedad intelectual de sus respectivos autores.</div>
+          <div >Si disfrutas el juego y quieres ayudar a que crezca puedes hacerlo en  <a target="_blank" href="https://www.patreon.com/AgerGames">Patreon</a></div>
+        </div>
+         <div ></div>
+        </div>
+    </div>
+</div>
+
+</div>
+<div class="{SHOWPARTY} PartyBox" id="partyFlotante">
+<div class="chatTittle" align="center">- Mover Party - <a href="javascript:partyToDown();"> Poner Bajo</div>
+         <div class="partyMembers">
+            <div id="partyChanger">
+              <!-- BEGIN PARTY -->
+               <div class="partyChar">
+                   <div class="partyImgPj"><img src="images/clases/{PARTY.IMG}_{PARTY.SEXO}.jpg" alt="" width="50" height="50" /></div>
+                   <div class="partyBlock">
+                        <div class="partyNamePj">&nbsp;&nbsp;<a href="index.php?sec=ver&pj={PARTY.NOMBRELINK}">{PARTY.NOMBRE}</a></div>
+                        <div class="partyLifeBar"> 
+                                <div  align="left">
+                                    <img src="images/iz_fin.gif" height="22" width="2" /><img id="userVida" src="images/life.gif" height="22" width="0"/><img id="userDead" src="images/dead.gif"   height="22" width="100"/><img src="images/dr_fin.gif" height="22" width="2"/>
+                                </div>
+                                <div class="partyLifeNumber" align="center">0/0</div>
+                            </div>
+                             <div class="partyDpsBar"> 
+                                <div  align="left">
+                                    <img src="images/iz_fin.gif" height="22" width="2" /><img id="userVida" src="images/life.gif" height="22" width="0"/><img id="userDead" src="images/dead.gif"   height="22" width="100"/><img src="images/dr_fin.gif" height="22" width="2"/>
+                                </div>
+                                <div class="partyLifeNumber" align="center">0/0</div>
+                                </div>
+                       </div>
+                       <div class="partyAssistSw"><a href="javascript:asistir()"><img src="images/Espada3.gif" alt="" width="25" height="25" /></a></div>
+                   </div>
+                <!-- END PARTY -->
+            </div>
+        </div>
+</div>
+
+<div class="GTFO">
+  <img src="images/newButton.png">
+  <img src="images/newButton2.png">
+  <img src="images/newButton3.png">
+  <img src="images/newButton4.png">
+  <img src="images/newButton5.png">
+   <img src="images/fondo_ShowItem.png">
+   <img src="images/images/boxes/dropBox1.png">
+   <img src="images/images/boxes/dropBox2.png">
+   <img src="images/images/boxes/dropBox3.png">
+</div>
+
+</body>
+</html>

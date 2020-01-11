@@ -1,0 +1,187 @@
+<script type="text/javascript">
+	function changeAtrr(id)
+	{
+		$("#IdRoll").val(id);
+		 $("#RR_magia").show(500);
+        $("#RR_actions").hide(500);
+        $("#RR_info").text("");
+        $("#RR_info").append("Ohh espera que realice el hechizo para mejorar tu arma!");
+        setTimeout(function(){
+          gowR();
+        }, 3000);
+	}
+function  startVieja()
+{
+    $("#RR_info").text("");
+    $("#RR_info").append("Elije el atributo que deseas cambiar de tu item.<br>Suerte joven.");
+}
+function gowR()
+{
+    $( "#Rrrolinga" ).submit();
+}
+function randomInt(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+function crazyAttrRoll()
+{
+    var textol="";
+    var cant={RRcantidad};
+    var i=0;
+    var USAtaque=0;
+    var USAtaqueMagico=0;
+    var USCritico=0;
+    var USCriticoMagico=0;
+    var USPC=0;
+    var USPCMagico=0;
+    var USDefensa=0;
+    var USDefensaMagica=0;
+    var USVidaLimit=0;
+    var USManaLimit=0;
+    var USHpRegen=0;
+    var USMpRegen=0;
+    var maxchanc=20;
+    switch(randomInt(1,6))
+        {
+            case 1:
+                textol+="Wind";
+            break;
+            case 2:
+                textol+="Fire";
+            break;
+            case 3:
+                textol+="Earth";
+            break;
+            case 4:
+                textol+="Water";
+            break;
+            case 5:
+                textol+="Dark";
+            break;
+            case 6:
+                textol+="Holy";
+            break;
+        }
+        textol+=" +"+randomInt(1,{RRelemtopPer})+"<br>";
+    luckyVar= randomInt(1,maxchanc);
+    cant--;
+    while(i<=cant)
+    {
+        if(USAtaque==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+            i++;
+            USAtaque=1;
+            textol+=" Ataque +"+randomInt(1,{RR_MAX1})+"<br>";
+        }
+         if(USAtaqueMagico==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+            i++;
+            USAtaqueMagico=1;
+             textol+=" AtaqueMagico +"+randomInt(1,{RR_MAX1})+"<br>";
+        }
+         if(USCritico==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+             i++;
+            USCritico=1;
+         textol+=" Critico +"+randomInt(1,{RR_MAX3})+"<br>";
+        }
+         if(USCriticoMagico==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+               i++;
+            USCriticoMagico=1;
+         textol+=" CriticoMagico +"+randomInt(1,{RR_MAX3})+"<br>";
+     }
+      if(USPC==0 && randomInt(1,5)==luckyVar && i<=cant)
+        {
+               i++;
+            USPC=1;
+          textol+=" PC +"+randomInt(1,{RR_MAX1})+"<br>";
+      }
+       if(USPCMagico==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+              i++;
+            USPCMagico=1;
+          textol+=" PCMagico +"+randomInt(1,{RR_MAX1})+"<br>";
+        }
+        if(USDefensa==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+              i++;
+            USDefensa=1;
+           textol+=" Defensa +"+randomInt(1,{RR_MAX2})+"<br>";
+       }
+        if(USDefensaMagica==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+              i++;
+            USDefensaMagica=1;
+           textol+=" DefensaMagica +"+randomInt(1,{RR_MAX2})+"<br>";
+       }
+       if(USVidaLimit==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+               i++;
+            USVidaLimit=1;
+            textol+=" VidaLimit +"+randomInt(1,{RR_MAX4})+"<br>";
+        }
+         if(USManaLimit==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+               i++;
+            USManaLimit=1;
+            textol+=" ManaLimit +"+randomInt(1,{RR_MAX4})+"<br>";
+        }
+         if(USHpRegen==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+               i++;
+            USHpRegen=1;
+            textol+=" HpRegen +"+randomInt(1,{RR_MAX5})+"<br>";
+        }
+          if(USMpRegen==0 && randomInt(1,maxchanc)==luckyVar && i<=cant)
+        {
+               i++;
+            USMpRegen=1;
+             textol+=" MpRegen +"+randomInt(1,{RR_MAX5})+"<br>";
+         }
+    }
+    $("#TT_myItemAtt").text("");
+     $("#TT_myItemAtt").append(textol);
+     setTimeout(function(){
+          crazyAttrRoll();
+        }, 1000);
+}
+$(document).ready(function(){   
+    {SROP}
+    startVieja();
+   
+});
+</script>
+<div id="fond_rolitem">
+    <div align="center" >
+    <br /> <br />
+    <div id="RR_info" align="center"></div>
+    <div align="left">
+    	 <form id="Rrrolinga" method="post" action="">
+     <div  id="RR_myitems">
+            <div align="center"><img src="images/item/{ITEMIMG}" /></div>
+             <div align="center" class="itemName">{ITEMNAME}</div>
+             <div id="TT_myItemAtt" align="center">{ITEMATR}</div>
+        </div>
+      <div  id="RR_posibilid">
+             <div align="center">{POSIBILI}</div>
+        </div>   
+         <br />
+        <input type="hidden" name="ReRoll" value="1">
+         <input type="hidden" id="IdRoll" name="IdRoll" value="0">
+        <div id="RR_actions" align="center" >
+        	<br>
+            <div class="rollCostText" align="center">Costo de ReRoll:<br> Un ReRoll y {ITEMCOST} de oro</div>
+            <div align="center">
+            <a href="index.php?sec=ReRoll">Volver a elegir item</a>
+        </div>
+        </div>
+            </div>
+        </form>
+   <br />
+   </div>
+    
+</div>
+<div id="RR_magia">
+<img src="images/Electricitysurge.gif" />
+</div>

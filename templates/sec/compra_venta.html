@@ -1,0 +1,44 @@
+<script>
+var itemsCatch = new Array();
+var pagina = 0;
+var cantidadItems=0;
+var filtroTxt="todo";
+var gradoFilter=0;
+var gradoFText="";
+</script>
+<script src="js/compra_venta.js?{RAND}" type="text/javascript"></script>
+
+<div id="compraventa">
+	<div class="title_spacer">
+    </div>
+	<div id="inventario_bot">
+    <div id="tusItems" align="center"><a href="javascript:filtro('todo');">Todo</a> - <a href="javascript:filtro('W');">Armas</a> - <a href="javascript:filtro('armor');">Armaduras</a> - <a href="javascript:filtro('foots');">Botas</a> - <a href="javascript:filtro('gloves');">Guantes</a> - <a href="javascript:filtro('head');">Cascos</a> 
+        <div>
+        <a href="javascript:filtro('shield');">Escudos</a> - <a href="javascript:filtro('rings');">Anillos</a> - <a href="javascript:filtro('necklace');">Collares</a> -  <a href="javascript:filtro('runa');">Runas</a> - <a href="javascript:filtro('misc');">Otros</a>
+        </div>
+        <div class="gradosCV">
+        Grado:  <select name="Grados" id="grados">
+                <option selected="selected" value="0">Cualquiera</option>
+                <option value="2">Nivel: 20 (Grado D)</option>
+                <option value="3">Nivel: 40 (Grado C Low)</option>
+                <option value="4">Nivel: 40 (Grado C Top)</option>
+                <option value="5">Nivel: 51 (Grado B Low)</option>
+                <option value="6">Nivel: 51 (Grado B Top)</option>
+                <option value="7">Nivel: 61 (Grado A)</option>
+                <option value="8">Nivel: 76 (Grado S)</option>
+                <option value="9">Nivel: 80 (Grado X)</option>
+                <option value="10">Nivel: 86 (Grado Y)</option>
+            </select>
+        </div>
+      <div id="buscandoCV" >Buscando: todo</div>
+    </div>
+
+        <div id="item_list_CV"></div>
+        <div id="item_paginacion"></div>
+        <div id="showOptionsObj">
+                <div id="IshowIDetail" class="scrollChatter"> </div>
+                <div id="IshowIOptions"> </div>
+                <div onclick="closeOptionUi();" id="IitemClose"><img src="images/cancel.png" width="25" height="25"> </div>
+            </div> 
+    </div>
+</div>

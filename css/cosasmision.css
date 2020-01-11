@@ -1,0 +1,46 @@
+#alien{ 
+background-image:url(../images/mision/npcs/alien.png);
+width:470px;
+height:341px;
+background-repeat:no-repeat;
+position:relative;
+top:-40px;
+left:10px;
+z-index:0;
+}
+.alienpost1{ left:70px; top: 106px;}
+
+.nomostrar{ display:none;}
+.mbfix{ position:relative; top:-370px;}
+.mosntresultfix{ padding-left:50px;}
+#espera{ font-size:18px; color:#000;}
+#channel{
+	width:450px;
+	height:170px;
+	position:relative;
+	top:23px;
+	left:23px;
+	}
+.option{
+	background-image:url(../images/mision/option.png);
+	background-repeat:no-repeat;
+	width:443px; 
+	height:52px;
+}
+.dialdivisor{ height:4px; width:443px;}
+.optImg{ padding-left:10px; padding-right:10px;float:left;}
+.optTxt{ padding-top:15px; font-size:18px; color:#C00; font-weight:bold;}
+.option:hover{ background-image:url(../images/mision/option2.png);}
+/* DIALOGOS */
+#dialogconteiner{
+	position:relative;
+	top:340px;
+	height:100px;
+	z-index:999;
+	}
+#dialogType{
+	font-size:24px;
+	background-color:#333;
+	color:#F60;
+	text-align:center;
+}
