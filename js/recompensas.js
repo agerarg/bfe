@@ -9,7 +9,7 @@ function loadRecomensasDone(data)
 		switch(arr[i]['especial'])
 		{
 			case "1":
-				$("#Recompensas_list").append("<div id='Recompensas_id"+arr[i]['idBox']+"' class='Recompensas_box'><div>Cofre de Santa</div>"+
+				$("#Recompensas_list").append("<div id='Recompensas_id"+arr[i]['idBox']+"' class='Recompensas_box'><div>Cofre del Comandante</div>"+
 			'<div><img class="Recompensas_icon" onclick="boxOpening('+arr[i]['idBox']+');" src="images/boxes/santa_close.png" width="101" height="87"></div>'+
 			'<a href="javascript:boxDestroying('+arr[i]['idBox']+');">Eliminar</a></div>');
 			break;

@@ -656,10 +656,10 @@ if($pj['antiBot']>$now)
 								}
 
 
-								if($monster['idMonster']==242)// SANTA
+								if($monster['idMonster']==242)// SANTA // COMANDANTE
 								{
 									earnDropBox(1,1,$log->get("pjSelected"),1);
-									systemLog("self","<div class=recompensaAstral>Conseguiste un cofre de Santa!<br><a href='index.php?sec=recompensas'>Ir a abrirlo</a></div>") ;
+									systemLog("self","<div class=recompensaAstral>Conseguiste un cofre del Comandante!<br><a href='index.php?sec=recompensas'>Ir a abrirlo</a></div>") ;
 									$monster['raid']=0;
 									$monster['mapBoss']=0;
 								}
@@ -671,7 +671,7 @@ if($pj['antiBot']>$now)
 														VALUES("242","2",
 														"'.$mundo['id'].'","100",'.$log->get("pjSelected").')');
 										$goblinHunt = mt_rand(100,500);
-										systemLog("party","<div class=bossKilling>Aparecio Santa!!!</div>") ;	
+										systemLog("party","<div class=bossKilling>Aparecio el Comandante!!!</div>") ;	
 								}
 
 
