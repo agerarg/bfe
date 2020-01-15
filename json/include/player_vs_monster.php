@@ -249,7 +249,7 @@ if($pj['antiBot']>$now)
 														systemLog("party", $damageLink);
 													}
 													//TEST
-													$monster['Ataque']=10;
+													//$monster['Ataque']=10;
 												
 												if($pj['idPersonaje']==$player['idPersonaje'])
 													$vidaModifier-=$monster['Ataque'];
@@ -718,7 +718,7 @@ if($pj['antiBot']>$now)
 										$expModifier += $monster['exp'];
 										switch ( $monster['monsterType']) {
 											case 'perfect':
-												$expModifier*3;
+												$expModifier*10;
 											break;
 											}
 										$nEnemy++;
@@ -729,8 +729,8 @@ if($pj['antiBot']>$now)
 									}
 									else
 									{
-										$data['mob'][] = array("nombre"=>$mob['nombre'],"foto"=>'mobs/'.$mob['imagen'],"id"=>$mob['idInMundo'],"vida"=>$currentLife
-					,"tipo"=>$mob['tipo']);
+										$data['mob'][] = array("nombre"=>$mobberArr[$i]['nombre'],"foto"=>'mobs/'.$mobberArr[$i]['imagen'],"id"=>$mobberArr[$i]['idInMundo'],"vida"=>$currentLife
+					,"tipo"=>$mobberArr[$i]['tipo']);
 									}
 								}
 							}
