@@ -5,7 +5,6 @@
 $template->set_filenames(array(
 							'content' => 'templates/sec/inventario.html' )
 						);
-				
 						
 					$_SESSION['ALLOW2Hand'] = $stats['Allow2Hand'];
 

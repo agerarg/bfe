@@ -170,15 +170,101 @@ if($pj['antiBot']>$now)
 									}*/
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////						
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+									
+						switch ( $monster['monsterType']) {
+							case 'perfect':
+
+								$danoFinalPuro = damageResist($danoFinalPuro,98);
+								$data['info']="Golpeaste por ". optimalDmg($danoFinalPuro);
+								
+								break;
+							}
+
+
 						$nexAttack = $monster['attackType'];
-						/// PAPAS FRITAS ///
 						
+						$query = 'SELECT im.element, im.idInMundo, im.currentLife, im.champion, im.idMonster, mob.nivel,mob.nombre, mob.imagen, mob.VidaLimit,im.tipo,mob.exp, mob.gold, mob.VidaLimit, mob.Ataque
+									FROM inmundo im JOIN monster mob USING(idMonster)
+									WHERE '.$monster_hash.'';
+							
+
+						$mobber = $db->sql_query($query);
 
 						if($MonsterAttackAproval)
 						{
-							
+							//$monster['Ataque']
+							switch ( $monster['monsterType']) {
+							case 'perfect':
+								$monsterAttackTrue=false;
 
+								if($monster['attackCooldown']<$now)
+								{
+									$monsterAttackTrue=true;
+								//while($mob = $db->sql_fetchrow($mobber))
+								//{
+										$query = 'SELECT p.idPersonaje, p.nombre, p.Vida,
+										p.resist_fire, p.resist_water, p.resist_earth, p.resist_wind, p.resist_dark, p.resist_holy
+															FROM personaje p
+													WHERE p.party='.$pj['party'].' AND p.party>0 ORDER BY RAND()';
+											$targetssq = $db->sql_query($query);	
+											while($player = $db->sql_fetchrow($targetssq))
+											{
+
+													$monster['Ataque']=0;
+													while($mob = $db->sql_fetchrow($mobber))
+													{
+
+														switch ($mob['element']) 
+														{
+														case "fire":
+															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_fire']);
+														break;
+														case "water":
+															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_water']);
+														break;
+														case "earth":
+															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_earth']);
+														break;
+														case "wind":
+															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_wind']);
+														break;
+														case "dark":
+															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_dark']);
+														break;
+														case "holy":
+															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_holy']);
+														break;
+														}
+														$damageLink= "<div class=perfecthit>".$monster['nombre']." hizo ".$monster['Ataque']." de da&ntilde;o a 
+														".$player['nombre']."</div>";
+														systemLog("party", $damageLink);
+													}
+													//TEST
+													//$monster['Ataque']=10;
+												
+												if($pj['idPersonaje']==$player['idPersonaje'])
+													$vidaModifier-=$monster['Ataque'];
+
+												if($player['Vida']>$monster['Ataque'])
+												{
+													$db->sql_query("UPDATE personaje SET 
+																Vida=(Vida-".$monster['Ataque'].")
+																WHERE idPersonaje = '".$player['idPersonaje']."'");
+												}
+												else
+												{
+													$timemuerto=120;
+												$db->sql_query("UPDATE personaje SET Vida='0', deathTime = '".($now+$timemuerto)."', 
+													killer = '".$monster['nombre']." te mato' WHERE idPersonaje = '".$player['idPersonaje']."'");	
+												}
+											
+										}
+									}
+								
+							break;
+							default:
 							//// MOB DMG CHANGER
 							$monster['Ataque']=bigintval($monster['Ataque']*($monster['nivel']/15));
 							if($dungeon['elite'])
@@ -186,7 +272,29 @@ if($pj['antiBot']>$now)
 								$monster['Ataque']=$monster['Ataque']+bigintval(($monster['Ataque']/2)*$dungeon['eliteLevel']);
 							}	
 
-							
+								switch ($monster['element']) 
+								{
+								case "fire":
+									$monster['Ataque']=penetration($monster['Ataque'],$pj['resist_fire']);
+								break;
+								case "water":
+									$monster['Ataque']=penetration($monster['Ataque'],$pj['resist_water']);
+								break;
+								case "earth":
+									$monster['Ataque']=penetration($monster['Ataque'],$pj['resist_earth']);
+								break;
+								case "wind":
+									$monster['Ataque']=penetration($monster['Ataque'],$pj['resist_wind']);
+								break;
+								case "dark":
+									$monster['Ataque']=penetration($monster['Ataque'],$pj['resist_dark']);
+								break;
+								case "holy":
+									$monster['Ataque']=penetration($monster['Ataque'],$pj['resist_holy']);
+								break;
+								}
+
+
 								$monsterAttackTrue=false;
 							if($monster['attackCooldown']<$now AND $monsterVida>0)
 							{
@@ -539,6 +647,12 @@ if($pj['antiBot']>$now)
 								else
 									$danoEnMonster = bigintval($monsterVidaTotal - $monsterVida);	
 
+
+								break;
+							}
+							//////////////////////////////////////////////////////////////////////
+							///////////////////////////////////////////////////////////////////////////
+							///////////////////////////////////////////////////////////////////////////
 							$danoFinalPuro=bigintval($danoFinalPuro);
 							
 
@@ -564,19 +678,16 @@ if($pj['antiBot']>$now)
 							
 							//////////////////////////////////////////////////
 						
-								$query = 'SELECT im.idInMundo, im.currentLife, im.champion, im.idMonster, mob.nivel,mob.nombre, mob.imagen, mob.VidaLimit,im.tipo,mob.exp, mob.gold, mob.VidaLimit
-									FROM inmundo im JOIN monster mob USING(idMonster)
-									WHERE '.$monster_hash.'';
-									
-								$mobber = $db->sql_query($query);
+								reset($mobber);// Reseteo el array de todos los monstruos seleccionados
 								unset($nEnemy);
-
 								$goldModifier = 0;
 								$expModifier = 0;
 								$championKilled=0;	
 								while($mob = $db->sql_fetchrow($mobber))
 								{
-									$currentLife = $mob['currentLife'];
+
+
+									$currentLife = $mob['currentLife']-$danoFinalPuro+$monsterHeal;
 									
 									if($currentLife<=0)
 									{
@@ -597,7 +708,11 @@ if($pj['antiBot']>$now)
 										
                                         $goldModifier += $monster['gold'];
 										$expModifier += $monster['exp'];
-	
+										switch ( $monster['monsterType']) {
+											case 'perfect':
+												$expModifier*3;
+											break;
+											}
 										$nEnemy++;
 										$goldAndExp=1;
 										$allowDrop=1;
@@ -615,6 +730,7 @@ if($pj['antiBot']>$now)
 							if($nEnemy)
 							{
 								//WARZONE
+
 								if($monster['idMonster']==204)
 								{
 									$query = 'SELECT *

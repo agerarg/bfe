@@ -80,8 +80,8 @@ $query = 'SELECT p.*, c.STR,c.CON,c.DEX,c.WIT,c.INTEL,c.MEN
 					{
 						$mob['Ataque']+=$mob['Ataque'];
 					}
-				
-				$extra = " - [Ataque:".$mob['Ataque']." PDef:".$mob['Defensa']." MDef:".$mob['DefensaMagica']."]";
+			
+				$extra = " - [Tipo: ".$mob['monsterType']." Ataque:".$mob['Ataque']." PDef:".$mob['Defensa']." MDef:".$mob['DefensaMagica']." Elemento:".$mob['element']."]";
 				
 				if($idDungeon)
 					{

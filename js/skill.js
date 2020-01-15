@@ -290,6 +290,9 @@ function useskill(id,time,targ)
 					$("#listo").hide();
 					$('#loadSkill').fadeIn();
 				//$('#footer').text("json/attack.php?id="+MONSTER+"&skill="+id+"&target="+boludo+"");
+
+				//jAlert("json/attack_mob.php?"+monster_hash+"&skill="+id+"&target="+boludo+"");
+
 				if(tipoTarget==1)
 				{
 						$.ajax({
@@ -304,9 +307,6 @@ function useskill(id,time,targ)
 				}
 				else
 				{
-			//alert("json/attack_mob.php?"+monster_hash+"&skill="+id+"&target="+boludo+"");
-					
-					
 					
 					$.ajax({
 							data: monster_hash+"&skill="+id+"&target="+boludo+"",

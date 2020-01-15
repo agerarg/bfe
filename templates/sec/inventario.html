@@ -45,31 +45,42 @@ const I_itemLimit = parseInt("{MYINVLIIT}");
             <div id="slot_head">{S_HEAD}</div>
             <div id="slot_necklace">{S_ERRINGS}</div>
         </div>
-        <div id="inv_stats">
-        	<div class="stat_column">
-                <div id="atr_VidaLimit">Vida: {VIDA_P} / {VIDA_L_P}</div>
-                <div id="atr_ManaLimit">Mana: {MANA_P} / {MANA_L_P}</div>
-                <div id="atr_Ataque">Ataque: {ATA_P}</div>
-               <div id="atr_AtaqueMagico">Ataque Magico: {ATA_M_P}</div>
-                <div id="atr_Defensa">Defensa: {DEF_P}</div>
-                 <div id="atr_DefensaMagica">Defensa Magica: {DEF_M_P}</div>
-              <div id="atr_Critico">Critico: {CR_P}%</div>
-                <div id="atr_PC" title="Poder Critico">PC: {PC_P}%</div>
-                <div id="atr_CriticoMagico">Critico Magico: {CR_M_P}%</div>
-                <div id="atr_PCMagico" title="Poder Critico Magico">PCM: {PC_M_P}%</div>
-            </div>
-            <div class="stat_column">
-            	<div id="atr_hpRegen" title="Regeneracion de Vida" >Reg Vida: {HPREGEN_P}</div>
-                <div id="atr_mpRegen" title="Regeneracion de Mana" >Reg Mana: {MPREGEN_P}</div>
-    			 <div id="atr_atkSpeed" title="Velelocidad de Ataque" >Vel. de Ataque: {ATKSPEED}seg</div>
-                  <div id="atr_castSpeed"itle="Velelocidad de Casteo" >Vel. de Casteo: {CASTSPEED}seg</div>
-                   <div id="atr_elemento" >Elemento: {ELEMENTO}</div>
-                   <div id="atr_elementodmg" >Daño elemental: {ELEMENTODMG}</div>
-                   <div id="atr_baseDps" >Item Power: {BASEDPS}</div>
-                 <div class="pvpatr" title="Personaje vs Personaje">PVP: {PVP}</div>
-                <div  class="pkatr" title="Personaje Asesinado">PK: {PK}</div>
-                 <div><a href="javascript:regalarOro();"> Regalar Oro</a></div>
-            </div>
+        <div id="inv_stats ">
+            <div class="statsScrollBox scrollChatter">
+            	<div class="stat_column_extend">
+                    <div class="statsCVida" id="atr_VidaLimit">Vida: {VIDA_L_P}</div>
+                    <div class="statCMana" id="atr_ManaLimit">Mana: {MANA_L_P}</div>
+                    <div class="statCAtaque" id="atr_Ataque">Ataque: {ATA_P}</div>
+                   <div  class="statCAtaque" id="atr_AtaqueMagico">Ataq. Magico: {ATA_M_P}</div>
+                    <div id="atr_Defensa">Defensa: {DEF_P}</div>
+                     <div id="atr_DefensaMagica">Def. Magica: {DEF_M_P}</div>
+                     <div class="statCevasion" id="atr_Evasion">Evasion Chance: {EVA_P}%</div>
+                     <div class="statCcritico" id="atr_Critico">Critico: {CR_P}%</div>
+                    <div class="statCcritico" id="atr_PC" title="Poder Critico">PC: {PC_P}%</div>
+                    <div class="statCcriticoMagico" id="atr_CriticoMagico">Critico Magico: {CR_M_P}%</div>
+                    <div  class="statCcriticoMagico" id="atr_PCMagico" title="Poder Critico Magico">PCM: {PC_M_P}%</div>
+                   
+                    <div class="pvpatr" title="Personaje vs Personaje">PVP: {PVP}</div>
+                    <div  class="pkatr" title="Personaje Asesinado">PK: {PK}</div>
+                </div>
+                <div class="stat_column ">
+                	<div class="statsCVida" id="atr_hpRegen" title="Regeneracion de Vida" >Reg Vida: {HPREGEN_P}</div>
+                    <div class="statCMana" id="atr_mpRegen" title="Regeneracion de Mana" >Reg Mana: {MPREGEN_P}</div>
+        			 <div class="statCvelCast" id="atr_atkSpeed" title="Velelocidad de Ataque" >Vel. de Ataque: {ATKSPEED}seg</div>
+                      <div class="statCvelCast" id="atr_castSpeed"itle="Velelocidad de Casteo" >Vel. de Casteo: {CASTSPEED}seg</div>
+                       <div class="statCelement" id="atr_elemento" >Elemento: {ELEMENTO}</div>
+                       <div class="statCelement" id="atr_elementodmg" >Daño elemental: {ELEMENTODMG}</div>
+                        <div class="statsCresist" id="atr_ResFire" title="Resistencia Fire">Res Fire: {RFire}%({ResFireFull}%)</div>
+                    <div class="statsCresist" id="atr_ResWater" title="Resistencia Water">Res Water: {RWater}%({ResWaterFull}%)</div>
+                    <div class="statsCresist" id="atr_ResEarth" title="Resistencia Earth">Res Earth: {REarth}%({ResEarthFull}%)</div>
+                    <div class="statsCresist" id="atr_ResWind" title="Resistencia Wind">Res Wind: {RWind}%({ResWindFull}%)</div>
+                    <div class="statsCresist" id="atr_ResDark" title="Resistencia Dark">Res Dark: {RDark}%({ResDarkFull}%)</div>
+                    <div class="statsCresist" id="atr_ResHoly" title="Resistencia Holy">Res Holy: {RHoly}%({ResHolyFull}%)</div>
+                       <div class="statsCItem" id="atr_baseDps" >Item Power: {GEARPOWER}</div>
+                    
+                     
+                </div>
+        </div>
         </div>
     </div>
 	<div id="inventario_bot">
@@ -85,7 +96,7 @@ const I_itemLimit = parseInt("{MYINVLIIT}");
         </div>
     </div>
 </div>
-<div id="INVlimpiar"><a href="javascript:showLimpieza()">Limpiar</a></div>
+<div id="INVlimpiar"><a href="javascript:showLimpieza()">Limpiar Items</a> - <a href="javascript:regalarOro();"> Regalar Oro</a></div>
 
 <div id="enchantBoxSucces" class="GTFO">El item ha mejorado a +<span id="Wpower"></span>!<br /><img src="images/good.gif" width="400" height="300" /></div>
 <div id="enchantBoxFail" class="GTFO">El encantamiento fallo! el arma perdio todo su poder<br /><img src="images/bad.gif" width="260" height="146" /></div>

@@ -168,9 +168,9 @@ echo $game['topPart'];
     break;
     case 13: // TOP GEAR
         $db->sql_query("DELETE FROM topplayer WHERE tipo = 'GEAR'");
-        $query = 'SELECT p.idPersonaje, p.nombre, p.baseDPS 
+        $query = 'SELECT p.idPersonaje, p.nombre, p.GearPower 
         FROM personaje p 
-        WHERE baseDPS > 0 AND SubClassFrom = 0 AND idCuenta!=1 
+        WHERE GearPower > 0 AND SubClassFrom = 0 AND idCuenta!=1 
         ORDER by p.baseDPS DESC limit 0,50';
 
         $topsq = $db->sql_query($query);
@@ -181,7 +181,7 @@ echo $game['topPart'];
                 $query = "INSERT INTO topplayer (idPersonaje,tipo,valor,topn) 
                 VALUES('".$player['idPersonaje']."',
                 'GEAR',
-                '".$player['baseDPS']."',
+                '".$player['GearPower']."',
                 '.$TOPNUM.')";
                 $db->sql_query($query);
                 $TOPNUM++;

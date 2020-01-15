@@ -16,7 +16,11 @@ function showMsg(data)
 		while(data['msg'][i])
 		{
 			if(data['msg'][i]['pvpTarget']>0)
-				$("#ch_mensajes_sistema").append("<div class='unMensaje'><div class='msg_texto'><a href='index.php?sec=mundo&mundo="+data['msg'][i]['mundo']+"&target="+data['msg'][i]['pvpTarget']+"'>"+data['msg'][i]['nombre']+"</a>"+data['msg'][i]['text']+"</div></div>");
+			{
+				var finalMsg = data['msg'][i]['text'];
+				finalMsg = finalMsg.replace(data['msg'][i]['nombre'], "<a href='index.php?sec=mundo&mundo="+data['msg'][i]['mundo']+"&target="+data['msg'][i]['pvpTarget']+"'>"+data['msg'][i]['nombre']+"</a>");
+				$("#ch_mensajes_sistema").append("<div class='unMensaje'><div class='msg_texto'>"+finalMsg+"</div></div>");
+			}
 			else	
 				$("#ch_mensajes_sistema").append("<div class='unMensaje'><div class='msg_texto'>"+data['msg'][i]['text']+"</div></div>");
 			i++;

@@ -23,10 +23,6 @@ if(!$fpj)
 {
 	$data['error'] = "El objetivo esta ya esta muerto.";
 }else
-if($pj['online'] < ($now-600) &&  $check['tipo']!="warzone" && $check['LUGARLOCO']!="free")
-{
-	$data['error'] = "El objetivo esta deslogeado.";
-}else
 if($pj['party']==$fpj['party'] AND $pj['party']>0)
 {
 	$data['error'] = "No puedes atacar alguien de tu misma party.";
@@ -112,13 +108,58 @@ else
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////			
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////						
-
 $dmgCap = abs($monsterVida - $fpj['Vida']);
-if($dmgCap>20000)
+
+switch ($stats['elemAttack']) {
+	case 'fire':
+	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	break;
+	case 'water':
+	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	break;
+	case 'earth':
+	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	break;
+	case 'wind':
+	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	break;
+	case 'dark':
+	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	break;
+	case 'holy':
+	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	break;
+	default:
+	 $finalDmg = $dmgCap;
+	break;
+}
+if($finalDmg>1)
+		{
+$msg = "<div class=pvpLog>PVP: ".$pj['nombre']." hizo <span class=pvpDmg>".$finalDmg."</span> de da&ntilde;o a ".$fpj['nombre']."</div>";
+$data['info'] .= $msg;
+systemLog("self",$msg);
+$db->sql_query('INSERT INTO  chat(idPersonaje,mensaje,pvpTarget,nombre,mundo) 
+								VALUES("'.$fpj['idPersonaje'].'","'.$msg.'","'.$log->get("pjSelected").'","'.$pj['nombre'].'","'.$check['mundo'].'")');
+
+}
+
+/*if(strlen($pvpInfo)>3)
+		{
+			
+				$db->sql_query('INSERT INTO  chat(idPersonaje,mensaje,pvpTarget,nombre,mundo) 
+								VALUES("'.$fpj['idPersonaje'].'"," '.$pvpInfo." a ".$fpj['nombre'].'","'.$log->get("pjSelected").'","'.$pj['nombre'].'","'.$check['mundo'].'")');
+				
+				systemLog("self",$pj['nombre'].": ".$pvpInfo." a ".$fpj['nombre']);
+		}*/
+
+
+
+//$dmgCap = abs($monsterVida - $fpj['Vida']);
+/*if($dmgCap>20000)
 {
 	$monsterVida=$fpj['Vida']-20000;
 	$data['info'] .= "(CAP: 20k)";
-}
+}*/
 $_PK=0;
 $_PVP=0;
 $pktimer=0;
@@ -295,14 +336,7 @@ if(!$completlyEvation)
 							Vida='".$vidaModifier."' 
 						WHERE idPersonaje = '".$log->get("pjSelected")."'");	
 	}
-		if(strlen($pvpInfo)>3)
-		{
-			
-				$db->sql_query('INSERT INTO  chat(idPersonaje,mensaje,pvpTarget,nombre,mundo) 
-								VALUES("'.$fpj['idPersonaje'].'"," '.$pvpInfo." a ".$fpj['nombre'].'","'.$log->get("pjSelected").'","'.$pj['nombre'].'","'.$check['mundo'].'")');
-				
-				systemLog("self",$pj['nombre'].": ".$pvpInfo." a ".$fpj['nombre']);
-		}
+		
 	}
 	
 	/*$db->sql_query("UPDATE personaje SET 

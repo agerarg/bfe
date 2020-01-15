@@ -127,6 +127,7 @@ if($log->check())
 				$check['VidaLimit']=$check['VidaLimit']*$check['dificulty'];
 				$check['Ataque']=$check['Ataque']*$check['dificulty'];
 			}
+			$monster['element']=$check['element'];
 			$monster['mundo']=$check['mundo'];
 			$monster['raid']=$check['raid'];
 			$monster['dropLevel']=$check['dropLevel'];
@@ -150,6 +151,10 @@ if($log->check())
 			$monster['DefensaMagica'] += $check['DefensaMagica'];
 			$monster['Critico'] += $check['Critico'];
 			$monster['LastIm'] = $check['idInMundo'];
+			$monster['LastIm'] = $check['idInMundo'];
+			$monster['VidaServer'] = $check['currentLife'];
+			$monster['monsterType'] = $check['monsterType'];
+			$monster['monsterElement'] = $check['element'];
                         $sqlTargetOne =  $check['idInMundo'];
                         $sqlTargetHash .= $check['idInMundo'].',';
 			$monster_hash .= $andadd." im.idInMundo = ".$check['idInMundo']."";

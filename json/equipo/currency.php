@@ -26,7 +26,7 @@ else
 	if($typee == "Wizq")
 	{
 		$typee = "W";
-		$sqladd2 = " AND inv.manoIzquierda = 1 ";
+		$sqladd2 = " AND (inv.manoIzquierda = 1 OR (inv.manoIzquierda = 0 AND inv.manoDerecha = 0))  ";
 	}
 	if($typee == "Wder")
 	{

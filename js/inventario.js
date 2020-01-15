@@ -888,8 +888,8 @@ function atr_update(statsNew=false)
 			$("#nombreArma").show(500);
 		else
 			$("#nombreArma").hide(500);
-		$("#atr_VidaLimit").text("Vida: "+stats['Vida']+" / "+statsNew['VidaLimit']);
-		$("#atr_ManaLimit").text("Mana: "+stats['Mana']+" / "+statsNew['ManaLimit']);
+		$("#atr_VidaLimit").text("Vida: "+statsNew['VidaLimit']);
+		$("#atr_ManaLimit").text("Mana: "+statsNew['ManaLimit']);
 		$("#atr_Ataque").text("Ataque: "+statsNew['Ataque']);
 		$("#atr_AtaqueMagico").text("Ataque Magico: "+statsNew['AtaqueMagico']);
 		$("#atr_Defensa").text("Defensa: "+statsNew['Defensa']);
@@ -909,7 +909,16 @@ function atr_update(statsNew=false)
 		
 		$("#atr_baseDps").text("Item Power: "+statsNew['baseDPS']);
 		
-	
+		
+		$("#atr_Evasion").text("Evasion Chance: "+statsNew['evasion']+"%");
+		
+		$("#atr_ResFire").text("Res Fire: "+statsNew['ResFire']+"%("+statsNew['ResFireFull']+"%)");
+		$("#atr_ResWater").text("Res Water: "+statsNew['ResWater']+"%("+statsNew['ResWaterFull']+"%)");
+		$("#atr_ResEarth").text("Res Earth: "+statsNew['ResEarth']+"%("+statsNew['ResEarthFull']+"%)");
+		$("#atr_ResWind").text("Res Wind: "+statsNew['ResWind']+"%("+statsNew['ResWindFull']+"%)");
+		$("#atr_ResDark").text("Res Dark: "+statsNew['ResDark']+"%("+statsNew['ResDarkFull']+"%)");
+		$("#atr_ResHoly").text("Res Holy: "+statsNew['ResHoly']+"%("+statsNew['ResHolyFull']+"%)");
+
 		if(statsNew['VidaLimit']<stats['Vida'])
 			stats['Vida']=statsNew['VidaLimit'];
 		userVida=stats['Vida'];

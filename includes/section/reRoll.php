@@ -689,7 +689,7 @@ while(0==$vueltas)
 
 								 	$query = 'SELECT *
 									FROM item_attr
-									WHERE idInventario = '.$item['idInventario'].' AND NOT attrb IN ("wind","water","fire","earth","dark","holy") ' ;
+									WHERE idInventario = '.$item['idInventario'].' AND blackmarket = 0 AND NOT attrb IN ("wind","water","fire","earth","dark","holy") ' ;
 									$itematrsq = $db->sql_query($query);
 									$atrbList="";
 									if($item['RollId']>0)

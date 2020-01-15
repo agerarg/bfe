@@ -90,6 +90,9 @@ npcGoTo = (to)=>{
 		case 9:
 			location.href="index.php?sec=thevoid";
 		break;
+		case 10:
+			location.href="index.php?sec=blackmarked";
+		break;
 	}
 }
 
@@ -106,6 +109,7 @@ npcZepp = (id)=>{
 			$("#npcContent").append('<div class="npcDialogTxt">Hay que detener a los magos a como de lugar.</div>');
 			textOut += npcMakeOption("Quien eres?","npcZepp",1);
 			textOut += npcMakeOption("como los vamos a detener?","npcZepp",2);
+			textOut += '<div class="menuItemNpc" onclick="npcGoTo(10)">Ir Al Mercado Negro!</div>';
 			//textOut += '<div class="menuItemNpc" onclick="npcGoTo(9)">Ir a The Void</div>';
 			$("#npcContent").append('<div class="menuHold">'+textOut+'</div>');
 			$("#npcPlayGround").show("slow");

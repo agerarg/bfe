@@ -297,6 +297,13 @@ if($pj)
 	{
 		$mapAllow[]=176;
 		$mapAllow[]=177;
+		
+		
+	}
+	if($pj['nivel']>=120)
+	{
+		$mapAllow[]=178;
+		
 	}
 //WARZONE
 if($gameCore['war'] && $pj['clan']>0)
@@ -475,6 +482,7 @@ if($gameCore['war'] && $pj['clan']>0)
 			  'CLASE_P' => $pj['dicho'],
 			   'CLASE_P_INFO' => $pj['CLASE'],
 			   'BASEDPS' => $stats['baseDPS'],
+			   'GEARPOWER' => $stats['GearPower'],
 			  'IMG_P' => $pj['imagen'],
 			  'NOMBRE_P' => $pj['nombre'],
 			   'ILVL' => $stats['ItemLevel'],
@@ -491,12 +499,30 @@ if($gameCore['war'] && $pj['clan']>0)
 				'ATA_M_P' => $stats['AtaqueMagico'],
 				'DEF_P' => $stats['Defensa'],
 				'DEF_M_P' => $stats['DefensaMagica'],
+
+				'EVA_P' => (int)$stats['evasion'],
+
 				'CR_P' => $stats['Critico'],
 				'CR_M_P' => $stats['CriticoMagico'],
 				'PC_P' => $stats['PC'],
 				'PC_M_P' => $stats['PCMagico'],
 				'ELEMENTO' => $stats['elemAttack'],
 				'ELEMENTODMG' => $stats['elemDmg'],
+
+				'RFire' => (int)$stats['ResFire'],
+				'RWater' => (int)$stats['ResWater'],
+				'REarth' => (int)$stats['ResEarth'],
+				'RWind' => (int)$stats['ResWind'],
+				'RDark' => (int)$stats['ResDark'],
+				'RHoly' => (int)$stats['ResHoly'],
+
+				'ResFireFull' => (int)$stats['ResFireFull'],
+				'ResWaterFull' => (int)$stats['ResWaterFull'],
+				'ResEarthFull' => (int)$stats['ResEarthFull'],
+				'ResDarkFull' => (int)$stats['ResDarkFull'],
+				'ResHolyFull' => (int)$stats['ResHolyFull'],
+				'ResWindFull' => (int)$stats['ResWindFull'],
+
 				'CON' => $stats['CON'],
 				'STR' => $stats['STR'],
 				'DEX' => $stats['DEX'],
@@ -982,7 +1008,9 @@ $_SESSION['soulImpactUsed']=0;
 							case 'opciones':
 								include('includes/section/opciones.php');
 							break;
-							
+							case 'blackmarked':
+								include('includes/section/blackMarket.php');
+							break;
 							case 'paragon':
 								include('includes/section/paragon.php');
 							break;

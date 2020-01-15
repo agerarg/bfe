@@ -88,6 +88,7 @@ $error=false;
 							
 							
 							$data["error"] = 0;
+							unset($_SESSION['PJITEM']);
 							$data['newstats'] = checkStats($pj['STR'],$pj['CON'],$pj['DEX'],$pj['WIT'],$pj['INTEL'],$pj['MEN'],$pj['nivel'],$pj['idPersonaje']);
 							}
 							else

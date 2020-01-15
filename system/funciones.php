@@ -14,6 +14,38 @@ if(SWORDON != 1)
 	header("Location: index.php");
 	die();
 }
+function getRandomElem()
+{
+	$elem="none";
+	$rnd=mt_rand(1,6);
+	switch ($rnd) {
+		case 1:
+			$elem="fire";
+		break;
+		case 2:
+			$elem="water";
+		break;
+		case 3:
+			$elem="earth";
+		break;
+		case 4:
+			$elem="wind";
+		break;
+		case 5:
+			$elem="dark";
+		break;
+		case 6:
+			$elem="holy";
+		break;
+	}
+	return $elem;
+}
+function damageResist($dmg,$resist)
+{
+	$dmg = penetration($dmg,$resist);
+	$dmg = penetration($dmg,$resist);
+	return defensa($dmg,10);
+}
 function monsterGenMap()
 {
 	global $db,$log,$mundo,$pj;
@@ -68,9 +100,9 @@ function monsterGenMap()
 														$bossMapsq = $db->sql_query($query);
 														$bossMap = $db->sql_fetchrow($bossMapsq);		
 
-														$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,openToClan) 
+														$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,openToClan,element) 
 														VALUES("'.$bossMap['idMonster'].'","2",
-														"'.$mundo['id'].'","'.($bossMap['VidaLimit']).'",'.$pj['party'].')');
+														"'.$mundo['id'].'","'.($bossMap['VidaLimit']).'",'.$pj['party'].',"'.getRandomElem().'")');
 														$db->sql_query("UPDATE mapinstance SET monsterCount =  0
 															WHERE id = ".$mapInstance['id']);
 														$mapBossOn=1;
@@ -83,17 +115,22 @@ function monsterGenMap()
 														WHERE id = ".$mapInstance['id']);
 												}
 											}
+											$eliteAviable=true;
+											if($mundo['id']==178)
+											{
+												$eliteAviable=false;
+											}
 											$cantidad = 8 + $mundo['nivel']/3;
 											for($i=0;$i<$cantidad;$i++)
 											{
-												if(mt_rand(1,20)==15)
-													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,openToClan,champion) 
+												if(mt_rand(1,20)==15 && $eliteAviable)
+													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,openToClan,champion,element) 
 												VALUES("'.$monsterCreator['idMonster'].'","2",
-												"'.$mundo['id'].'","'.($monsterCreator['VidaLimit']*3).'",'.$pj['party'].',1)');
+												"'.$mundo['id'].'","'.($monsterCreator['VidaLimit']*3).'",'.$pj['party'].',1,"'.getRandomElem().'")');
 												else
-													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,openToClan) 
+													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,openToClan,element) 
 													VALUES("'.$monsterCreator['idMonster'].'","2",
-													"'.$mundo['id'].'","'.$monsterCreator['VidaLimit'].'",'.$pj['party'].')');
+													"'.$mundo['id'].'","'.$monsterCreator['VidaLimit'].'",'.$pj['party'].',"'.getRandomElem().'")');
 											
 											}
 										}
@@ -123,9 +160,9 @@ function monsterGenMap()
 														$bossMapsq = $db->sql_query($query);
 														$bossMap = $db->sql_fetchrow($bossMapsq);		
 
-														$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,deQuien) 
+														$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,deQuien,element) 
 														VALUES("'.$bossMap['idMonster'].'","2",
-														"'.$mundo['id'].'","'.$bossMap['VidaLimit'].'",'.$log->get("pjSelected").')');
+														"'.$mundo['id'].'","'.$bossMap['VidaLimit'].'",'.$log->get("pjSelected").',"'.getRandomElem().'")');
 
 														$db->sql_query("UPDATE mapinstance SET monsterCount =  0
 															WHERE id = ".$mapInstance['id']);
@@ -145,13 +182,13 @@ function monsterGenMap()
 											for($i=0;$i<$cantidad;$i++)
 											{
 												if(mt_rand(1,20)==15)
-													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,champion,deQuien) 
+													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,champion,deQuien,element) 
 												VALUES("'.$monsterCreator['idMonster'].'","2",
-												"'.$mundo['id'].'","'.($monsterCreator['VidaLimit']*3).'",1,'.$log->get("pjSelected").')');
+												"'.$mundo['id'].'","'.($monsterCreator['VidaLimit']*3).'",1,'.$log->get("pjSelected").',"'.getRandomElem().'")');
 												else
-													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,deQuien) 
+													$db->sql_query('INSERT INTO  inmundo(idMonster,tipo,mundo,currentLife,deQuien,element) 
 													VALUES("'.$monsterCreator['idMonster'].'","2",
-													"'.$mundo['id'].'","'.$monsterCreator['VidaLimit'].'",'.$log->get("pjSelected").')');
+													"'.$mundo['id'].'","'.$monsterCreator['VidaLimit'].'",'.$log->get("pjSelected").',"'.getRandomElem().'")');
 											
 											}
 										}
@@ -214,16 +251,19 @@ function recreateItem($id)
 	$maxvalio="";
 	$marquer = " &#10067;";
 	$exodimo = " &#10024;";
+	$update = "&#128310;";
 	while($attr = $db->sql_fetchrow($attrsq))
 	{
 		$maxvalio="";
 		$mark="";
-
+		$up="";
 		if($invent['RollId']===$attr['idAttrb'])
 			$mark=$marquer;
 		if($invent['idExodimo']===$attr['idAttrb'])
 			$mark=$exodimo;	
-		$leyendafin.=" ".$attr['attrb']." +".$attr['valor'].$maxvalio.$mark."<br>";
+		if($attr['blackmarket']==1)
+			$up=$update;
+		$leyendafin.=$up." ".$attr['attrb']." +".$attr['valor'].$maxvalio.$mark."<br>";
 	}
 	$db->sql_query('UPDATE inventario 
 	SET atributos = "'.$leyendafin.'" 
@@ -767,6 +807,14 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		//$PetId=$pj['idPet'];
 		$IniEXPBONUS=$pj['EXPBONUS'];
 		$IniGOLDBONUS=$pj['GOLDBONUS'];
+		$iniGEARSHOW=$pj['GearPower'];
+
+		$iniResFire = $pj['resist_fire'];
+		$iniResWater = $pj['resist_water'];
+		$iniResEarth = $pj['resist_earth'];
+		$iniResWind = $pj['resist_wind'];
+		$iniResDark = $pj['resist_dark'];
+		$iniResHoly = $pj['resist_holy'];
 
 		$godLevel['godlvlAttack']=$pj['godlvlAttack'];
 		$godLevel['godlvlCritico']=$pj['godlvlCritico'];
@@ -804,7 +852,7 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		//CHEKEO ITEMS
 		else
 		{
-		$query = 'SELECT i.*, inv.manoDerecha,inv.extraLevel,inv.value, inv.enchant, inv.SAchar, inv.SA, ia.attrb, ia.valor, inv.idInventario, inv.manoIzquierda, inv.conNombre, inv.nameCheck, inv.nameTimeTry, inv.trucho, inv.lvlAstral
+		$query = 'SELECT i.*,inv.masterWork, inv.manoDerecha,inv.extraLevel,inv.value, inv.enchant, inv.SAchar, inv.SA, ia.attrb, ia.valor, inv.idInventario, inv.manoIzquierda, inv.conNombre, inv.nameCheck, inv.nameTimeTry, inv.trucho, inv.lvlAstral
 				FROM item i JOIN inventario inv USING ( idItem ) LEFT JOIN item_attr ia on ia.idInventario = inv.idInventario 
 				WHERE inv.usadoPor = '.$PJID.' ORDER BY inv.idInventario';
 		$itemsq = $db->sql_query($query);
@@ -829,6 +877,8 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 			if($noRepeat!=$item['idInventario'])
 			{
 			    $gear += ($item['grado']*100)+($item['enchant']*$item['enchant']*$item['enchant']);
+			    if($item['masterWork'])
+			    	$gear += $item['grado']*10;
 				$noRepeat=$item['idInventario'];
 				//Special Ability	
 				if($item['tipo']=="runa")
@@ -1437,6 +1487,8 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 				WHERE idPersonaje = ".$log->get("pjSelected")."");
 			}
 		}
+
+
 		if($pj['C_InnerFire'])
 		{
 			$pj['Defensa'] += $pj['Defensa'];
@@ -1482,12 +1534,89 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 			$pj['VidaLimit'] = potenciar($pj['VidaLimit'],($godLevel['godlvlVida']*5));	
 		}
 		
+		//Resistences
+		$pj['ResFire'] += $pj['ResAll'];
+		$pj['ResWater'] += $pj['ResAll'];
+		$pj['ResEarth'] += $pj['ResAll'];
+		$pj['ResWind'] += $pj['ResAll'];
+		$pj['ResDark'] += $pj['ResAll'];
+		$pj['ResHoly'] += $pj['ResAll'];
 
+		$pj['ResFireFull'] = $pj['ResFire'];
+		$pj['ResWaterFull'] = $pj['ResWater'];
+		$pj['ResEarthFull'] = $pj['ResEarth'];
+		$pj['ResWindFull']= $pj['ResWind'];
+		$pj['ResDarkFull'] = $pj['ResDark'];
+		$pj['ResHolyFull'] = $pj['ResHoly'];
+
+		//Limit
+		if($pj['ResFire']>75)
+			$pj['ResFire']=75;
+		if($pj['ResWater']>75)
+			$pj['ResWater']=75;
+		if($pj['ResEarth']>75)
+			$pj['ResEarth']=75;
+		if($pj['ResWind']>75)
+			$pj['ResWind']=75;
+		if($pj['ResDark']>75)
+			$pj['ResDark']=75;
+		if($pj['ResHoly']>75)
+			$pj['ResHoly']=75;
+
+		//SSVINGGEAR TO SERVER
+		$pj['GearPower'] = $gear;
+		if($PJID==$log->get("pjSelected"))
+		{
+			$pj['GearPower'] = $_SESSION['PJITEM_gear'];
+			if($pj['GearPower']!=$iniGEARSHOW)
+				{
+					$db->sql_query("UPDATE personaje SET
+					GearPower='".$pj['GearPower']."'
+					WHERE idPersonaje = ".$log->get("pjSelected")."");
+				}
+
+			if($pj['ResFire']!=$iniResFire)
+				{
+					$db->sql_query("UPDATE personaje SET
+					resist_fire='".$pj['ResFire']."'
+					WHERE idPersonaje = ".$log->get("pjSelected")."");
+				}	
+			if($pj['ResWater']!=$iniResWater)
+				{
+					$db->sql_query("UPDATE personaje SET
+					resist_water='".$pj['ResWater']."'
+					WHERE idPersonaje = ".$log->get("pjSelected")."");
+				}	
+			if($pj['ResEarth']!=$iniResEarth)
+				{
+					$db->sql_query("UPDATE personaje SET
+					resist_earth='".$pj['ResEarth']."'
+					WHERE idPersonaje = ".$log->get("pjSelected")."");
+				}	
+			if($pj['ResWind']!=$iniResWind)
+				{
+					$db->sql_query("UPDATE personaje SET
+					resist_wind='".$pj['ResWind']."'
+					WHERE idPersonaje = ".$log->get("pjSelected")."");
+				}	
+			if($pj['ResDark']!=$iniResDark)
+				{
+					$db->sql_query("UPDATE personaje SET
+					resist_dark='".$pj['ResDark']."'
+					WHERE idPersonaje = ".$log->get("pjSelected")."");
+				}	
+			if($pj['ResHoly']!=$iniResHoly)
+				{
+					$db->sql_query("UPDATE personaje SET
+					resist_holy='".$pj['ResHoly']."'
+					WHERE idPersonaje = ".$log->get("pjSelected")."");
+				}	
+		}
 
 		$pj['Ataque']=intval($pj['Ataque']);
 		//TEST
-		//$pj['Ataque']+=50000000;
-		//$pj['PSpeed']=1;
+		//$pj['Ataque']+= potenciar(potenciar(12077270,859),800)  ;
+		//$pj['PSpeed']=10;
 		//$pj['Defensa']+=99999;
 		//$pj['Critico'] = 100;
 		//$pj['ManaShield']+=30;
@@ -1654,5 +1783,10 @@ function dificultyGoldMulty($dig)
 		break;
 	}
 	return $multyDifer;
+}
+function rand_float($st_num=0,$end_num=1,$mul=1000000)
+{
+if ($st_num>$end_num) return false;
+return mt_rand($st_num*$mul,$end_num*$mul)/$mul;
 }
 ?>

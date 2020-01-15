@@ -388,11 +388,14 @@ color:#FFF;
 .topSemanal{font-variant: small-caps; font-weight:bold; color:#FF7F00; background:#333333;}
 .dmgtransf{ color: #FFD24D; font-weight: bold; }
 .cantPolvos{ font-variant: small-caps; font-weight:bold; color:#7F00FF; background:#CCCCCC; border: 1px solid #000;}
-.marketPlace{ padding-top: 160px; padding-left: 23px; }
+.marketBoxCanv{
+overflow-y: scroll; overflow-x: hidden; height: 400px; width: 440px;
+}
+.marketPlace{ padding-top: 160px; padding-left: 23px; font-variant: small-caps;font-size:18px; font-weight:bold;   }
 .marketCosto{ color: orange;  }
 .marketSpace{ padding-left: 70px; }
-.marketBox{ border: 1px solid black; padding: 2px 2px 2px 2px; float: left; text-align: center; margin-left: 10px; background-color: #333333 }
-.marketBox:hover{ border: 1px solid white; background-color: #444444; }
+.marketBox{ border: 1px solid black; padding: 2px 2px 2px 2px; width: 400px;  text-align: center; margin-left: 10px; background-color: #110022 }
+.marketBox:hover{ border: 1px solid white; background-color: #1C0037; }
 .partyDmg{font-weight:bold; color:#0F9; font-family:"Comic Sans MS", cursive;}
 .romperItem{font-weight:bold; color:#CCC; background-color:#003; border:1px #000 solid;}
 .reRollItem{font-weight:bold; font-variant: small-caps; font-weight:bold; color: #AAAAAA; background-color:#444444; }
@@ -1175,7 +1178,7 @@ color:#FF0;}
 	height:646px;
 	}
 	#blackMarket {
-	background-image:url(../images/fond_black.jpg);
+	background-image:url(../images/fond_black.jpg?1);
 	background-repeat:no-repeat;
 	width:490px;
 	height:646px;
@@ -1186,19 +1189,96 @@ color:#FF0;}
 	}
 
 #inv_stats{
-	margin-left:200px;
-	padding-top:23px;
-	padding-left:5px;
-	background-image:url(../images/caracteristicas.png);
-	background-repeat:no-repeat;
-	width:277px;
-	height:200px;
-	font-size:12px;
+	
 	}
+
+.statsScrollBox{
+	overflow-y: auto;
+	width:290px;
+	height:220px;
+	background-color: #111111;
+	border: 1px solid black;
+	font-variant: small-caps; font-weight:bold; border: black 1px solid;
+	padding: 2px 2px 2px 2px; 
+	font-size: 12px;
+}
+
+.statsScrollBoxPjVer{
+	overflow-y: auto;
+	width:270px;
+	height:170px;
+	background-color: #111111;
+	border: 1px solid black;
+	font-variant: small-caps; font-weight:bold; border: black 1px solid;
+	padding: 2px 2px 2px 2px; 
+	font-size: 12px;
+}
+
+.statsCVida{
+	color: red;
+}
+.statCMana{
+	color: #4D4DFF;
+}
+.statCAtaque{
+	color: #999999;
+}
+.statCAtaqueMagico{
+	color: #FFFF99;
+}
+.statCcriticoMagico{
+	color: #FFFF00;
+}
+.statCcritico{
+	color: #FF4D4D;
+}
+.statCevasion{
+	color: darkgreen;
+}
+.statCVelAttack{
+	color: #006633;
+}
+.statCvelCast{
+	color: #73B9FF;
+}
+
+.statCelement{
+	color: #FF7F00;
+}
+.statsCresist{
+	color:#DFBFFF;
+}
+.statsCItemOnVer{
+	color: #FFFFBF;
+	font-size: 20px;
+
+}
+.statsCItem{
+	color: #FFFFBF;
+	font-size: 20px;
+	position: absolute;
+	width: 200px;
+	text-align: center;
+	left: 240px;
+	top: 255px;
+}
+.stat_column_extend{
+	float:left;
+	width:160px;
+	height:180px;
+}
 .stat_column{
 	float:left;
 	width:130px;
 	height:180px;
+}
+.inv_stats_fix{
+	position: absolute;
+	left: 200px;
+	width: 250px;
+}
+.stat_column_separator{
+
 }
 #slot_W{
 	position:relative;
@@ -2736,6 +2816,10 @@ margin-top: -30px;
 .mapObjetive{ color:#400000; font-variant: small-caps; font-weight:bold; border: black 1px solid; background-color: #6C6; }
 .partyExpGold{ color:#B2B200; font-variant: small-caps; font-weight:bold; background:#404000; border: 1px solid #000;  }
 .subClassThings{ color:#ffb342; font-variant: small-caps; font-weight:bold;  }
+.pvpLog{ color:#FFFFBF; font-variant: small-caps; font-weight:bold; background:#240000; border: 1px solid #000; }
+.pvpDmg{ color:red; font-size: 20; }
+
+.perfecthit{color:#FF9326; font-variant: small-caps; font-weight:bold; background:#222222; border: 1px solid #000;}
 
 .subClassSkillBlock{
 	padding: 5px;
@@ -3030,7 +3114,8 @@ margin-left: -40px;
 #INVlimpiar{
 	position: absolute;
 	top: 600px;
-	left: 420px;
+	left: 320px;
+	width: 200px;
 }
 #INVlimpiarSelector{
 	background-image:url(../images/fondo_ShowItem.png);

@@ -1,50 +1,166 @@
+<script type="text/javascript">
+checkPrecios = ()=>{
+    var val = parseInt($("#craftxchaos_cant").val());
+
+                var select = $("#CraftXChaos").val();
+
+
+                var checkVal = val%100;
+
+               if(checkVal==0)
+               {
+                    var num = val/100;
+  
+                   switch(select)
+                    {
+                        case "3":
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break;
+                        case "4":
+                            num=num*2;
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break; 
+                         case "5":
+                            num=num*3;
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break;  
+                           case "6":
+                            num=num*4;
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break;  
+                           case "7":
+                            num=num*5;
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break;  
+                           case "8":
+                            num=num*7;
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break;  
+                         case "9":
+                            num=num*10;
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break;  
+
+                    }
+
+                }
+                else
+                    jAlert("Solo se pueden vender de a 100 unideades", 'Error');
+}    
+CheckOnChaosCant = ()=>{
+    var value = parseInt($("#craftxchaos_cant").val());
+         var checkVal = value%100;
+         if(checkVal==0)
+            checkPrecios();
+}
+CraftXChaosDone = (data)=>{
+    if(data['error']==0)
+         jAlert(data['error_msg'], 'Felicidades');
+     else
+     {
+        if(data['error_msg'].length > 2)
+            jAlert(data['error_msg'], 'Error');
+        else
+            jAlert("Algo anda mal!", 'Error');
+    }
+}
+SendCraftXChaos = ()=>{
+     var val = parseInt($("#craftxchaos_cant").val());
+     var checkVal = val%100;
+    var select = $("#CraftXChaos").val();
+
+   if(checkVal==0)
+         $.ajax({
+            data: "",
+            type: "GET",
+            dataType: "json",
+            url: "json/blackMarket.php?t=craftxchaos&tier="+select+"&cant="+val,
+            success: function(data){
+                CraftXChaosDone(data);
+        }
+        });
+     else
+     {
+        jAlert("Solo se pueden vender de a 100 unideades", 'Error');
+     }
+
+}
+
+UpdateItemDone =(data)=>
+{
+    jAlert(data['error_msg']);
+}
+
+SendUpdateItem = ()=>{
+     var tier = $("#UpdateItem").val();
+     var piece = $("#UpdateItem_part").val();
+      $.ajax({
+            data: "",
+            type: "GET",
+            dataType: "json",
+            url: "json/blackMarket.php?t=update&tier="+tier+"&piece="+piece,
+            success: function(data){
+                UpdateItemDone(data);
+        }
+        });
+}
+
+$( document ).ready(function() {
+    $( "#CraftXChaos" ).change(function() {
+        checkPrecios();
+    });
+    
+});
+</script>
+
 <div id="blackMarket">
 	<div class="title_spacer">
     </div>
+
     <div class="marketPlace">
+         <div class="marketBoxCanv scrollChatter">
     <div class="marketBox">
-    	<div><img src="images/item/rings/ring.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Anillo">Anillo Astral</a></div>
-    	<div class="marketCosto"> Costo: 3 Polvos Astrales</div>
+    	<div><img src="images/item/currency/caos.png" /></div>
+    	<div> Transaccion Craft X Chaos</div>
+    	<div class="marketCosto"> Cantidad: <input id="craftxchaos_cant" oninput="CheckOnChaosCant()" class="boxInner" value="100" type="text" size="5"> 
+            <br> 
+            <select  class="boxInner"  id="CraftXChaos">
+                        <option selected value="3">100 Craft C por 1 Chaos</option>
+                        <option value="4">100 Craft B por 2 Chaos</option>
+                        <option value="5">100 Craft A por 3 Chaos</option>
+                        <option value="6">100 Craft S por 4 Chaos</option>
+                        <option value="7">100 Craft X por 5 Chaos</option>
+                        <option value="8">100 Craft Y por 7 Chaos</option>
+                        <option value="9">100 Craft Z por 10 Chaos</option> </select><br>
+                        Obtienes: <span id="obtienesCraftXChaos">1</span> Chaos<br>
+                        <input type="button" name="env" onclick="SendCraftXChaos()"  class="boxInner" value="Vender"></input></div>
     </div>
-     <div class="marketBox">
-    	<div><img src="images/item/head/helmet.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Casco">Casco Astral</a></div>
-    	<div class="marketCosto"> Costo: 3 Polvos Astrales</div>
-    </div>
-     <div class="marketBox">
-    	<div><img src="images/item/necklace/necklace.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Collar">Collar Astral</a></div>
-    	<div class="marketCosto"> Costo: 3 Polvos Astrales</div>
-    </div>
-    <br>
-     <div class="marketBox">
-    	<div><img src="images/item/dagger/SwordBreaker.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Arma">Arma Astral</a></div>
-    	<div class="marketCosto"> Costo: 5 Polvos Astrales</div>
-    </div>
-     <div class="marketBox">
-    	<div><img src="images/item/heavy/ChainMailShirt.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Armadura">Armadura Astral</a></div>
-    	<div class="marketCosto"> Costo: 5 Polvos Astrales</div>
-    </div>
-     <div class="marketBox">
-    	<div><img src="images/item/shield/shield.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Escudo">Escudo Astral</a></div>
-    	<div class="marketCosto"> Costo: 3 Polvos Astrales</div>
-    </div>
-    <br>
-    <div class="marketSpace">
+
     <div class="marketBox">
-    	<div><img src="images/item/gloves/gloves.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Guantes">Guantes Astral</a></div>
-    	<div class="marketCosto"> Costo: 3 Polvos Astrales</div>
+        <div><img src="images/item/material/enchantArmor.jpg" /></div>
+        <div> Update Item </div>
+            <br> 
+            <select  class="boxInner"  id="UpdateItem">
+                        <option selected value="6">Item S por 10 Chaos</option>
+                        <option value="7">Item X por 15 Chaos</option>
+                        <option value="8">Item Y por 20 Chaos</option>
+                        <option value="9">Item Z por 30 Chaos</option> 
+                    </select><br>
+   <select  class="boxInner"  id="UpdateItem_part">
+                        <option value="W1">Arma Izquierda</option>
+                         <option value="W2">Arma Derecha</option>
+                        <option value="armor">Armadura</option>
+                        <option value="head">Casco</option>
+                        <option value="foots">Botas</option>
+                        <option value="gloves">Guantes</option>
+                        <option value="rings">Anillo</option>
+                        <option value="necklace">Collar</option>
+                        <option value="shield">Escudo</option>
+                    </select><br>
+                        <input type="button" name="env" onclick="SendUpdateItem()"  class="boxInner" value="Update"></input></div>
     </div>
-     <div class="marketBox">
-    	<div><img src="images/item/foots/boots.jpg" /></div>
-    	<div> <a href="index.php?sec=blackMarket&cagame=Botas">Botas Astral</a></div>
-    	<div class="marketCosto"> Costo: 3 Polvos Astrales</div>
-    </div>
-    </div>
+
+    
+</div>
     </div>
 </div>

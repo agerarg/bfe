@@ -15,11 +15,12 @@ include('system/login.php');
 $template = new Template;
 $log = new LOGuser;
 $now = tiempoReal();
-$template->assign_var('RAND',15 );//time() 18
+$template->assign_var('RAND', 25 );//time() 18
 define('ADMIN', 1);
 $mantenimiento=false;
 
-
+//echo damageResist(50000,75);
+//echo potenciar(potenciar(12077270,859),2803);
 					
 	if(!$mantenimiento OR $log->get("idCuenta")==1)
 	{

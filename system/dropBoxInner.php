@@ -14,7 +14,7 @@ $query = 'SELECT *
 		WHERE p.idCuenta = '.$log->get("idCuenta").' AND p.idPersonaje = '.$log->get("pjSelected").' AND p.desactivada=0';
 $pj = $db->sql_fetchrow($db->sql_query($query));
 
-function generateBoxItem($boxTier,$idBox,$grado,$especial)
+function generateBoxItem($boxTier,$idBox,$grado,$especial=0)
 {
 	global $log,$banTypes,$db,$counterRare,$counterEpic,$counterLegendary,$pj;
 

@@ -300,29 +300,40 @@ $(document).ready(function(){
 	            <div id="slot_head">{S_HEAD}</div>
 	            <div id="slot_necklace">{S_ERRINGS}</div>
 	        </div>
-	        <div id="inv_stats" class="inv_stats_fix">
-	        	<div class="stat_column">
-	                <div id="atr_VidaLimit">Vida: {VIDA_L_P2}</div>
-	                <div id="atr_ManaLimit">Mana: {MANA_L_P2}</div>
-	                <div id="atr_Ataque">Ataque: {ATA_P2}</div>
-	               <div id="atr_AtaqueMagico">Ataque Magico: {ATA_M_P2}</div>
-	                <div id="atr_Defensa">Defensa: {DEF_P2}</div>
-	                 <div id="atr_DefensaMagica">Defensa Magica: {DEF_M_P2}</div>
-	              <div id="atr_Critico">Critico: {CR_P2}%</div>
-	                <div id="atr_PC" title="Poder Critico">PC: {PC_P2}%</div>
-	                <div id="atr_CriticoMagico">Critico Magico: {CR_M_P2}%</div>
-	                <div id="atr_PCMagico" title="Poder Critico Magico">PCM: {PC_M_P2}%</div>
-	            </div>
-	            <div class="stat_column">
-	    			 <div id="atr_atkSpeed" title="Velocidad de Ataque" >Vel Ataque: {ATKSPEED2} seg</div>
-	                  <div id="atr_castSpeed" title="Velocidad de Casteo">Vel Casteo: {CASTSPEED2} seg</div>
-	                  <div id="atr_elemento" >Elemento: {ELEMENTO2}</div>
-	                   <div id="atr_elementodmg" >Daño elemental: {ELEMENTODMG2}</div>
-	                   <div id="atr_baseDps" >Item Power: {BASEDPS2}</div>
-	                 <div class="pvpatr" title="Personaje vs Personaje">PVP: {PVP2}</div>
-	                <div  class="pkatr" title="Personajes Asesinado">PK: {PK2}</div>
-	            </div>
+	        <div id="inv_stats" class="inv_stats_fix ">
+	        	<div class="statsScrollBoxPjVer scrollChatter">
+                    <div class="statsCItemOnVer" id="atr_baseDps" >Item Power: {GEARPOWER2}</div>
+                     <div class="pvpatr" title="Personaje vs Personaje">PVP: {PVP2}</div>
+                    <div  class="pkatr" title="Personaje Asesinado">PK: {PK2}</div>
+                     <hr>
+	                 <div class="statsCVida" id="atr_VidaLimit">Vida: {VIDA_L_P2}</div>
+                    <div class="statCMana" id="atr_ManaLimit">Mana: {MANA_L_P2}</div>
+                    <div class="statCAtaque" id="atr_Ataque">Ataque: {ATA_P2}</div>
+                   <div  class="statCAtaque" id="atr_AtaqueMagico">Ataq. Magico: {ATA_M_P2}</div>
+                    <div id="atr_Defensa">Defensa: {DEF_P2}</div>
+                     <div id="atr_DefensaMagica">Def. Magica: {DEF_M_P2}</div>
+                     <div class="statCevasion" id="atr_Evasion">Evasion Chance: {EVA_P2}%</div>
+                     <div class="statCcritico" id="atr_Critico">Critico: {CR_P2}%</div>
+                    <div class="statCcritico" id="atr_PC" title="Poder Critico">PC: {PC_P2}%</div>
+                    <div class="statCcriticoMagico" id="atr_CriticoMagico">Critico Magico: {CR_M_P2}%</div>
+                    <div  class="statCcriticoMagico" id="atr_PCMagico" title="Poder Critico Magico">PCM: {PC_M_P2}%</div>
+                    <hr>
+                	<div class="statsCVida" id="atr_hpRegen" title="Regeneracion de Vida" >Reg Vida: {HPREGEN_P2}</div>
+                    <div class="statCMana" id="atr_mpRegen" title="Regeneracion de Mana" >Reg Mana: {MPREGEN_P2}</div>
+        			 <div class="statCvelCast" id="atr_atkSpeed" title="Velelocidad de Ataque" >Vel. de Ataque: {ATKSPEED2}seg</div>
+                      <div class="statCvelCast" id="atr_castSpeed"itle="Velelocidad de Casteo" >Vel. de Casteo: {CASTSPEED2}seg</div>
+                       <div class="statCelement" id="atr_elemento" >Elemento: {ELEMENTO2}</div>
+                       <div class="statCelement" id="atr_elementodmg" >Daño elemental: {ELEMENTODMG2}</div>
+                        <div class="statsCresist" id="atr_ResFire" title="Resistencia Fire">Res Fire: {RFire}%({ResFireFull}%)</div>
+                    <div class="statsCresist" id="atr_ResWater" title="Resistencia Water">Res Water: {RWater}%({ResWaterFull}%)</div>
+                    <div class="statsCresist" id="atr_ResEarth" title="Resistencia Earth">Res Earth: {REarth}%({ResEarthFull}%)</div>
+                    <div class="statsCresist" id="atr_ResWind" title="Resistencia Wind">Res Wind: {RWind}%({ResWindFull}%)</div>
+                    <div class="statsCresist" id="atr_ResDark" title="Resistencia Dark">Res Dark: {RDark}%({ResDarkFull}%)</div>
+                    <div class="statsCresist" id="atr_ResHoly" title="Resistencia Holy">Res Holy: {RHoly}%({ResHolyFull}%)</div>
+                    
+                <br>
 	        </div>
+	    </div>
 
 			<div id="runasBox" class="runasBox_fix">
 					<div id="runa_1">

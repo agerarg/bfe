@@ -780,11 +780,12 @@ if($Enchanter>6)
 											manoDerecha = ".$manoDerecha."
 											WHERE idInventario = ".$item['idInventario']);
 										$data["error"] = 0;
-										
+										unset($_SESSION['PJITEM']);
 										$data['newstats'] = checkStats($pj['STR'],$pj['CON'],$pj['DEX'],$pj['WIT'],$pj['INTEL'],$pj['MEN'],$pj['nivel'],$pj['idPersonaje']);
 										$db->sql_query("UPDATE personaje SET
 											baseDPS = '".$data['newstats']['baseDPS']."'
 											WHERE idPersonaje = ".$log->get("pjSelected"));
+										
 									///////////////////////////////////////////////////////////////////////////////////////	
 									}
 								}
