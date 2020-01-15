@@ -207,7 +207,7 @@ if($pj['antiBot']>$now)
 										$query = 'SELECT p.idPersonaje, p.nombre, p.Vida,
 										p.resist_fire, p.resist_water, p.resist_earth, p.resist_wind, p.resist_dark, p.resist_holy
 															FROM personaje p
-													WHERE p.party='.$pj['party'].' AND p.party>0 ORDER BY RAND()';
+													WHERE p.party='.$pj['party'].' AND p.party>0 AND p.Vida>0 ORDER BY RAND()';
 											$targetssq = $db->sql_query($query);	
 											while($player = $db->sql_fetchrow($targetssq))
 											{
