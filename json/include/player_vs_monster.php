@@ -191,6 +191,12 @@ if($pj['antiBot']>$now)
 							
 
 						$mobber = $db->sql_query($query);
+						while($mob = $db->sql_fetchrow($mobber))
+						{
+							$mobberArr[]=$mob;
+						}
+						
+
 
 						if($MonsterAttackAproval)
 						{
@@ -213,28 +219,29 @@ if($pj['antiBot']>$now)
 											{
 
 													$monster['Ataque']=0;
-													while($mob = $db->sql_fetchrow($mobber))
+													//while($mob = $db->sql_fetchrow($mobber))
+													for($i=0; $i<count($mobberArr); $i++)
 													{
 
-														switch ($mob['element']) 
+														switch ($mobberArr[$i]['element']) 
 														{
 														case "fire":
-															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_fire']);
+															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_fire']);
 														break;
 														case "water":
-															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_water']);
+															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_water']);
 														break;
 														case "earth":
-															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_earth']);
+															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_earth']);
 														break;
 														case "wind":
-															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_wind']);
+															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_wind']);
 														break;
 														case "dark":
-															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_dark']);
+															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_dark']);
 														break;
 														case "holy":
-															$monster['Ataque']+=damageResist($mob['Ataque'],$player['resist_holy']);
+															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_holy']);
 														break;
 														}
 														$damageLink= "<div class=perfecthit>".$monster['nombre']." hizo ".$monster['Ataque']." de da&ntilde;o a 
@@ -242,7 +249,7 @@ if($pj['antiBot']>$now)
 														systemLog("party", $damageLink);
 													}
 													//TEST
-													//$monster['Ataque']=10;
+													$monster['Ataque']=10;
 												
 												if($pj['idPersonaje']==$player['idPersonaje'])
 													$vidaModifier-=$monster['Ataque'];
@@ -683,11 +690,12 @@ if($pj['antiBot']>$now)
 								$goldModifier = 0;
 								$expModifier = 0;
 								$championKilled=0;	
-								while($mob = $db->sql_fetchrow($mobber))
+								//while($mob = $db->sql_fetchrow($mobber))
+								for($i=0; $i<count($mobberArr); $i++)
 								{
+									
 
-
-									$currentLife = $mob['currentLife']-$danoFinalPuro+$monsterHeal;
+									$currentLife = $mobberArr[$i]['currentLife']-$danoFinalPuro+$monsterHeal;
 									
 									if($currentLife<=0)
 									{
@@ -695,9 +703,9 @@ if($pj['antiBot']>$now)
 					                   $monster['gold']=0;
                                        $monster['exp']=0;
 
-											$monster['gold']= Monster_gold($mob['nivel'],$mob['exp']);
+											$monster['gold']= Monster_gold($mobberArr[$i]['nivel'],$mobberArr[$i]['exp']);
 											
-											$monster['exp'] = Monster_experience($mob['nivel'],$mob['exp']);
+											$monster['exp'] = Monster_experience($mobberArr[$i]['nivel'],$mobberArr[$i]['exp']);
 																					
 											if($mob['champion']==1)
 											{
@@ -716,7 +724,7 @@ if($pj['antiBot']>$now)
 										$nEnemy++;
 										$goldAndExp=1;
 										$allowDrop=1;
-										$db->sql_query("DELETE FROM inmundo WHERE idInMundo = '".$mob['idInMundo']."'");
+										$db->sql_query("DELETE FROM inmundo WHERE idInMundo = '".$mobberArr[$i]['idInMundo']."'");
 										
 									}
 									else

@@ -1616,7 +1616,7 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		$pj['Ataque']=intval($pj['Ataque']);
 		//TEST
 		//$pj['Ataque']+= potenciar(potenciar(12077270,859),800)  ;
-		//$pj['PSpeed']=10;
+		//$pj['PSpeed']=3;
 		//$pj['Defensa']+=99999;
 		//$pj['Critico'] = 100;
 		//$pj['ManaShield']+=30;
