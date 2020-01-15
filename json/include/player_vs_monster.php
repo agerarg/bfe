@@ -2,6 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////// Script By Ager [ager.arg@gmail.com] ///////////////////
 /////////////////////////////////////////////////////////////////////////////////////
+$testing=false;
 $cancelMonsterAutoAttack=1;
 /*$query = 'SELECT * FROM monster
 							WHERE idMonster = '.$check['idMonster'].'';
@@ -249,7 +250,8 @@ if($pj['antiBot']>$now)
 														systemLog("party", $damageLink);
 													}
 													//TEST
-													//$monster['Ataque']=10;
+													if($testing)
+													$monster['Ataque']=10;
 												
 												if($pj['idPersonaje']==$player['idPersonaje'])
 													$vidaModifier-=$monster['Ataque'];
@@ -716,11 +718,6 @@ if($pj['antiBot']>$now)
 										
                                         $goldModifier += $monster['gold'];
 										$expModifier += $monster['exp'];
-										switch ( $monster['monsterType']) {
-											case 'perfect':
-												$expModifier*10;
-											break;
-											}
 										$nEnemy++;
 										$goldAndExp=1;
 										$allowDrop=1;
@@ -802,7 +799,11 @@ if($pj['antiBot']>$now)
 									$expModifier = (int)$expModifier*2;
 									$goldModifier  = (int)$goldModifier*2;
 
-
+									switch ( $monster['monsterType']) {
+											case 'perfect':
+												$expModifier=$expModifier*5;
+											break;
+											}
 
 
 									if($pj['party']>0 && ($mundo['extraInfo']==1 || $monster['raid'] || $dungeon['conquest']>0))
