@@ -608,7 +608,6 @@ function itemDestructor(id,mano=0)
 					{
 						itemsCatch[id]['show'] = false;
 					showItemList();
-					
 			$.ajax({
 					data: "id="+itemsCatch[id]['idInventario']+"&action=poner&mano="+mano,
 					type: "GET",
