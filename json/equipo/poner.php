@@ -652,14 +652,11 @@ if($Enchanter>6)
 												$customMsg=true;
 												if($item['cantidad']>0)
 												{
-													if($pj['astralActive']==1)
-													{
 														insertBuff($pj['idPersonaje'],604,448,7200);
 														$data["msg"] = "Ahora estas en el mundo Astral!";
 														$data["someMsg"]=1;
 														$error=0;		
 														delete_item($item['idInventario']);
-													}		
 												}
 												else
 												{
