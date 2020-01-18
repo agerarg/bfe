@@ -607,7 +607,6 @@ function makeDesc(cosasLocas,extra)
 		desc+="<div class=epicItm>"+cosasLocas['textoLoco']+"</div>";	
 	if(cosasLocas['conNombre']==1 && extra == "<br>")
 		 desc+= "<div class=WNAME>Nombre: "+cosasLocas['nameWeapon']+"</div>";
-
 	if(cosasLocas['atributos'] && extra == "<br>" && cosasLocas['tipo']!="crystal" && cosasLocas['tipo']!="egg" && cosasLocas['tipo']!="pot")
 		desc+="Attr:<div class=legdesc>"+cosasLocas['atributos']+"</div>";
 if(cosasLocas['grado']==12)
