@@ -303,6 +303,9 @@ if($pj)
 	if($pj['nivel']>=120)
 	{
 		$mapAllow[]=178;
+		$mapAllow[]=179;
+		$mapAllow[]=180;
+		$mapAllow[]=181;
 		
 	}
 //WARZONE

@@ -137,7 +137,10 @@ function resultados(data,id,time)
 				{
 					jAlert(data['dropMsg'], 'Drop Drop Drop!!!');	
 				}					
-				
+				if(data['refreshOnHit']==1)
+				{
+					refreshChat();
+				}
 				$('#monsterWeakness').text("");
 				switch(data['animation'])
 				{

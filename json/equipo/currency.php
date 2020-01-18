@@ -40,6 +40,7 @@ else
 	WHERE i.tipo = "'.$typee.'"
 	AND inv.usadoPor = '.$log->get("pjSelected").'
 	AND inv.corrupted = 0
+	AND i.grado <= 11
 	AND inv.masterWork = 0
 	AND inv.enVenta = 0'.$sqladd2;
 	$selectItemsq = $db->sql_query($query);

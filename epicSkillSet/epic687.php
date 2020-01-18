@@ -1,0 +1,3 @@
+<?php
+	$guantesAstrales=1;
+?>

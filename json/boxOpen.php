@@ -14,6 +14,7 @@ if($log->check())
 {
 
 		$data['error']=0;
+		$data['AstralKey']=0;
 		$id = intval($_GET['id']);
 		$query = 'SELECT *
 			FROM boxes_player
@@ -22,11 +23,40 @@ if($log->check())
 		$box = $db->sql_fetchrow($boxsq);
 		if($box)
 		{
+			
+
 
 			$data['boxTier']=$box['tier'];
 			$data['special']=$box['especial'];
 			if($box['opened']==0)
 			{
+				if($box['nivel']>=12)
+				{
+
+					$query = 'SELECT inv.idInventario, inv.cantidad
+						FROM inventario inv
+						WHERE inv.idCuenta = '.$log->get("idCuenta").' AND inv.usadoPor = 0 AND inv.enVenta = 0 AND inv.intradeable = 0
+						AND  idItem = 673';
+					$dropsq = $db->sql_query($query);
+					$CraftFromPlayer = $db->sql_fetchrow($dropsq);
+					$raidKeys=(int)$CraftFromPlayer['cantidad'];
+
+					if($raidKeys>0)
+					{
+						$db->sql_query("UPDATE inventario SET
+							cantidad = (cantidad-1)
+							WHERE idItem = 673 AND idCuenta = ".$log->get("idCuenta")."");
+						systemLog("self","Se consumio una Astral Key para abrir el cofre!");
+					}
+					else
+					{
+						$data['error']=1;
+						$data['AstralKey']=1;
+		 				echo json_encode($data);
+		 				die();
+	 				}
+				}
+
 				include("../system/dropBoxInner.php");
 				generateBoxItem($box['tier'],$box['idBox'],$box['nivel'],$box['especial']);
 				generateBoxItem($box['tier'],$box['idBox'],$box['nivel'],$box['especial']);
@@ -39,7 +69,7 @@ if($log->check())
 			}
 
 
-			$query = 'SELECT i.*,inv.*, inv.nivel AS value, inv.text_legend AS atributos
+			$query = 'SELECT i.*,inv.*, inv.nivel AS value, inv.text_legend AS atributos, inv.runa1 AS bonusRuna1, inv.runa2 AS bonusRuna2, inv.runa3 AS bonusRuna3
 			FROM item i JOIN boxes_drop inv USING ( idItem )
 			WHERE inv.idBox = '.$box['idBox'].'';
 			

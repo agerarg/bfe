@@ -238,6 +238,14 @@ $query = 'SELECT p.*, c.STR,c.CON,c.DEX,c.WIT,c.INTEL,c.MEN
 						$baina=1;
 					}
 				break;
+				case "astral":
+					if($mobcity<2)
+					{
+						$pj['party']=$PARTY;
+						$data['mapBoss']=monsterGenMap();
+						$baina=1;
+					}
+				break;
 			case "free":
 					$dayBlock = $now + 600;
 					if($mundo['warTime']>$now)

@@ -283,7 +283,43 @@ armorSetInfo(73,
 "<br>+10"+commonSay['attack']+
 "<br>+1"+commonSay['atkSpeed']);
 
+armorSetInfo(93,
+	"Casco Astral<br>Guantes Astral<br>Botas Astral",
+	"Aumenta el limite de resistencias 1%"+
+	"<br>1 o 2 Bonus de Runa Aleatorio"+
+	"<br>(Con Arma Astral) Tu Critico excedente (mas de 100%) aumenta tu Ataque"+
+	"<br>+15000"+commonSay['hp']+
+	"<br>+700"+commonSay['defBase']+
+	"<br>+900"+commonSay['defMBase']+
+	"<br>+2"+commonSay['atkSpeed']+
+	"<br>+450"+commonSay['attack']+
+	"<br>+20"+commonSay['crit']+
+	"<br>+60"+commonSay['critoPow']+"");
+	
+armorSetInfo(92,
+"Casco Astral<br>Guantes Astral<br>Botas Astral",
+"Aumenta el limite de resistencias 1%"+
+"<br>1 o 2 Bonus de Runa Aleatorio"+
+"<br>(Con Arma Astral) Tu Critico Magico excedente (mas de 100%) aumenta tu Ataque Magico"+
+"<br>+15000"+commonSay['hp']+
+"<br>+700"+commonSay['defBase']+
+"<br>+900"+commonSay['defMBase']+
+"<br>+5"+commonSay['castSpeed']+
+"<br>+450"+commonSay['baseDmgMagic']+
+"<br>+20"+commonSay['critMagico']);
 
+armorSetInfo(91,
+"Casco Astral<br>Guantes Astral<br>Botas Astral",
+"Aumenta el limite de resistencias 1%"+
+"<br>(Con Arma Astral) Tu Critico excedente (mas de 100%) aumenta tu Ataque"+
+"<br>1 o 2 Bonus de Runa Aleatorio"+
+"<br>+15000"+commonSay['hp']+
+"<br>+700"+commonSay['defBase']+
+"<br>+900"+commonSay['defMBase']+
+"<br>+25"+commonSay['crit']+
+"<br>+450"+commonSay['attack']+
+"<br>+5"+commonSay['atkSpeed']+
+"<br>+150"+commonSay['critoPow']);
 
 
 function enchantion(base,enchants)
@@ -333,6 +369,9 @@ function gradoString(sd)
 		case 11:
 			grade="Z";
 		break;
+		case 12:
+			grade="Astral";
+		break;
 	}
 	return grade;
 }
@@ -354,7 +393,9 @@ function itemGrade(lvl)
 	if(lvl>=10)
 		grade="Y";
 	if(lvl>=11)
-		grade="Z";		
+		grade="Z";	
+		if(lvl>=12)
+		grade="Astral";		
 	return grade;
 }
 ///////////////
@@ -569,7 +610,15 @@ function makeDesc(cosasLocas,extra)
 
 	if(cosasLocas['atributos'] && extra == "<br>" && cosasLocas['tipo']!="crystal" && cosasLocas['tipo']!="egg" && cosasLocas['tipo']!="pot")
 		desc+="Attr:<div class=legdesc>"+cosasLocas['atributos']+"</div>";
-
+if(cosasLocas['grado']==12)
+{
+		if(cosasLocas['bonusRuna1']>0)
+		 desc+= "<div class=legdesc>Bonus: "+runaText(cosasLocas['bonusRuna1'],10)+"</div>";
+		if(cosasLocas['bonusRuna2']>0)
+		 desc+= "<div class=legdesc>Bonus: "+runaText(cosasLocas['bonusRuna2'],10)+"</div>";
+		if(cosasLocas['bonusRuna3']>0)
+		 desc+= "<div class=legdesc>Bonus: "+runaText(cosasLocas['bonusRuna3'],10)+"</div>";
+}
 	if(cosasLocas['grado']>2 && extra == "<br>" && cosasLocas['contable']==0 && cosasLocas['tipo']!="crystal" && cosasLocas['tipo']!="egg")
 	{
 		var craft=0;

@@ -40,140 +40,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 		$value+=3;
 	}
 
-	switch($grade)
-	 {
-		 case 12:
-		 	$skilltopPer=40;
-			$elemtopPer=40;
-			
-			$maxSkill3 = 8;
-			$maxSkill5 = 50;
-		 	$maxSkill1 = 60;
-			$maxSkill2 = 85;
-			$maxSkill4 = 750;
-		 break;
-		 case 11:
-		 	$skilltopPer=30;
-			$elemtopPer=30;
-			
-			$maxSkill3 = 16;
-			$maxSkill5 = 40;
-		 	$maxSkill1 = 50;
-			$maxSkill2 = 75;
-			$maxSkill4 = 650;
-		 break;
-		 case 10:
-		 	$skilltopPer=25;
-			$elemtopPer=25;
-			
-			$maxSkill3 = 12;
-			$maxSkill5 = 30;
-		 	$maxSkill1 = 40;
-			$maxSkill2 = 65;
-			$maxSkill4 = 550;
-		 break;
-		  case 9:
-		 	$skilltopPer=23;
-			$elemtopPer=23;
-			
-			$maxSkill3 = 10;
-			$maxSkill5 = 25;
-		 	$maxSkill1 = 35;
-			$maxSkill2 = 60;
-			$maxSkill4 = 500;
-		 break;
-		  case 8:
-		 	$skilltopPer=20;
-			$elemtopPer=20;
-			
-			$maxSkill3 = 8;
-			$maxSkill5 = 20;
-		 	$maxSkill1 = 30;
-			$maxSkill2 = 55;
-			$maxSkill4 = 450;
-		 break;
-		 case 7:
-		 	$skilltopPer=15;
-			$elemtopPer=15;
-			
-			$maxSkill3 = 5;
-			$maxSkill5 = 15;
-		 	$maxSkill1 = 25;
-			$maxSkill2 = 50;
-			$maxSkill4 = 350;
-		 break;
-		 case 1:
-		 	$skilltopPer=5;
-			$elemtopPer=5;
-			
-			$maxSkill3 = 2;
-			$maxSkill5 = 5;
-		 	$maxSkill1 = 10;
-			$maxSkill2 = 25;
-			$maxSkill4 = 150;
-		 break;
-		 case 2:
-		 	$skilltopPer=5;
-			$elemtopPer=5;
-			
-			$maxSkill3 = 2;
-			$maxSkill5 = 5;
-		 	$maxSkill1 = 10;
-			$maxSkill2 = 25;
-			$maxSkill4 = 150;
-		 break;
-		 case 3:
-		 	$skilltopPer=6;
-			$elemtopPer=6;
-			
-			$maxSkill3 = 3;
-			$maxSkill5 = 6;
-		 	$maxSkill1 = 12;
-			$maxSkill2 = 30;
-			$maxSkill4 = 175;
-		 break;
-		 case 4:
-		 	$skilltopPer=7;
-			$elemtopPer=7;
-			
-			$maxSkill3 = 3;
-			$maxSkill5 = 7;
-		 	$maxSkill1 = 11;
-			$maxSkill2 = 30;
-			$maxSkill4 = 200;
-		 break;
-		 case 5:
-		 	$skilltopPer=8;
-			$elemtopPer=8;
-			
-			$maxSkill3 = 4;
-			$maxSkill5 = 8;
-		 	$maxSkill1 = 12;
-			$maxSkill2 = 35;
-			$maxSkill4 = 250;
-		 break;
-		 case 6:
-		 	$skilltopPer=10;
-			$elemtopPer=10;
-			
-			$maxSkill3 = 4;
-			$maxSkill5 = 13;
-		 	$maxSkill1 = 20;
-			$maxSkill2 = 40;
-			$maxSkill4 = 300;
-		 break;
-	 }
-	$acumulate=0;
-	$leyenda="";
-	
-			$skilltopPer=$skilltopPer*$value;
-			$elemtopPer=$elemtopPer*$value;
-			$maxSkill3 = $maxSkill3*$value;
-			$maxSkill5 = $maxSkill5*$value;
-		 	$maxSkill1 = $maxSkill1*$value;
-			$maxSkill2 = $maxSkill2*$value;
-			$maxSkill4 = $maxSkill4*$value;
-	
+	include("tablaAtributos.php");
 	// VALUE
 	
 	
@@ -219,7 +86,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 						if($masterwork)
 							$valor=$maxSkill1*3;
 						else	
-							$valor=mt_rand(10,$maxSkill1);
+							$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -235,7 +102,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 						if($masterwork)
 							$valor=$maxSkill1*3;
 						else
-							$valor=mt_rand(10,$maxSkill1);
+							$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -251,7 +118,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 						if($masterwork)
 							$valor=$maxSkill3*3;
 						else
-							$valor=mt_rand(1,$maxSkill3);
+							$valor=mt_rand(balanceStatMin($maxSkill3),$maxSkill3);
 						$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -267,7 +134,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 						if($masterwork)
 							$valor=$maxSkill3*3;
 						else
-						$valor=mt_rand(1,$maxSkill3);
+						$valor=mt_rand(balanceStatMin($maxSkill3),$maxSkill3);
 						$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -283,7 +150,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 						if($masterwork)
 							$valor=$maxSkill1*3;
 						else
-							$valor=mt_rand(5,$maxSkill1);
+							$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -299,7 +166,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 						if($masterwork)
 							$valor=$maxSkill1*3;
 						else
-						$valor=mt_rand(5,$maxSkill1);
+						$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -313,7 +180,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 					if($masterwork)
 							$valor=$maxSkill2*3;
 						else
-					$valor=mt_rand(20,$maxSkill2);
+					$valor=mt_rand(balanceStatMin($maxSkill2),$maxSkill2);
 					$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -326,7 +193,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 					if($masterwork)
 							$valor=$maxSkill2*3;
 						else
-					$valor=mt_rand(20,$maxSkill2);
+					$valor=mt_rand(balanceStatMin($maxSkill2),$maxSkill2);
 					$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -339,7 +206,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 					if($masterwork)
 							$valor=$maxSkill4*3;
 						else
-					$valor=mt_rand(100,$maxSkill4);
+					$valor=mt_rand(balanceStatMin($maxSkill4),$maxSkill4);
 					$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -352,7 +219,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 					if($masterwork)
 							$valor=$maxSkill4*3;
 						else
-					$valor=mt_rand(100,$maxSkill4);
+					$valor=mt_rand(balanceStatMin($maxSkill4),$maxSkill4);
 					$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -365,7 +232,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 					if($masterwork)
 							$valor=$maxSkill5*3;
 						else
-					$valor=mt_rand(1,$maxSkill5);
+					$valor=mt_rand(balanceStatMin($maxSkill5),$maxSkill5);
 					$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -378,7 +245,7 @@ function randomAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=0
 					if($masterwork)
 							$valor=$maxSkill5*3;
 						else
-					$valor=mt_rand(1,$maxSkill5);
+					$valor=mt_rand(balanceStatMin($maxSkill5),$maxSkill5);
 					$db->sql_query('INSERT INTO item_attr(idInventario,attrb,valor) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -415,8 +282,23 @@ function createLegendary($especif,$intradeable=0,$idCuenta=0,$clase=0,$value=1,$
 				$pj = $db->sql_fetchrow($pjsq);
 				$clase = $pj['idClase'];
 			}
+	$runaSkill1=0;
+	$runaSkill2=0;
+	$runaSkill3=0;
+	if($res['grado']==12 && $res['armorset']>0)
+	{
+		$query = 'SELECT idItem FROM item WHERE i.tipo = "runa"  ORDER BY RAND() LIMIT 0,1';
+		$runarndsq = $db->sql_query($query);
+		$runa = $db->sql_fetchrow($runarndsq);
+		$runaSkill1=$runa['idItem'];
+		$query = 'SELECT idItem FROM item WHERE tipo = "runa" AND idItem!='.$runaSkill1.'  ORDER BY RAND() LIMIT 0,1';
+		$runarndsq = $db->sql_query($query);
+		$runa = $db->sql_fetchrow($runarndsq);
+		$runaSkill2=$runa['idItem'];
+	}
 
-	$db->sql_query('INSERT INTO inventario(idItem,idCuenta,cantidad,intradeable,legendary,value,lvlAstral,masterWork) VALUES("'.$res['idItem'].'","'.$idCuenta.'",1,'.$intradeable.',1,'.$value.','.$astralLvl.','.$masterwork.')');
+	$db->sql_query('INSERT INTO inventario(idItem,idCuenta,cantidad,intradeable,legendary,value,lvlAstral,masterWork,bonusRuna1,bonusRuna2,bonusRuna3) 
+		VALUES("'.$res['idItem'].'","'.$idCuenta.'",1,'.$intradeable.',1,'.$value.','.$astralLvl.','.$masterwork.','.$runaSkill1.','.$runaSkill2.','.$runaSkill3.')');
 
 	$query = 'SELECT max(idInventario) AS ID FROM inventario WHERE idCuenta = '.$idCuenta.'';	
 	$itemsq = $db->sql_query($query);

@@ -1,0 +1,3 @@
+<?php
+	$armaAstral=1;
+?>

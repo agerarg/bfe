@@ -19,6 +19,8 @@ skillSetInfo(419,1,"Casting Pot Buff","pot/velcastpot.jpg","Aumenta tu Velocidad
 skillSetInfo(420,1,"Vida Limit Pot Buff","pot/vidalimipot.jpg","Aumenta tu Limite de Vida +3000");
 
 skillSetInfo(433,1,"Bendición de Odin","odin.jpg","Aumenta tu Ataque en 10k, Ataque magico en 5k, Critico y Critico magico 100%, Defensas en 2k");
+
+skillSetInfo(448,1,"Astral Pass","astral.jpg","Puedes acceder a mapas Astrales");
 //SUBCLASS
 skillSetInfo(430,1,"Boost HP","subclass/boostHp.jpg","Aumenta tu vida en 20%.");
 skillSetInfo(430,2,"Boost HP 2","subclass/boostHp.jpg","Aumenta tu vida en 40%.");

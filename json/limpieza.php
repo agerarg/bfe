@@ -54,9 +54,20 @@ if($log->check())
 			$materialID= 450; //craft Z
 			$materialName="Craft Z";
 		break;
+		case 10:
+			$sqlAdds ="i.grado = 12";
+			$materialID= 692; //craft Astral
+			$materialName="Craft Astral";
+		break;
 		default:
 			die();
 		break;
+	}
+	$legOn = (int)$_GET['leg'];
+	$sqlLeg = " AND value <= 3";
+	if($legOn==1)
+	{
+		$sqlLeg = " AND value <= 4";
 	}
 	$query = 'SELECT inv.idInventario , inv.value, i.tipo, i.grado
 			FROM inventario inv JOIN item i USING ( idItem )
@@ -65,6 +76,7 @@ if($log->check())
 			AND masterWork = 0
 			AND enVenta = 0
 			AND contable = 0
+			'.$sqlLeg.'
 			AND idCuenta = '.$log->get("idCuenta");
 			
 			$checkitemsq = $db->sql_query($query);

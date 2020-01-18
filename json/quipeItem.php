@@ -25,7 +25,7 @@ if($log->check())
 {
 		$id = (int)$_GET['id'];
 		$mano = (int)$_GET['mano'];
-		$query = 'SELECT p.SubClassFrom, p.inDungeon, p.Vida, p.boludo, p.idCuenta, p.nombre, p.idPersonaje, p.nivel, p.idPersonaje, p.idClase, p.nivel, c.STR,c.CON,c.DEX,c.WIT,c.INTEL,c.MEN 
+		$query = 'SELECT p.astralActive ,p.SubClassFrom, p.inDungeon, p.Vida, p.boludo, p.idCuenta, p.nombre, p.idPersonaje, p.nivel, p.idPersonaje, p.idClase, p.nivel, c.STR,c.CON,c.DEX,c.WIT,c.INTEL,c.MEN 
 			FROM personaje p JOIN clase c USING ( idClase )
 			WHERE p.idCuenta = '.$log->get("idCuenta").' AND p.idPersonaje = '.$log->get("pjSelected").' AND p.rankedPlaing = 0';
 		$pj = $db->sql_fetchrow($db->sql_query($query));
@@ -55,18 +55,36 @@ if($log->check())
 		 	switch($_GET['action'])
 			{
 				case 'poner':
-					include('equipo/poner.php');
+					if($item['enVenta']==1)
+					{
+						$data["error"] = "El item esta en venta.";
+						$error=1;
+					}
+					else
+						include('equipo/poner.php');
 				break;
 				case 'sacar':
 					include('equipo/sacar.php');	
 				break;
 				case 'regalar':
+				if($item['enVenta']==1)
+					{
+						$data["error"] = "El item esta en venta.";
+						$error=1;
+					}
+					else
 					include('equipo/regalar.php');	
 				break;
 				case 'venderReal':
 					include('equipo/venderReal.php');	
 				break;
 				case 'borrar': // ROMPER
+				if($item['enVenta']==1)
+					{
+						$data["error"] = "El item esta en venta.";
+						$error=1;
+					}
+					else
 					include('equipo/borrar.php');	
 				break;
 				case 'vender':
@@ -76,6 +94,12 @@ if($log->check())
 					include('equipo/venderCancelar.php');
 				break;
 				case 'currency':
+				if($item['enVenta']==1)
+					{
+						$data["error"] = "El item esta en venta.";
+						$error=1;
+					}
+					else
 					include('equipo/currency.php');
 				break;
 			}

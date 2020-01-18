@@ -1,0 +1,3 @@
+<?php
+		$cascoAstral=1;
+?>

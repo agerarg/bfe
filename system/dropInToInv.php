@@ -12,12 +12,13 @@ function addItemToInv($item)
 	}
 	else
 	{
-		$db->sql_query('INSERT INTO inventario(idItem,idCuenta,value,atributos,extraLevel) 
+
+		$db->sql_query('INSERT INTO inventario(idItem,idCuenta,value,atributos,extraLevel,bonusRuna1,bonusRuna2,bonusRuna3) 
 			VALUES("'.$item['idItem'].'",
 			"'.$log->get("idCuenta").'",
 			'.$item['nivel'].',
 			"'.$item['text_legend'].'",
-			'.$item['extraLevel'].')');
+			'.$item['extraLevel'].','.$item['runa1'].','.$item['runa2'].','.$item['runa3'].')');
 
 		$query = 'SELECT max(idInventario) AS ID FROM inventario';	
 		$itemsq = $db->sql_query($query);

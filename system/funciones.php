@@ -14,6 +14,15 @@ if(SWORDON != 1)
 	header("Location: index.php");
 	die();
 }
+function balanceStatMin($start)
+{
+	if($start<=0)
+		$start=2;
+	$b = $start/2;
+	if($b<1)
+		$b=1;
+	return $b;
+}
 function getRandomElem()
 {
 	$elem="none";
@@ -116,7 +125,7 @@ function monsterGenMap()
 												}
 											}
 											$eliteAviable=true;
-											if($mundo['id']==178)
+											if($mundo['id']==178 OR $mundo['id']==179)
 											{
 												$eliteAviable=false;
 											}
@@ -829,12 +838,14 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		$pj['dificultyLvl'] = 1;
 		$pj['VidaLimit'] = 100;
 		$pj['ManaLimit'] = 100;
-		
+		$pj['ResistLimit']=75;
 		$pj['shieldDef']=0;
 		//unset($_SESSION['PJITEM']);
 		if($PJID==$log->get("pjSelected") AND isset($_SESSION['PJITEM']))
 		{
 			$pj=$_SESSION['PJITEM'];
+			if(!$pj['ResistLimit'])
+				$pj['ResistLimit']=75;
 			$idFoot = $_SESSION['PJITEM_idFoot'];
 			$idGloves = $_SESSION['PJITEM_idGloves'];
 			$idHead = $_SESSION['PJITEM_idHead'];
@@ -852,7 +863,7 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		//CHEKEO ITEMS
 		else
 		{
-		$query = 'SELECT i.*,inv.masterWork, inv.manoDerecha,inv.extraLevel,inv.value, inv.enchant, inv.SAchar, inv.SA, ia.attrb, ia.valor, inv.idInventario, inv.manoIzquierda, inv.conNombre, inv.nameCheck, inv.nameTimeTry, inv.trucho, inv.lvlAstral
+		$query = 'SELECT i.*,inv.bonusRuna1, inv.bonusRuna2, inv.bonusRuna3, inv.masterWork, inv.manoDerecha,inv.extraLevel,inv.value, inv.enchant, inv.SAchar, inv.SA, ia.attrb, ia.valor, inv.idInventario, inv.manoIzquierda, inv.conNombre, inv.nameCheck, inv.nameTimeTry, inv.trucho, inv.lvlAstral
 				FROM item i JOIN inventario inv USING ( idItem ) LEFT JOIN item_attr ia on ia.idInventario = inv.idInventario 
 				WHERE inv.usadoPor = '.$PJID.' ORDER BY inv.idInventario';
 		$itemsq = $db->sql_query($query);
@@ -876,6 +887,14 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 			}
 			if($noRepeat!=$item['idInventario'])
 			{
+				if($item['epic'])
+				{
+					if(file_exists("epicSkillSet/epic".$item['idItem'].".php"))
+							@include("epicSkillSet/epic".$item['idItem'].".php");
+						else
+							@include("../epicSkillSet/epic".$item['idItem'].".php");
+				}
+
 			    $gear += ($item['grado']*100)+($item['enchant']*$item['enchant']*$item['enchant']);
 			    if($item['masterWork'])
 			    	$gear += $item['grado']*10;
@@ -896,6 +915,9 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 					$armorSet[$item['armorset']]['setId'] = $item['armorset'];
 					if($PJID==$log->get("pjSelected"))
 					$_SESSION['PJITEM_armorset']=$armorSet;
+					$pj['armor_bonusRuna1']=$item['bonusRuna1'];
+					$pj['armor_bonusRuna2']=$item['bonusRuna2'];
+					$pj['armor_bonusRuna3']=$item['bonusRuna3'];
 				}
 				//Special Ability	
 				if($item['SA']==1  AND $item['manoIzquierda']==0)
@@ -1087,6 +1109,7 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		$pj['ShockResist'] = 0;
 		$pj['Defensa'] += $defensa;
 		$pj['DefensaMagica'] += $Mdefensa;
+		$pj['evasion']+=0;
 		$pj['Critico'] += 0;
 		$pj['CriticoMagico'] += 0 + $bonusCriticoMagico;
 		$pj['PC'] += 25;
@@ -1534,7 +1557,25 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 			$pj['VidaLimit'] = potenciar($pj['VidaLimit'],($godLevel['godlvlVida']*5));	
 		}
 		
+
+		if($pj['ArmaAstralOn']==1)
+		{
+			if($pj['Critico']>100)
+			{
+				$rest = $pj['Critico']-100;
+				$rest = (int)$rest/10;
+				$pj['Ataque'] = potenciar($pj['Ataque'],$rest);
+			}
+			if($pj['CriticoMagico']>100)
+			{
+				$rest = $pj['CriticoMagico']-100;
+				$rest = (int)$rest/10;
+				$pj['AtaqueMagico'] = potenciar($pj['AtaqueMagico'],$rest);
+			}
+		}
+
 		//Resistences
+		//$pj['ResAll']=100;
 		$pj['ResFire'] += $pj['ResAll'];
 		$pj['ResWater'] += $pj['ResAll'];
 		$pj['ResEarth'] += $pj['ResAll'];
@@ -1550,18 +1591,19 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		$pj['ResHolyFull'] = $pj['ResHoly'];
 
 		//Limit
-		if($pj['ResFire']>75)
-			$pj['ResFire']=75;
-		if($pj['ResWater']>75)
-			$pj['ResWater']=75;
-		if($pj['ResEarth']>75)
-			$pj['ResEarth']=75;
-		if($pj['ResWind']>75)
-			$pj['ResWind']=75;
-		if($pj['ResDark']>75)
-			$pj['ResDark']=75;
-		if($pj['ResHoly']>75)
-			$pj['ResHoly']=75;
+		if($pj['ResFire']>$pj['ResistLimit'])
+			$pj['ResFire']=$pj['ResistLimit'];
+		if($pj['ResWater']>$pj['ResistLimit'])
+			$pj['ResWater']=$pj['ResistLimit'];
+		if($pj['ResEarth']>$pj['ResistLimit'])
+			$pj['ResEarth']=$pj['ResistLimit'];
+		if($pj['ResWind']>$pj['ResistLimit'])
+			$pj['ResWind']=$pj['ResistLimit'];
+		if($pj['ResDark']>$pj['ResistLimit'])
+			$pj['ResDark']=$pj['ResistLimit'];
+		if($pj['ResHoly']>$pj['ResistLimit'])
+			$pj['ResHoly']=$pj['ResistLimit'];
+
 
 		//SSVINGGEAR TO SERVER
 		$pj['GearPower'] = $gear;
@@ -1615,7 +1657,7 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 
 		$pj['Ataque']=intval($pj['Ataque']);
 		//TEST
-		//$pj['Ataque']+= potenciar(potenciar(12077270,859),800)  ;
+		//$pj['Ataque']+= potenciar(potenciar(12077270,859),1000)  ;
 		//$pj['PSpeed']=3;
 		//$pj['Defensa']+=99999;
 		//$pj['Critico'] = 100;

@@ -88,9 +88,12 @@ function generateBoxItem($boxTier,$idBox,$grado,$especial=0)
 		$_SESSION['gotConsum']=true;
 	}
 	else
+	{
+
 		$query = 'SELECT i.Nombre, i.contable, i.leg, i.idItem, i.subtipo
 			FROM item i
 			WHERE (('.$runaSql.') OR (droppeable=1 AND grado='.$grado.' AND tier=0) '.$newbieSql.') '.$bansql.' ORDER BY RAND() LIMIT 0,1';
+	}
 	
 	switch($especial)
 	{
@@ -100,6 +103,13 @@ function generateBoxItem($boxTier,$idBox,$grado,$especial=0)
 			FROM item i
 			WHERE ( i.idItem = 615 OR i.idItem = 618 OR i.idItem = 617 OR i.idItem = 616 OR i.idItem = 614 OR (i.tipo = "runa" AND 2 > '.$rnd.') ) ORDER BY RAND() LIMIT 0,1';
 		break;
+	}
+
+	if($grado>=12)
+	{
+		$query = 'SELECT i.Nombre, i.contable, i.leg, i.idItem, i.subtipo
+			FROM item i
+			WHERE droppeable=1 AND grado='.$grado.' AND tier=0 ORDER BY RAND() LIMIT 0,1';
 	}
 
 	$dropssq = $db->sql_query($query);
@@ -297,7 +307,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 						$attaqueFree=false;
 						$buffGiven++;
 						$attr="Ataque";
-						$valor=mt_rand(10,$maxSkill1);
+						$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill1.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -310,7 +320,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 						$attaqueMagicFree=false;
 						$buffGiven++;
 						$attr="AtaqueMagico";
-						$valor=mt_rand(10,$maxSkill1);
+						$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill1.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -323,7 +333,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 						$criticalFree=false;
 						$buffGiven++;
 						$attr="Critico";
-						$valor=mt_rand(1,$maxSkill3);
+						$valor=mt_rand(balanceStatMin($maxSkill3),$maxSkill3);
 						$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill3.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -336,7 +346,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 						$CriticoMagicoFree=false;
 						$buffGiven++;
 						$attr="CriticoMagico";
-						$valor=mt_rand(1,$maxSkill3);
+						$valor=mt_rand(balanceStatMin($maxSkill3),$maxSkill3);
 						$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill3.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -349,7 +359,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 						$PCFree=false;
 						$buffGiven++;
 						$attr="PC";
-						$valor=mt_rand(5,$maxSkill1);
+						$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill1.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -362,7 +372,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 						$PCMagicoFree=false;
 						$buffGiven++;
 						$attr="PCMagico";
-						$valor=mt_rand(5,$maxSkill1);
+						$valor=mt_rand(balanceStatMin($maxSkill1),$maxSkill1);
 						$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill1.'")');
 						$leyenda .= $attr." +".$valor." <br>";
 					}
@@ -373,7 +383,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 					$DefensaFree=false;
 					$buffGiven++;
 					$attr="Defensa";
-					$valor=mt_rand(20,$maxSkill2);
+					$valor=mt_rand(balanceStatMin($maxSkill2),$maxSkill2);
 					$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill2.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -383,7 +393,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 					$DefensaMagicaFree=false;
 					$buffGiven++;
 					$attr="DefensaMagica";
-					$valor=mt_rand(20,$maxSkill2);
+					$valor=mt_rand(balanceStatMin($maxSkill2),$maxSkill2);
 					$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill2.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -393,7 +403,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 					$VidaLimitFree=false;
 					$buffGiven++;
 					$attr="VidaLimit";
-					$valor=mt_rand(100,$maxSkill4);
+					$valor=mt_rand(balanceStatMin($maxSkill4),$maxSkill4);
 					$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill4.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -403,7 +413,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 					$ManaLimitFree=false;
 					$buffGiven++;
 					$attr="ManaLimit";
-					$valor=mt_rand(100,$maxSkill4);
+					$valor=mt_rand(balanceStatMin($maxSkill4),$maxSkill4);
 					$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill4.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -413,7 +423,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 					$HpRegenFree=false;
 					$buffGiven++;
 					$attr="HpRegen";
-					$valor=mt_rand(1,$maxSkill5);
+					$valor=mt_rand(balanceStatMin($maxSkill5),$maxSkill5);
 					$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill5.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -423,7 +433,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 					$MpRegenFree=false;
 					$buffGiven++;
 					$attr="MpRegen";
-					$valor=mt_rand(1,$maxSkill5);
+					$valor=mt_rand(balanceStatMin($maxSkill5),$maxSkill5);
 					$db->sql_query('INSERT INTO boxes_attr(idBoxDrop,attrb,valor,idBox,maxVal) VALUES("'.$itemId.'","'.$attr.'","'.$valor.'","'.$idBox.'","'.$maxSkill5.'")');
 					$leyenda .= $attr." +".$valor." <br>";
 				}
@@ -444,7 +454,7 @@ function randomAttrb($itemId,$grade,$type,$value,$idBox)
 function createDrop($especif,$idBox,$tier,$dropGrado,$especial)
 {
 	global $db,$log;
-
+	
 	if($especif)
 		{
 			$query = 'SELECT * FROM item WHERE idItem='.$especif.'';
@@ -461,19 +471,35 @@ function createDrop($especif,$idBox,$tier,$dropGrado,$especial)
 			$dropGrado=mt_rand(7,10);
 		break;
 	}
-
-	$db->sql_query('INSERT INTO boxes_drop(idItem,idBox,nivel,extraLevel) 
-		VALUES("'.$res['idItem'].'","'.$idBox.'",'.$tier.','.$dropGrado.')');
+		$runaSkill1=0;
+		$runaSkill2=0;
+		$runaSkill3=0;
+		if($res['idItem']==689 || $res['idItem']==685 || $res['idItem']==684 )
+		{
+			$query = 'SELECT idItem FROM item WHERE tipo = "runa"  ORDER BY RAND() LIMIT 0,1';
+			$runarndsq = $db->sql_query($query);
+			$runa = $db->sql_fetchrow($runarndsq);
+			$runaSkill1=$runa['idItem'];
+			if(mt_rand(1,2)==2)
+			{
+				$query = 'SELECT idItem FROM item WHERE tipo = "runa" AND idItem!='.$runaSkill1.'  ORDER BY RAND() LIMIT 0,1';
+				$runarndsq = $db->sql_query($query);
+				$runa = $db->sql_fetchrow($runarndsq);
+				$runaSkill2=$runa['idItem'];
+			}
+		}
+		
+	$db->sql_query('INSERT INTO boxes_drop(idItem,idBox,nivel,extraLevel,runa1,runa2,runa3) 
+		VALUES("'.$res['idItem'].'","'.$idBox.'",'.$tier.','.$dropGrado.','.$runaSkill1.','.$runaSkill2.','.$runaSkill3.')');
 
 	$query = 'SELECT max(idBoxDrop) AS ID FROM boxes_drop';	
 	$itemsq = $db->sql_query($query);
 	$maxId = $db->sql_fetchrow($itemsq);
 	
-
-	//Random attributes
-	//echo 'randomAttrb('.$maxId['ID'].','.$grade.','.$type.','.$clase.')';
-	$temp = randomAttrb($maxId['ID'],$grade,$type,$tier,$idBox,$maxVal);
-	
+	if(!($res['contable']==1 || $res['tipo']=="runa" || $res['tipo']=="stone"|| $res['tipo']=="enchant"))
+	{
+		$temp = randomAttrb($maxId['ID'],$grade,$type,$tier,$idBox,$maxVal);
+	}
 	return $maxId['ID']; 
 	}
 	else

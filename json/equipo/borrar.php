@@ -89,8 +89,8 @@ if($item['trade']==1)
 									systemLog("self",$msg);
 									break;
 									 case 12:
-									add_item(450,$romperCant,false);
-									 $msg = "Consiguio ".$romperCant."  Craft Z";
+									add_item(692,$romperCant,false);
+									 $msg = "Consiguio ".$romperCant."  Craft Astral";
 									systemLog("self",$msg);
 									break;
 								}

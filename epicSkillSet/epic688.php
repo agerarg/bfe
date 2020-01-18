@@ -1,0 +1,3 @@
+<?php
+	$botasAstrales=1;
+?>

@@ -28,7 +28,7 @@ switch ($_GET['t']) {
 		$cant = (int)$_GET['cant'];
 
 		$check = $cant%100;
-		if($check==0 && $cant>0 && $cant<100000 && $tier>=3 && $tier<=9)
+		if($check==0 && $cant>0 && $cant<100000 && $tier>=3 && $tier<=10)
 		{
 			$matId = 0;
 			$ratio = 0;
@@ -60,6 +60,10 @@ switch ($_GET['t']) {
 				case 9:
 					$matId = 450;
 					$ratio = 10;
+				break;
+				case 10:
+					$matId = 692;
+					$ratio = 20;
 				break;
 			}
 
@@ -155,6 +159,12 @@ switch ($_GET['t']) {
 			case 9:
 				$price = 30;
 				$realGrade = 11;
+				$minCant=2;
+				$maxCant=4;
+			break;
+			case 10:
+				$price = 40;
+				$realGrade = 12;
 				$minCant=2;
 				$maxCant=4;
 			break;
@@ -332,6 +342,33 @@ switch ($_GET['t']) {
 			$data['error_msg']="Item Updated!";
 		}
 
+	break;
+	case "astralkeys":
+		$cantidad = (int)$_GET['cant'];
+		$chaos=5;
+		$price = $chaos*$cantidad ;
+		$data['error']=0;
+		if($price<=0 || $price > 10000)
+		{
+			$data['error']=1;
+			$data['error_msg']="Cantidad incorrecta";
+		}
+		
+		if( GetChaos() <  $price)
+		{
+			$data['error']=1;
+			$data['error_msg']="No tienes suficientes Chaos";
+		}
+		
+		if($data['error']==0)
+		{
+			add_item(673,$cantidad);
+			$db->sql_query("UPDATE inventario SET
+				cantidad = (cantidad-".$price.")
+				WHERE idItem = 614 AND idCuenta = ".$log->get("idCuenta")."");
+			$data['error']=0;
+			$data['error_msg']="Compraste ".$cantidad." Astral Keys!";
+		}
 	break;
 }
 

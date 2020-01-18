@@ -1,6 +1,7 @@
 <?php
 $data["itemTipo"]=$item['tipo'];
 $data["itemSubtipo"]=$item['subtipo'];
+$customMsg=false;
 if($item['Nivel']<=$pj['nivel'] OR $item['epic']==1 AND $pj['nivel']>=40)
 							if($item['ClaseReq']<=$pj['idClase'])
 								{
@@ -225,6 +226,12 @@ if($item['Nivel']<=$pj['nivel'] OR $item['epic']==1 AND $pj['nivel']>=40)
 													
 												switch($item['idItem'])
 												{
+													//Enchant weapon Astral
+													case 691:
+														if($res['grado']==12)
+															$enchantWeapon=true;
+														$data["error"] = "El nivel del arma tiene que ser 120(Grade Astral)!";	
+													break;
 													//Enchant weapon Z
 													case 442:
 														if($res['grado']==11)
@@ -294,6 +301,12 @@ if($item['Nivel']<=$pj['nivel'] OR $item['epic']==1 AND $pj['nivel']>=40)
 														$data["error"] = "El nivel del arma tiene que ser 40 (Grade C)!";	
 													break;
 													//////////////////////////////////////////////////////////////////////////////////////////
+													//Enchant armor Astral
+													case 690:
+														if($res['grado']==12)
+															$enchantArmor=true;
+														$data["error"] = "El nivel de ".$parte." tiene que ser 120 (Grade Astral)!";	
+													break;
 													//Enchant armor Z
 													case 445:
 														if($res['grado']==11)
@@ -635,6 +648,25 @@ if($Enchanter>6)
 										case 'material':
 											switch($item['idItem'])
 											{
+												case 654:
+												$customMsg=true;
+												if($item['cantidad']>0)
+												{
+													if($pj['astralActive']==1)
+													{
+														insertBuff($pj['idPersonaje'],604,448,7200);
+														$data["msg"] = "Ahora estas en el mundo Astral!";
+														$data["someMsg"]=1;
+														$error=0;		
+														delete_item($item['idInventario']);
+													}		
+												}
+												else
+												{
+													$data["msg"] = "No tienes suficientes Lost Gark Heads!";
+													$data["someMsg"]=1;
+												}
+												break;
 												case 672:
 													if($pj['SubClassFrom']>0)
 													{
@@ -671,6 +703,11 @@ if($Enchanter>6)
 									{
 										$data['newstats'] = checkStats($pj['STR'],$pj['CON'],$pj['DEX'],$pj['WIT'],$pj['INTEL'],$pj['MEN'],$pj['nivel'],$pj['idPersonaje']);
 									}
+									if($customMsg)
+									{
+										///nada
+										$data["error"] = 0;
+									}else
 									if($error==0)
 									{
 										// chekeando pasivos

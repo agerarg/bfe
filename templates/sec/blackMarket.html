@@ -40,6 +40,10 @@ checkPrecios = ()=>{
                             num=num*10;
                             $("#obtienesCraftXChaos").text(num+"");
                         break;  
+                         case "10":
+                            num=num*20;
+                            $("#obtienesCraftXChaos").text(num+"");
+                        break;  
 
                     }
 
@@ -53,6 +57,12 @@ CheckOnChaosCant = ()=>{
          if(checkVal==0)
             checkPrecios();
 }
+CheckOnAstralKeyCant = ()=>{
+         var value = parseInt($("#astralkeys_cant").val());
+         var checkVal = value*5;
+         $("#AstralKeyCost").text(checkVal);
+         
+}
 CraftXChaosDone = (data)=>{
     if(data['error']==0)
          jAlert(data['error_msg'], 'Felicidades');
@@ -64,6 +74,7 @@ CraftXChaosDone = (data)=>{
             jAlert("Algo anda mal!", 'Error');
     }
 }
+
 SendCraftXChaos = ()=>{
      var val = parseInt($("#craftxchaos_cant").val());
      var checkVal = val%100;
@@ -92,13 +103,27 @@ UpdateItemDone =(data)=>
 }
 
 SendUpdateItem = ()=>{
-     var tier = $("#UpdateItem").val();
-     var piece = $("#UpdateItem_part").val();
+   var piece = $("#UpdateItem_part").val();
+   var tier = $("#UpdateItem").val();
       $.ajax({
             data: "",
             type: "GET",
             dataType: "json",
             url: "json/blackMarket.php?t=update&tier="+tier+"&piece="+piece,
+            success: function(data){
+                UpdateItemDone(data);
+        }
+        });
+}
+
+SendComprarKeys=()=>{
+   var piece = $("#astralkeys_cant").val();
+      $.ajax({
+            data: "",
+            type: "GET",
+            dataType: "json",
+            
+             url: "json/blackMarket.php?t=astralkeys&cant="+piece,
             success: function(data){
                 UpdateItemDone(data);
         }
@@ -119,6 +144,7 @@ $( document ).ready(function() {
 
     <div class="marketPlace">
          <div class="marketBoxCanv scrollChatter">
+
     <div class="marketBox">
     	<div><img src="images/item/currency/caos.png" /></div>
     	<div> Transaccion Craft X Chaos</div>
@@ -131,9 +157,11 @@ $( document ).ready(function() {
                         <option value="6">100 Craft S por 4 Chaos</option>
                         <option value="7">100 Craft X por 5 Chaos</option>
                         <option value="8">100 Craft Y por 7 Chaos</option>
-                        <option value="9">100 Craft Z por 10 Chaos</option> </select><br>
+                        <option value="9">100 Craft Z por 10 Chaos</option>
+                        <option value="10">100 Craft Astral por 20 Chaos</option> </select><br>
                         Obtienes: <span id="obtienesCraftXChaos">1</span> Chaos<br>
-                        <input type="button" name="env" onclick="SendCraftXChaos()"  class="boxInner" value="Vender"></input></div>
+                        <input type="button" name="env" onclick="SendCraftXChaos()"  class="boxInner" value="Vender"></input>
+         </div>
     </div>
 
     <div class="marketBox">
@@ -145,6 +173,7 @@ $( document ).ready(function() {
                         <option value="7">Item X por 15 Chaos</option>
                         <option value="8">Item Y por 20 Chaos</option>
                         <option value="9">Item Z por 30 Chaos</option> 
+                        <option value="10">Item Astral por 40 Chaos</option> 
                     </select><br>
    <select  class="boxInner"  id="UpdateItem_part">
                         <option value="W1">Arma Izquierda</option>
@@ -157,10 +186,23 @@ $( document ).ready(function() {
                         <option value="necklace">Collar</option>
                         <option value="shield">Escudo</option>
                     </select><br>
-                        <input type="button" name="env" onclick="SendUpdateItem()"  class="boxInner" value="Update"></input></div>
-    </div>
+                        <input type="button" name="env" onclick="SendUpdateItem()"  class="boxInner" value="Update"></input>
+          </div>
+    <div class="marketBox">
+      <div><img src="images/item/material/AstralKey.jpg" /></div>
+      <div>Astral Key</div>
+      <div class="marketCosto"> Cantidad: <input id="astralkeys_cant" oninput="CheckOnAstralKeyCant()" class="boxInner" value="1" type="text" size="3"> 
+            <br> 
+               Costo <span id="AstralKeyCost">5</span> Chaos<br>
+        <input type="button" name="env" onclick="SendComprarKeys()"  class="boxInner" value="Comprar"></input>
+           </div>
+         </div>
 
-    
+
+  </div>
 </div>
+
+
+
     </div>
 </div>

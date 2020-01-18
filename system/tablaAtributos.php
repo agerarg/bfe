@@ -1,15 +1,18 @@
 <?php
 	switch($grade)
     {
+
         case 12:
-            $skilltopPer=40;
-           $elemtopPer=40;
+            $skilltopPer=80;
+           $elemtopPer=80;
            
-           $maxSkill3 = 8;
-           $maxSkill5 = 50;
-            $maxSkill1 = 60;
-           $maxSkill2 = 85;
-           $maxSkill4 = 750;
+           $maxSkill3 = 16;
+           $maxSkill5 = 100;
+            $maxSkill1 = 120;
+           $maxSkill2 = 170;
+           $maxSkill4 = 1600;
+
+           $value=$value+2;
         break;
         case 11:
             $skilltopPer=30;

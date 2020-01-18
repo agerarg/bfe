@@ -5,10 +5,17 @@
 $goFight=0;
 		$cleanbrlocation = explode("<br>",$mundo['nombre']);
 		$template->assign_var('USR_LOCATION', $cleanbrlocation[0]);
-						if($pj['nivel']>=$mundo['nivel'] && $pj['nivel']>($mundo['nivel']+30) && $mundo['nivel']!=90)
+						if($mundo['nivel']==90 && ($pj['nivel']<$mundo['nivel'] || $pj['nivel']>119))
+						{
+							show_message("Solo personajes de nivel 90 - 119 pueden ingresar aqui!",
+							"index.php?sec=mundo");	
+						}
+							else
+						if($pj['nivel']>=$mundo['nivel'] && $pj['nivel']>($mundo['nivel']+30) && $mundo['nivel']!=90 && $mundo['nivel']!=120)
 						{
 							show_message("Solo personajes de nivel ".$mundo['nivel']." - ".($mundo['nivel']+30)." pueden ingresar aqui!",
 							"index.php?sec=mundo");	
+
 						}else
 										if($mundo['tipo']=="free" AND $mundo['warTime']<$now AND $pj['clan']==$mundo['clan'] AND $pj['clan']!=0 )
 										{
@@ -32,6 +39,9 @@ $goFight=0;
 													$tier=3;
 												break;
 												case 80:
+													$tier=4;
+												break;
+												case 120:
 													$tier=4;
 												break;
 												default:

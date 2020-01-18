@@ -962,6 +962,204 @@ runaText = (idRuna,Level)=>{
 			}
 			desc="Incrementa el critico +"+value+"";
 		break;
+		case 693:
+			switch(Level)
+			{
+				case 2:
+		            value=3;
+		        break;
+		        case 3:
+		            value=5;
+		        break;
+		        case 4:
+		            value=7;
+		        break;
+		        case 5:
+		            value=10;
+		        break;		
+		        case 6:
+		            value=12;
+		        break;
+		        case 7:
+		            value=15;
+		        break;	
+		        case 8:
+		            value=17;
+		        break;
+		        case 9:
+		            value=20;
+		        break;
+		        case 10:
+		            value=25;
+		        break;			
+			}
+			desc="Incrementa resistencia a Dark "+value+"% ";
+		break;
+		case 694:
+			switch(Level)
+			{
+				case 2:
+		            value=3;
+		        break;
+		        case 3:
+		            value=5;
+		        break;
+		        case 4:
+		            value=7;
+		        break;
+		        case 5:
+		            value=10;
+		        break;		
+		        case 6:
+		            value=12;
+		        break;
+		        case 7:
+		            value=15;
+		        break;	
+		        case 8:
+		            value=17;
+		        break;
+		        case 9:
+		            value=20;
+		        break;
+		        case 10:
+		            value=25;
+		        break;			
+			}
+			desc="Incrementa resistencia a Earth "+value+"% ";
+		break;
+		case 695:
+			switch(Level)
+			{
+				case 2:
+		            value=3;
+		        break;
+		        case 3:
+		            value=5;
+		        break;
+		        case 4:
+		            value=7;
+		        break;
+		        case 5:
+		            value=10;
+		        break;		
+		        case 6:
+		            value=12;
+		        break;
+		        case 7:
+		            value=15;
+		        break;	
+		        case 8:
+		            value=17;
+		        break;
+		        case 9:
+		            value=20;
+		        break;
+		        case 10:
+		            value=25;
+		        break;			
+			}
+			desc="Incrementa resistencia a Fire "+value+"% ";
+		break;
+		case 696:
+			switch(Level)
+			{
+				case 2:
+		            value=3;
+		        break;
+		        case 3:
+		            value=5;
+		        break;
+		        case 4:
+		            value=7;
+		        break;
+		        case 5:
+		            value=10;
+		        break;		
+		        case 6:
+		            value=12;
+		        break;
+		        case 7:
+		            value=15;
+		        break;	
+		        case 8:
+		            value=17;
+		        break;
+		        case 9:
+		            value=20;
+		        break;
+		        case 10:
+		            value=25;
+		        break;			
+			}
+			desc="Incrementa resistencia a Holy "+value+"% ";
+		break;
+		case 697:
+			switch(Level)
+			{
+				case 2:
+		            value=3;
+		        break;
+		        case 3:
+		            value=5;
+		        break;
+		        case 4:
+		            value=7;
+		        break;
+		        case 5:
+		            value=10;
+		        break;		
+		        case 6:
+		            value=12;
+		        break;
+		        case 7:
+		            value=15;
+		        break;	
+		        case 8:
+		            value=17;
+		        break;
+		        case 9:
+		            value=20;
+		        break;
+		        case 10:
+		            value=25;
+		        break;			
+			}
+			desc="Incrementa resistencia a Water "+value+"% ";
+		break;
+		case 698:
+			switch(Level)
+			{
+				case 2:
+		            value=3;
+		        break;
+		        case 3:
+		            value=5;
+		        break;
+		        case 4:
+		            value=7;
+		        break;
+		        case 5:
+		            value=10;
+		        break;		
+		        case 6:
+		            value=12;
+		        break;
+		        case 7:
+		            value=15;
+		        break;	
+		        case 8:
+		            value=17;
+		        break;
+		        case 9:
+		            value=20;
+		        break;
+		        case 10:
+		            value=25;
+		        break;			
+			}
+			desc="Incrementa resistencia a Wind "+value+"% ";
+		break;
 	}
 	return desc;
 }

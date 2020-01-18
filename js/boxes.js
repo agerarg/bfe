@@ -101,6 +101,15 @@ function CompareMouseOut() {
 
 function boxOpeningDone(data)
 {
+  if(data["error"])
+  {
+    if(data["AstralKey"])
+ jAlert("Necesitas una Astral Key para abrir esta caja, Se puede conseguir en el mapa Exiliados.", 'Error!');
+      else
+    jAlert("Error en abrir caja.", 'Error!');
+  }
+  else
+  {
     itemsCatch = data.litem;
     var i=0;
     var desc="";
@@ -146,6 +155,7 @@ function boxOpeningDone(data)
       }
    //$('.dropItems').cluetip({splitTitle: '|',delayedClose: 0,cursor:'pointer'});
    $("#showItem_box").show("slow");
+ }
 }
 function boxOpening(id)
 {
@@ -227,7 +237,7 @@ checkItems();
     $( "#SD_GET_BUT" ).click(function()
     {
        // alert("boxItemId1:"+boxItemId1+" boxItemId2:"+boxItemId2+" boxItemId3:"+boxItemId3+"boxItemId4:"+boxItemId4+" boxItemId5:"+boxItemId5)
-       // $( "#SD_GET_BUT" ).text("json/boxGetThings.php?box="+boxId+"&item1="+boxItemId1+"&item2="+boxItemId2+"&item3="+boxItemId3+"&item4="+boxItemId4+"&item5="+boxItemId5)
+    //  alert("json/boxGetThings.php?box="+boxId+"&item1="+boxItemId1+"&item2="+boxItemId2+"&item3="+boxItemId3+"&item4="+boxItemId4+"&item5="+boxItemId5)
         if(boxItemId1==0 && boxItemId2==0 && boxItemId3==0 && boxItemId4==0 && boxItemId5==0   )
         {
           jAlert("Elije al menos un item!", 'ERROR: Conseguir items');	

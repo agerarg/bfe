@@ -62,6 +62,9 @@ if($pj['descanso']==0)
 									$goFight=1;
 										switch($mundo['tipo'])
 										{
+											case "astral":
+											include('includes/section/mundo/astral.php');
+											break;
 											case "paragon":
 											include('includes/section/mundo/paragon.php');
 											break;
@@ -228,6 +231,7 @@ if($pj['descanso']==0)
 														$template->set_filenames(array(
 														'content' => 'templates/sec/inmundoRaid.html' )
 													);
+
 													break;
 													case "free":
 														
@@ -689,6 +693,18 @@ if($pj['descanso']==0)
 										width: 52px;
 										height: 66px;  background-image:url('images/retos/".$mundo['estructImg']."')";
 										$mundo['SLtipo']="paragon";
+										$mundo['basic_tipo']=" ".$mundo['nombre'];
+									}
+									if($mundo['tipo']=="astral")
+									{
+										$nameBlow="<div class='cataMap' style='margin-top:15px;'>".$mundo['nombre']."</div>";
+										$mundo['tipo']="";
+										$injertoImg = "	
+										background-repeat:no-repeat;
+										width: 50px;
+										height: 50px;  
+										background-image:url('images/retos/".$mundo['estructImg']."')";
+										$mundo['SLtipo']="astral";
 										$mundo['basic_tipo']=" ".$mundo['nombre'];
 									}
 									if($mundo['tipo']=="cata")

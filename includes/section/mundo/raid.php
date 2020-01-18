@@ -119,10 +119,10 @@
 																$db->sql_query('INSERT INTO  
 																	inmundo(idMonster,tipo,mundo,
 																	currentLife,dificulty,
-																	idInstance,openToClan) 
+																	idInstance,openToClan,element) 
 																VALUES("'.$mob['idMonster'].'","2",
 																	1,"'.$mob['VidaLimit'].'",1,'.$maxId['ID'].',
-																	'.$pj['party'].')');
+																	'.$pj['party'].',"'.getRandomElem().'")');
 																				
 																		
 																		

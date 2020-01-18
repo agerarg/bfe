@@ -16,7 +16,7 @@ $monster = $db->sql_fetchrow($db->sql_query($query));*/
 	$monster['VidaLimit']=$monster['VidaLimit']*3;	
 }*/
 
-
+$data['refreshOnHit']=0;
 $monsterHeal=0;
 $goblinHunt=$pj['goblinHunt'];
 $query = 'SELECT *
@@ -204,6 +204,7 @@ if($pj['antiBot']>$now)
 							//$monster['Ataque']
 							switch ( $monster['monsterType']) {
 							case 'perfect':
+								$data['refreshOnHit']=1;
 								$monsterAttackTrue=false;
 
 								if($monster['attackCooldown']<$now)
@@ -223,29 +224,30 @@ if($pj['antiBot']>$now)
 													//while($mob = $db->sql_fetchrow($mobber))
 													for($i=0; $i<count($mobberArr); $i++)
 													{
-
+														$attackSum=0;
 														switch ($mobberArr[$i]['element']) 
 														{
 														case "fire":
-															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_fire']);
+															$attackSum=damageResist($mobberArr[$i]['Ataque'],$player['resist_fire']);
 														break;
 														case "water":
-															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_water']);
+															$attackSum=damageResist($mobberArr[$i]['Ataque'],$player['resist_water']);
 														break;
 														case "earth":
-															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_earth']);
+															$attackSum=damageResist($mobberArr[$i]['Ataque'],$player['resist_earth']);
 														break;
 														case "wind":
-															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_wind']);
+															$attackSum=damageResist($mobberArr[$i]['Ataque'],$player['resist_wind']);
 														break;
 														case "dark":
-															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_dark']);
+															$attackSum=damageResist($mobberArr[$i]['Ataque'],$player['resist_dark']);
 														break;
 														case "holy":
-															$monster['Ataque']+=damageResist($mobberArr[$i]['Ataque'],$player['resist_holy']);
+															$attackSum=damageResist($mobberArr[$i]['Ataque'],$player['resist_holy']);
 														break;
 														}
-														$damageLink= "<div class=perfecthit>".$monster['nombre']." hizo ".$monster['Ataque']." de da&ntilde;o a 
+														$monster['Ataque']+=$attackSum;
+														$damageLink= "<div class=perfecthit>".$monster['nombre']." hizo ".$attackSum." de da&ntilde;o a 
 														".$player['nombre']."</div>";
 														systemLog("party", $damageLink);
 													}
@@ -821,9 +823,7 @@ if($pj['antiBot']>$now)
 										if($monster['raid'])
 										{
 											$expModifier = bigintval($expModifier*15);
-											$goldModifier  = bigintval($goldModifier*15);
-											systemLog("party","<div class=bossKilling>Mataron al Raid Boss ".$monster['nombre']."!<br>
-											+".$expModifier." de experiencia.<br>+".$goldModifier." de oro.</div>") ;												
+											$goldModifier  = bigintval($goldModifier*15);											
 										}
 										else
 										{
@@ -838,9 +838,10 @@ if($pj['antiBot']>$now)
 													$targetssq = $db->sql_query($query);	
 													$boxDroperino=false;	
 													$boxDropLevel=0;		
+													$contenders="";
 											while($targets = $db->sql_fetchrow($targetssq))
 														{
-														
+														$contenders.="  ".$targets["nombre"];
 													if($monster['customDrop'])
 													{
 														include("../customDeaths/dead".$monster['idMonster'].".php");
@@ -906,13 +907,30 @@ if($pj['antiBot']>$now)
 															case 211:
 																add_item(654,1,$targets["idCuenta"],1);
 															break;
+															case 247://Scorpion king
+																//add_item(654,1,$targets["idCuenta"],1);
+																earnDropBox($monster['dropGrade'],$raidTierDrop,$targets["idPersonaje"]);
+																earnDropBox($monster['dropGrade'],$raidTierDrop,$targets["idPersonaje"]);
+															break;
 
 														}
 														earnDropBox($monster['dropGrade'],$raidTierDrop,$targets["idPersonaje"]);
 														$boxDroperino=true;
 														$boxDropLevel=$monster['dropGrade'];
 													}
-													
+													if($monster['raid'])
+													{
+														switch ($monster['idMonster']) {
+															case 247://Scorpion king
+																systemLog("global",
+																	"<div class=bossKilling>".$contenders." derrotaron a ".$monster['nombre']."!</div>") ;
+															break;
+															default:
+															systemLog("party","<div class=bossKilling>Mataron al Raid Boss ".$monster['nombre']."!<br>
+														+".$expModifier." de experiencia.<br>+".$goldModifier." de oro.</div>") ;
+															break;
+														}											
+													}
 														$expBonusTxt="";
 														$goldBonusTxt="";
 													$expPartyVal=0;

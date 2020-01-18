@@ -1260,11 +1260,19 @@ limpiezaDone=()=>{
 	closeCST("INVlimpiarSelector");
 }
 doLimpieza=()=>{
-	jConfirm('Estas seguro de eliminar todos los items del grado seleccionado?.', 'ELIMINAR ITEMS', function(r) {
+	var legWar="";
+	var legOn=0;
+	if($('#destruirLeg:checked').val()==1)
+	{
+		legWar=" Incluyendo todas las Legendarias";
+		legOn=1;
+	}
+	
+	jConfirm('Estas seguro de eliminar todos los items del grado seleccionado'+legWar+'?', 'ELIMINAR ITEMS', function(r) {
 		if(r)
 		{
 			$.ajax({
-				data: "grado="+$("#LimpiezaItms").val(),
+				data: "grado="+$("#LimpiezaItms").val()+"&leg="+legOn,
 				type: "GET",
 				dataType: "json",
 				url: "json/limpieza.php",
