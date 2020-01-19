@@ -13,7 +13,7 @@ switch($skill['nivel'])
                  $_SESSION['soulImpactUsed']++;
 		$_SESSION['soulImpactUsed']++;
 		
-	$ataque_player = 100 + $stats['AtaqueMagico']*(int)$stats['soulAcumulate']/4;
+	$ataque_player = 100 + $stats['AtaqueMagico']*(int)$stats['soulAcumulate']/4; 
 		
 		$db->sql_query("UPDATE aura SET acumuleitor = 0  WHERE idAura = '".$stats['soulCannonId']."'");
 		$data['aura'][] = array("idSkill"=>20,"lvl"=>1,"auraTimeOut"=>0,"pasive"=>1);

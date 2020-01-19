@@ -911,7 +911,7 @@ if($pj['antiBot']>$now)
 																add_item(653,1,$targets["idCuenta"],1);
 															break;
 															case 211:
-																add_item(654,1,$targets["idCuenta"],1);
+																add_item(654,1,$targets["idCuenta"]);
 															break;
 															case 247://Scorpion king
 																//add_item(654,1,$targets["idCuenta"],1);
