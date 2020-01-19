@@ -15,7 +15,7 @@ include('system/login.php');
 $template = new Template;
 $log = new LOGuser;
 $now = tiempoReal();
-$template->assign_var('RAND',31);//time() 18
+$template->assign_var('RAND',32);//time() 18
 define('ADMIN', 1);
 $mantenimiento=false;
 

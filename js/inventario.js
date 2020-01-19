@@ -126,7 +126,7 @@ function showItemList()
 				{
 					if(filtroTxt=='misc')
 					{
-						if(itemsCatch[i]['tipo']=='currency' || itemsCatch[i]['tipo']=='pot' || itemsCatch[i]['tipo']=='crystal' || itemsCatch[i]['tipo']=='portal' || itemsCatch[i]['tipo']=='enchant' || itemsCatch[i]['tipo']=='material')
+						if(itemsCatch[i]['tipo']=='currency' || itemsCatch[i]['tipo']=='pot' || itemsCatch[i]['tipo']=='crystal' || itemsCatch[i]['tipo']=='portal' || itemsCatch[i]['tipo']=='enchant' || itemsCatch[i]['tipo']=='material' || itemsCatch[i]['tipo']=='card')
 						{
 							if(desde <= n && hasta >= n )
 								$("#objContent"+i).show(500);
