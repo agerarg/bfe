@@ -631,6 +631,9 @@ if($gameCore['war'] && $pj['clan']>0)
 						
 						switch($_GET['sec'])
 						{
+							case 'cards':
+								include('includes/section/cartas.php');
+							break;
 							case 'subclass':
 								include('includes/section/subclass.php');
 							break;
@@ -759,6 +762,9 @@ $_SESSION['soulImpactUsed']=0;
 						
 							switch($_GET['sec'])
 							{
+								case 'cards':
+								include('includes/section/cartas.php');
+							break;
 								case 'salirDungeon':
 									if($pj['inDungeon']==1)
 									{

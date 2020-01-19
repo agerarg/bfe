@@ -59,6 +59,9 @@ function generateBoxItem($boxTier,$idBox,$grado,$especial=0)
 	if($grado>=2 && $grado<=8 && mt_rand(1,50)==25)
 		$runaSql = 'i.tipo = "stone"';
 
+	if($grado>=2 && mt_rand(1,75)==25)
+		$getThis = 'i.tipo = "card"';
+
 
 	//// DROP POCIONES
 	if(mt_rand(1,5)==3)
@@ -89,7 +92,6 @@ function generateBoxItem($boxTier,$idBox,$grado,$especial=0)
 	}
 	else
 	{
-
 		$query = 'SELECT i.Nombre, i.contable, i.leg, i.idItem, i.subtipo
 			FROM item i
 			WHERE (('.$runaSql.') OR (droppeable=1 AND grado='.$grado.' AND tier=0) '.$newbieSql.') '.$bansql.' ORDER BY RAND() LIMIT 0,1';

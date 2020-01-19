@@ -21,6 +21,8 @@ skillSetInfo(420,1,"Vida Limit Pot Buff","pot/vidalimipot.jpg","Aumenta tu Limit
 skillSetInfo(433,1,"Bendición de Odin","odin.jpg","Aumenta tu Ataque en 10k, Ataque magico en 5k, Critico y Critico magico 100%, Defensas en 2k");
 
 skillSetInfo(448,1,"Astral Pass","astral.jpg","Puedes acceder a mapas Astrales");
+skillSetInfo(449,1,"Buff del Support","supportbuff.jpg","Aumenta 150% la experiencia");
+
 //SUBCLASS
 skillSetInfo(430,1,"Boost HP","subclass/boostHp.jpg","Aumenta tu vida en 20%.");
 skillSetInfo(430,2,"Boost HP 2","subclass/boostHp.jpg","Aumenta tu vida en 40%.");
@@ -423,6 +425,7 @@ skillSetInfo(216,1,"Robe Mastery","skeletal/robe.jpg","Incrementa velocidad de c
 skillSetInfo(380,1,"Dark Lord","skeletal/darklord.jpg","Cada vez que te curas aumenta el poder critico x2 en el siguiente golpe.");
 skillSetInfo(381,1,"Sword Push","skeletal/sword.jpg","Suma tu ataque a tu ataque magico.");
 skillSetInfo(443,1,"FastCast","skeletal/fastcast.jpg","Aumenta tu Vel. de Casteo aumenta 50% pero reduce tu Defensa 20% por 5min.");
+skillSetInfo(450,1,"The Darkness","skeletal/manaup.jpg","Aumenta 2 de elemento Dark por Nivel de Personaje.");
 
 //THE EVIL
 skillSetInfo(96,1,"The evil stage 1","skeletal/darkMather2.jpg","Incrementa el Poder Critico Magico un 10");

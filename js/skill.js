@@ -120,6 +120,10 @@ function resultados(data,id,time)
 				MaloId = data['MaloId'];
 				attackAviser(MaloId);
 			}
+			if(data['enddamage']>0 && data['enddamage']<10 && userLevelp<50)
+			{
+				jAlert("Tu daño es muy bajo trata de seleccionar menos objetivos", 'Daño bajo!');	
+			}
 			
 				skilltimer(data['attackCooldown']);
 			if(data['monsterCasting'] && partyId>0)

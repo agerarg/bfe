@@ -71,8 +71,8 @@ var romper ="";
 		$('.setInfo').cluetip({splitTitle: '|',delayedClose: 0});
 		$("div.item_img").draggable({ revert: true });
 		injertoTardio();
-	
 }	
+
 
 function calculoPaginas()
 {
@@ -463,7 +463,21 @@ else
 		var setInfo="";
 		var title="";
 		var idItemTrue=0;
-		$("#"+id).hide();
+		if(parseInt(data['noBorrarItem'])==1)
+		{
+			itemsCatch[id]['show'] = true;
+			itemsCatch[i]['usadoPor']=0;
+			if(itemsCatch[id]['tipo']=="card")
+			{
+				itemsCatch[i]['cantidad']=parseInt(data['cardLeft']);
+				checkItems();
+			}
+
+		}
+		else
+		{
+			$("#"+id).hide();
+		}
 		//openClosedSlots(itemsCatch[id]['tipo']);
 		
 		if(data['auraCheck'])
@@ -890,9 +904,9 @@ function atr_update(statsNew=false)
 		$("#atr_VidaLimit").text("Vida: "+statsNew['VidaLimit']);
 		$("#atr_ManaLimit").text("Mana: "+statsNew['ManaLimit']);
 		$("#atr_Ataque").text("Ataque: "+statsNew['Ataque']);
-		$("#atr_AtaqueMagico").text("Ataque Magico: "+statsNew['AtaqueMagico']);
+		$("#atr_AtaqueMagico").text("Ataq. Magico: "+statsNew['AtaqueMagico']);
 		$("#atr_Defensa").text("Defensa: "+statsNew['Defensa']);
-		$("#atr_DefensaMagica").text("Defensa Magica: "+statsNew['DefensaMagica']);
+		$("#atr_DefensaMagica").text("Def. Magica: "+statsNew['DefensaMagica']);
 		$("#atr_Critico").text("Critico: "+statsNew['Critico']+"%");
 		$("#atr_PC").text("PC: "+statsNew['PC']+"%");
 		$("#atr_CriticoMagico").text("Critico Magico: "+statsNew['CriticoMagico']+"%");

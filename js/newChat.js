@@ -33,8 +33,10 @@ function showItemOnDone(data)
 			  setInfo+= "<div class=ComunDescSet><div class=SetName>Set "+item['Nombre']+"</div><div class=raidDrop>Requiere:<br>"+descArmor[idItemTrue]['req']+"</div>";
 			setInfo+= "<div>Bonus:<br>"+descArmor[idItemTrue]['desc']+"</div></div>";
 		}
-
-	$("#mostrarItemSh").append('<div class="itemRulerSh"><div class="itemRShTitl"><img src="images/item/'+item['subtipo']+'/'+item['imagen']+'"> '+item['Nombre']+enchant+"</div><div class='Sh_Attr' >"+makeDesc(item,"<br>")+'</div>'+setInfo+'</div><div class="itemRulerCloser"><button onclick="closeItemShow()" id="closeItemSh" class="boxInner" >Cerrar</button></div>');
+		if(item['subtipo']=="card")
+		$("#mostrarItemSh").append("<div class='itemRulerSh'><div class='Sh_Attr' >"+makeDesc(item,"<br>")+'</div></div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><div class="itemRulerCloser"><button onclick="closeItemShow()" id="closeItemSh" class="boxInner" >Cerrar</button></div>');
+		else
+		$("#mostrarItemSh").append('<div class="itemRulerSh"><div class="itemRShTitl"><img src="images/item/'+item['subtipo']+'/'+item['imagen']+'"> '+item['Nombre']+enchant+"</div><div class='Sh_Attr' >"+makeDesc(item,"<br>")+'</div>'+setInfo+'</div><div class="itemRulerCloser"><button onclick="closeItemShow()" id="closeItemSh" class="boxInner" >Cerrar</button></div>');
 	$("#mostrarItemSh").show("slow");
 	}
 	else

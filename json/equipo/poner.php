@@ -2,6 +2,7 @@
 $data["itemTipo"]=$item['tipo'];
 $data["itemSubtipo"]=$item['subtipo'];
 $customMsg=false;
+$data['noBorrarItem']=0;
 if($item['Nivel']<=$pj['nivel'] OR $item['epic']==1 AND $pj['nivel']>=40)
 							if($item['ClaseReq']<=$pj['idClase'])
 								{
@@ -644,7 +645,156 @@ if($Enchanter>6)
 												$data["error"] = "No te quedan mas buffs!";	
 											$error=1;
 									break;
+									case 'card':
+										if($item['cantidad']>=$item['cantReq'])
+										{
+											$customMsg=true;
+											$data['noBorrarItem']=1;
+											$data["someMsg"]=1;
+											$data['cardLeft']=$item['cantidad'];
+											switch($item['idItem'])
+											{
+												case 703: //Hasta la vista
+													$query = 'SELECT inv.idInventario, inv.enchant, i.grado, i.nombre, inv.trucho, inv.intradeable
+													FROM inventario inv JOIN item i USING ( idItem )
+													WHERE inv.idCuenta = '.$log->get("idCuenta").'
+													AND inv.usadoPor='.$log->get("pjSelected").' AND enchant<6 AND i.tipo="W" limit 0,1';
+													$itemsqshield = $db->sql_query($query);
+													$res = $db->sql_fetchrow($itemsqshield);
+													if($res)
+													{
+														$db->sql_query("UPDATE inventario SET enchant = 6 WHERE idInventario = ".$res['idInventario']);
+														$data["msg"] = $res['nombre']." se encanto a +6 ";
 
+														$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");	
+														$data['cardLeft']-=$item['cantReq'];			
+													}
+													else
+													{
+														$data["msg"] = "No se encontro el arma!";
+													}
+												break;
+												case 704: // houston
+													include("../system/legendary.php");
+													$query = 'SELECT * FROM item WHERE grado = 11 AND tipo != "enchant" ORDER BY RAND() limit 0,1';
+													$itemsqshield = $db->sql_query($query);
+													$res = $db->sql_fetchrow($itemsqshield);
+													createLegendary($res['idItem'],0,0,0,4);
+
+													$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");
+
+													$data["msg"] = "Conseguiste ".$res['Nombre']." Legendario!";
+													$data['cardLeft']-=$item['cantReq'];	
+												break;
+												case 705: //no lo se
+													include("../system/legendary.php");
+													$query = 'SELECT * FROM item WHERE grado = 7 AND tipo = "W" ORDER BY RAND() limit 0,1';
+													$itemsqshield = $db->sql_query($query);
+													$res = $db->sql_fetchrow($itemsqshield);
+													createLegendary($res['idItem'],0,0,0,4,0,0,0,1);
+
+													$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");
+
+													$data["msg"] = "Conseguiste ".$res['Nombre']." Obra Maestra!";
+													$data['cardLeft']-=$item['cantReq'];	
+												break;
+												case 701: //bobo
+													add_item(654,1);
+
+													$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");
+
+													$data["msg"] = "Conseguiste un Lost Gark Head!";
+													$data['cardLeft']-=$item['cantReq'];
+												break;
+												case 702: //elemental
+													$query = 'SELECT inv.idNombre, inv.idApellido, inv.idInventario, inv.enchant, i.grado, i.nombre, inv.trucho, inv.intradeable
+													FROM inventario inv JOIN item i USING ( idItem )
+													WHERE inv.idCuenta = '.$log->get("idCuenta").'
+													AND inv.usadoPor='.$log->get("pjSelected").' AND inv.conNombre = 0 AND i.tipo="W" limit 0,1';
+													$itemsqshield = $db->sql_query($query);
+													$res = $db->sql_fetchrow($itemsqshield);
+													if($res)
+													{
+														$query = 'SELECT  nombre
+														FROM jnombre
+														WHERE idNombre = '.$res['idNombre'];
+														$wnamesq = $db->sql_query($query);
+														$wname = $db->sql_fetchrow($wnamesq);
+														
+														$query = 'SELECT  apellido
+														FROM japellido
+														WHERE idApellido = '.$res['idApellido'];
+														$wlasNamesq = $db->sql_query($query);
+														$wlasName = $db->sql_fetchrow($wlasNamesq);
+														$fullName = $wname['nombre'].' '.$wlasName['apellido'];
+
+											$db->sql_query('UPDATE inventario SET nameCheck="'.$fullName.'", conNombre = 1 
+												WHERE idInventario = '.$res['idInventario']);
+														
+													
+
+													$data["msg"] = "El nombre de tu arma es ".$fullName."!";
+
+														$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");	
+														$data['cardLeft']-=$item['cantReq'];			
+													}
+													else
+													{
+														$data["msg"] = "No se encontro el arma!";
+													}
+												break;
+												case 700: //atras
+													include("../system/legendary.php");
+													createLegendary(626,0,0,0,4,0,0,0,1);
+													$data["msg"] = "Conseguiste Collar Solador Obra Maestra!";
+													$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");
+													$data['cardLeft']-=$item['cantReq'];
+												break;
+												case 706:
+													insertBuff($pj['idPersonaje'],605,449,1200);
+													$data["msg"] = "Ahora tienes el Buff del Support!";
+
+													$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");	
+														$data['cardLeft']-=$item['cantReq'];	
+												break;
+												case 707:
+													include("../system/legendary.php");
+													$query = 'SELECT * FROM item WHERE grado = 12 AND tipo != "enchant" ORDER BY RAND() limit 0,1';
+													$itemsqshield = $db->sql_query($query);
+													$res = $db->sql_fetchrow($itemsqshield);
+													createLegendary($res['idItem'],0,0,0,1);
+
+													$db->sql_query("UPDATE inventario SET
+																				cantidad = (cantidad-".$item['cantReq'].")
+																				WHERE idInventario = ".$item['idInventario']." AND idCuenta = ".$log->get("idCuenta")."");
+
+													$data["msg"] = "Conseguiste ".$res['Nombre']."!";
+													$data['cardLeft']-=$item['cantReq'];	
+												break;
+
+											}
+											
+										}
+										else
+										{
+											$data["error"] = "No tienes la cantidad requerida!";
+											$error=1;
+										}
+									break;
 										case 'material':
 											switch($item['idItem'])
 											{

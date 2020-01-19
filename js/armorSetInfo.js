@@ -528,6 +528,13 @@ function makeDesc(cosasLocas,extra)
 	{
 		desc+= "<div class=ITEMMASTERWORK>Obra Maestra</div>";	
 	}	
+
+	if(cosasLocas['tipo']=="card")
+	{
+		desc+= '<div class="deckTitle blackborder">'+cosasLocas['cantidad']+'/'+cosasLocas['cantReq']+'</div><div><img width="100%" src="images/cards/'+cosasLocas['idItem']+'.png"></div>';	
+	}
+	else
+	{
 	if(extra == "<br>" && cosasLocas['contable']=="0" && cosasLocas['tipo']!="pot")
 	{
 		if(cosasLocas['value']==0)
@@ -679,5 +686,6 @@ if(cosasLocas['grado']==12)
 					if(cosasLocas['grado']>=2)
 						desc+= " Limite de Elemento: "+limitElem+" "+extra;
 				}
+	}
 		return desc;			 
 }

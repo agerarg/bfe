@@ -93,6 +93,9 @@ npcGoTo = (to)=>{
 		case 10:
 			location.href="index.php?sec=blackmarked";
 		break;
+		case 11:
+			location.href="index.php?sec=cards";
+		break;
 	}
 }
 
@@ -110,6 +113,7 @@ npcZepp = (id)=>{
 			textOut += npcMakeOption("Quien eres?","npcZepp",1);
 			textOut += npcMakeOption("como los vamos a detener?","npcZepp",2);
 			textOut += '<div class="menuItemNpc" onclick="npcGoTo(10)">Ir Al Mercado Negro!</div>';
+			textOut += '<div class="menuItemNpc" onclick="npcGoTo(11)">Ver Cartas!</div>';
 			//textOut += '<div class="menuItemNpc" onclick="npcGoTo(9)">Ir a The Void</div>';
 			$("#npcContent").append('<div class="menuHold">'+textOut+'</div>');
 			$("#npcPlayGround").show("slow");
