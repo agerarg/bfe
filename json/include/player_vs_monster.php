@@ -2,7 +2,7 @@
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////// Script By Ager [ager.arg@gmail.com] ///////////////////
 /////////////////////////////////////////////////////////////////////////////////////
-$testing=false;
+$testing=true;
 $cancelMonsterAutoAttack=1;
 /*$query = 'SELECT * FROM monster
 							WHERE idMonster = '.$check['idMonster'].'';
@@ -24,6 +24,11 @@ $query = 'SELECT *
 $logosq = $db->sql_query($query);
 $logros = $db->sql_fetchrow($logosq);
 
+
+if($monster['mundo']==179 && $stats['AstralPass']==0)
+{
+	$data['error'] = "Necesitas estar en forma Astral para atacar este monstruo!";
+}else
 if($estoyMuerto==1)
 {
 	$data['error'] = "No podes atacar cuando estas muerto.";

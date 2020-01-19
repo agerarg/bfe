@@ -1564,13 +1564,13 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 			{
 				$rest = $pj['Critico']-100;
 				$rest = (int)$rest/10;
-				$pj['Ataque'] = potenciar($pj['Ataque'],$rest);
+				$pj['Ataque'] += potenciar($pj['Ataque'],$rest);
 			}
 			if($pj['CriticoMagico']>100)
 			{
 				$rest = $pj['CriticoMagico']-100;
 				$rest = (int)$rest/10;
-				$pj['AtaqueMagico'] = potenciar($pj['AtaqueMagico'],$rest);
+				$pj['AtaqueMagico'] += potenciar($pj['AtaqueMagico'],$rest);
 			}
 		}
 
