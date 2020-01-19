@@ -34,7 +34,7 @@ function generateBoxItem($boxTier,$idBox,$grado,$especial=0)
 		}
 
 	$getThis="";
-	$runaSql = '0=1';
+	$runaSql = 'i.tipo = "card"';
 	if(mt_rand(1,7)==1)// ReRoll
 		$getThis = 'i.idItem = 613';	
 	
@@ -59,7 +59,7 @@ function generateBoxItem($boxTier,$idBox,$grado,$especial=0)
 	if($grado>=2 && $grado<=8 && mt_rand(1,50)==25)
 		$runaSql = 'i.tipo = "stone"';
 
-	if($grado>=2 && mt_rand(1,75)==25)
+	if($grado>=2 && mt_rand(1,50)==25)
 		$getThis = 'i.tipo = "card"';
 
 
