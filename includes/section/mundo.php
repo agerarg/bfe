@@ -3,6 +3,13 @@
 /////////////////////////// Script By Ager [ager.arg@gmail.com] ///////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 $today = date("z");
+include("system/MobileDetector.php");
+			$detect = new Mobile_Detect;
+			$whereMobile=0;
+			if ( $detect->isMobile() ) {
+			   	$whereMobile=1;
+			}
+			  $template->assign_var('ONMOBIL', $whereMobile);
 if($pj['descanso']==0)
 {
 	if($pj['inDungeon']==1)
@@ -533,7 +540,7 @@ if($pj['descanso']==0)
 								
 								$useragent=$_SERVER['HTTP_USER_AGENT'];
 
-
+			
 	switch($dimencion)
 	{
 		case 2:
@@ -542,19 +549,14 @@ if($pj['descanso']==0)
 			);
 		break;
 		default:
-			include("system/MobileDetector.php");
-			$detect = new Mobile_Detect;
- 
-			if ( $detect->isMobile() ) {
+			if ( $whereMobile ) {
 			    $template->set_filenames(array(
 				'content' => 'templates/sec/mundoMobil.html' )
 			);
-			    $template->assign_var('ONMOBIL', 1);
 			} else {
 			    $template->set_filenames(array(
 				'content' => 'templates/sec/mundo.html' )
 				);
-				 $template->assign_var('ONMOBIL', 0);
 			}
 		break;
 	}

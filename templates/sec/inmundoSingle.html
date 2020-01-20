@@ -46,6 +46,7 @@ $(document).ready(function(){
 
 
 	goldChange({NEWGOLDCHANGE});
+   if(ONMOBILE==0)
 	$('.skill_use').cluetip({splitTitle: '|',delayedClose: 0,cluetipClass:'auras',cursor:'pointer'});
 	 <!-- BEGIN CD -->
 	 fkingCountDown('skill_'+{CD.ID},{CD.TIME},"skill",{CD.ID});
