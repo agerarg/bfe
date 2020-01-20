@@ -264,6 +264,7 @@ skillSetInfo(179,1,"DooM Crush","destroyer/doomcrush.jpg","Próximo ataque hace 
 skillSetInfo(399,1,"Poder Intenso","destroyer/power.jpg","Aumenta tu ataque +25 (no escalable) por cada nivel del personaje cuando usas arma bigsword.");
 skillSetInfo(405,1,"Rompe Ortos","destroyer/rompeortos.jpg","Mientras mas lento pegas mas aumenta tu Ataque.");
 skillSetInfo(434,1,"Colossal Speed","destroyer/colossal.jpg","Ajusta la velocidad de Ataque a 5, sin reducir el efecto de [Rompe Ortos]. Si tienes menos de 100% de critico te aumenta a 100%.");
+skillSetInfo(451,1,"Madness","destroyer/overpower.jpg"," Ignora los bonus de velocidad de ataque de items y buffs.");
 
 ////////// VAMPIRE ///////////////
 skillSetInfo(82,1,"Blood Seeker","vampire/bloodseeker.jpg","Cada ataque basico te cura 50 de vida requiere");

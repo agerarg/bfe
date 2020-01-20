@@ -1366,7 +1366,27 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 			$pj['Ataque']=potenciar($pj['Ataque'],300);
 			 $pj['PSpeed']=6;
 		}
-		
+		if($pj['skill_madness'])
+		{
+			$wpenalty = 0;
+			switch($Wtipo)
+			{
+				case 'bow':
+					$wpenalty = 10;
+				break;
+				case 'bigsword':
+					$wpenalty = 10;
+				break;
+				case 'dagger':
+					$wpenalty = 8;
+				break;
+				default:
+					$wpenalty = 9;
+				break;
+			}
+			$pj['PSpeed'] = $wpenalty;
+
+		}
 
 		if($pj['rompeOrtos'])
 			$pj['Ataque']+=(int)$pj['Ataque']*($pj['PSpeed']/4);

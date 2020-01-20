@@ -281,6 +281,9 @@ function refreshMobs()
 	}
 function loadmonster(data)
 {
+	if(ONMOBILE==1)
+	$('.skill_use').unbind('.cluetip');
+
 	if(monsterActivation==true)
 	{
 		monstersDeath=0;

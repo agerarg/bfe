@@ -283,7 +283,7 @@ if($pj['descanso']==0)
 													{ // FOR PARTY
 														if($pj['party']==0)
 														{
-															show_error("Solo puedes ingresar a este mundo con party","index.php?sec=mundo");
+															show_error("Solo puedes ingresar a este mundo con party, puedes crear una party y entrar solo si quieres!","index.php?sec=mundo");
 														}
 														else
 														{
@@ -396,10 +396,13 @@ if($pj['descanso']==0)
 													);
 													}
 													else
+															{
 														$template->set_filenames(array(
 													'content' => 'templates/sec/inmundo.html' )
 												);
-												
+													
+													}
+
 													break;
 												}
 								/// Attack Coldown FIX
@@ -539,9 +542,20 @@ if($pj['descanso']==0)
 			);
 		break;
 		default:
-			$template->set_filenames(array(
-				'content' => 'templates/sec/mundo.html' )
+			include("system/MobileDetector.php");
+			$detect = new Mobile_Detect;
+ 
+			if ( $detect->isMobile() ) {
+			    $template->set_filenames(array(
+				'content' => 'templates/sec/mundoMobil.html' )
 			);
+			    $template->assign_var('ONMOBIL', 1);
+			} else {
+			    $template->set_filenames(array(
+				'content' => 'templates/sec/mundo.html' )
+				);
+				 $template->assign_var('ONMOBIL', 0);
+			}
 		break;
 	}
 		
