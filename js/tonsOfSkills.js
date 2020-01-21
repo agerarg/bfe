@@ -240,10 +240,10 @@ skillSetInfo(440,1,"Prophecy of Hope","cleric/profecy1.jpg","Aumenta +4 velocida
 skillSetInfo(439,1,"Prophecy of Doom","cleric/profecy2.jpg","Aumenta +4 velocidad casteo y Aumenta Poder Critico Magico +250 y Aumenta, Holy Wrath siempre va ser critico y va hacer doble daño");
 skillSetInfo(438,1,"Prophecy of Violence","cleric/profecy3.jpg","Aumenta +4 velocidad casteo y Chance de critico +50 y Aumenta +150 Dark, Holy Wrath siempre va ser critico y va hacer doble daño");
 ////////// DESTROYER ///////////////
-skillSetInfo(104,1,"Anger","destroyer/anger.jpg","Aumenta tu Ataque en 5 por cada 1% de vida faltante, el numero que muestra es el Ataque agregado.");
-skillSetInfo(104,2,"Anger 2","destroyer/anger.jpg","Aumenta tu Ataque en 10 por cada 1% de vida faltante, el numero que muestra es el Ataque agregado.");
-skillSetInfo(104,3,"Anger 3","destroyer/anger.jpg","Aumenta tu Ataque en 20 por cada 1% de vida faltante, el numero que muestra es el Ataque agregado.");
-skillSetInfo(104,4,"Anger 4","destroyer/anger.jpg","Aumenta tu Ataque en 40 por cada 1% de vida faltante, el numero que muestra es el Ataque agregado.");
+skillSetInfo(104,1,"Anger","destroyer/anger.jpg","Aumenta tu Ataque 10% usando BigSword");
+skillSetInfo(104,2,"Anger 2","destroyer/anger.jpg","Aumenta tu Ataque 30% usando BigSword");
+skillSetInfo(104,3,"Anger 3","destroyer/anger.jpg","Aumenta tu Ataque 70% usando BigSword");
+skillSetInfo(104,4,"Anger 4","destroyer/anger.jpg","Aumenta tu Ataque 100% usando BigSword");
 skillSetInfo(106,1,"Rampage","destroyer/rampage.jpg","Incrementa +25 Ataque y +10 Critico");
 skillSetInfo(106,2,"Rampage 2","destroyer/rampage.jpg","Incrementa +50 Ataque y +15 Critico");
 skillSetInfo(107,1,"Destruction","destroyer/destruction.jpg","Incrementa el Ataque un 450% pero reduce la Vel Ataque 5 seg requiere BigSwords");

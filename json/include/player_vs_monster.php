@@ -197,6 +197,7 @@ if($pj['antiBot']>$now)
 									WHERE '.$monster_hash.'';
 							
 
+
 						$mobber = $db->sql_query($query);
 						while($mob = $db->sql_fetchrow($mobber))
 						{
@@ -706,7 +707,6 @@ if($pj['antiBot']>$now)
 									
 
 									$currentLife = $mobberArr[$i]['currentLife']-$danoFinalPuro+$monsterHeal;
-									
 									if($currentLife<=0)
 									{
 												
@@ -717,7 +717,7 @@ if($pj['antiBot']>$now)
 											
 											$monster['exp'] = Monster_experience($mobberArr[$i]['nivel'],$mobberArr[$i]['exp']);
 																					
-											if($mob['champion']==1)
+											if($mobberArr[$i]['champion']==1)
 											{
 												$monster['gold']=$monster['gold']*3;
 												$monster['exp']=$monster['exp']*3;

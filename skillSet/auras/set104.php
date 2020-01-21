@@ -1,32 +1,21 @@
 <?php
-		$per= intval(($CurrentVida * 100) / $pj['VidaLimit']);
-		$reverse = 100-$per;
-		$inmortality = $reverse;
-	$bonus=0;
-	
-	$pj['AngerOn']=1;
-	if($inmortality>1)
-	{
-switch($aura['nivel'])
+
+if($pj['Wtipo']=="bigsword")
 {
-	case 1:
-		$bonus=$inmortality*5;
-		$pj['Ataque']+=intval($bonus);
-	break;
-	case 2:
-		$bonus=$inmortality*10;
-		$pj['Ataque']+=intval($bonus);
-	break;
-	case 3:
-		$bonus=$inmortality*20;
-		$pj['Ataque']+=intval($bonus);
-	break;
-	case 4:
-		$bonus=$inmortality*40;
-		$pj['Ataque']+=intval($bonus);
-	break;
-}
+	switch($aura['nivel'])
+	{
+		case 1:
+			$pj['Ataque']=potenciar($pj['Ataque'],10);
+		break;
+		case 2:
+			$pj['Ataque']=potenciar($pj['Ataque'],30);
+		break;
+		case 3:
+			$pj['Ataque']=potenciar($pj['Ataque'],70);
+		break;
+		case 4:
+			$pj['Ataque']=potenciar($pj['Ataque'],100);
+		break;
 	}
-	$pj['AngerBonus']=intval($bonus);
-	$pj['AngerLvl']=$aura['nivel'];
+}
 ?>
