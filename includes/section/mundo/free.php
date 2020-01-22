@@ -203,7 +203,7 @@ $goFight=0;
 																$db->sql_query("DELETE FROM inmundo WHERE mundo = ".$mundoid);
 																
 																$query = 'SELECT idPersonaje FROM personaje
-																WHERE clan = '.$mundo['clan'].' AND attackCooldown > '.($now-600).' AND nivel >= '.$mundo['nivel'].' AND nivel <= '.($mundo['nivel']+20).' AND inDungeon=0';
+																WHERE clan = '.$mundo['clan'].' AND online > '.($now-600).' AND nivel >= '.$mundo['nivel'].' AND nivel <= '.($mundo['nivel']+20).' AND inDungeon=0';
 																
 																$membersq = $db->sql_query($query);
 																		while($member = $db->sql_fetchrow($membersq))
