@@ -136,7 +136,7 @@ switch ($stats['elemAttack']) {
 if($finalDmg>1)
 		{
 $msg = "<div class=pvpLog>PVP: ".$pj['nombre']." hizo <span class=pvpDmg>".$finalDmg."</span> de da&ntilde;o a ".$fpj['nombre']."</div>";
-$data['info'] .= $msg;
+$data['info'] = $msg;
 systemLog("self",$msg);
 $db->sql_query('INSERT INTO  chat(idPersonaje,mensaje,pvpTarget,nombre,mundo) 
 								VALUES("'.$fpj['idPersonaje'].'","'.$msg.'","'.$log->get("pjSelected").'","'.$pj['nombre'].'","'.$check['mundo'].'")');
