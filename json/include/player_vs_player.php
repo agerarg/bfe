@@ -112,22 +112,22 @@ $dmgCap = abs($monsterVida - $fpj['Vida']);
 
 switch ($stats['elemAttack']) {
 	case 'fire':
-	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	 $finalDmg = damageResist($dmgCap,$fpj['resist_fire']);
 	break;
 	case 'water':
-	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	 $finalDmg = damageResist($dmgCap,$fpj['resist_fire']);
 	break;
 	case 'earth':
-	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	 $finalDmg = damageResist($dmgCap,$fpj['resist_fire']);
 	break;
 	case 'wind':
-	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	 $finalDmg = damageResist($dmgCap,$fpj['resist_fire']);
 	break;
 	case 'dark':
-	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	 $finalDmg = damageResist($dmgCap,$fpj['resist_fire']);
 	break;
 	case 'holy':
-	 $finalDmg = penetration($dmgCap,$fpj['resist_fire']);
+	 $finalDmg = damageResist($dmgCap,$fpj['resist_fire']);
 	break;
 	default:
 	 $finalDmg = $dmgCap;
@@ -140,6 +140,9 @@ $data['info'] .= $msg;
 systemLog("self",$msg);
 $db->sql_query('INSERT INTO  chat(idPersonaje,mensaje,pvpTarget,nombre,mundo) 
 								VALUES("'.$fpj['idPersonaje'].'","'.$msg.'","'.$log->get("pjSelected").'","'.$pj['nombre'].'","'.$check['mundo'].'")');
+
+	$monsterVida = $fpj['Vida'];
+	$monsterVida-=$finalDmg;
 
 }
 
