@@ -9,7 +9,10 @@ include("system/MobileDetector.php");
 			if ( $detect->isMobile() ) {
 			   	$whereMobile=1;
 			}
+
 			  $template->assign_var('ONMOBIL', $whereMobile);
+
+
 if($pj['descanso']==0)
 {
 	if($pj['inDungeon']==1)

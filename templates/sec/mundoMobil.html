@@ -27,6 +27,14 @@ $( document ).ready(function() {
 .markerMobil{
 	
 }
+#basicMOdeMap{
+	position: absolute;
+	top: 0;
+	left: 300px;
+}
+#basicMapSHow{
+	padding-top: 35px;
+}
 </style>
 
 <div id="content" align="center">	
@@ -44,10 +52,10 @@ $( document ).ready(function() {
 	               <!-- END LOC -->
 				</div>
 		</div>
-	
 		<div class="scrollChatter" id="basicMapSHow"> 
 		</div>
-
+		<div id="basicMOdeMap"><div class="menuItem" onclick="javascript:modoBasicoOn();">Modo Basico</div></div>
+		
 </div>
 
 
@@ -130,14 +138,14 @@ $( document ).ready(function() {
 	}
 
 	modoBasicoOn=()=>{
-			$("#mapRealm").hide();
+			$("#mapRealmMobile").hide();
 			$("#basicMapSHow").show();
 			makeCategoryShow();
 			$("#basicMOdeMap").text("");
 			$("#basicMOdeMap").append('<div class="menuItem" onclick="javascript:modoBasicoOff();">Modo Mapa</div>');
 	}
 	modoBasicoOff=()=>{
-			$("#mapRealm").show();
+			$("#mapRealmMobile").show();
 			$("#basicMapSHow").hide();
 			$("#basicMOdeMap").text("");
 			$("#basicMOdeMap").append('<div class="menuItem" onclick="javascript:modoBasicoOn();">Modo Basico</div>');
