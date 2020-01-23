@@ -1,0 +1,25 @@
+[23-Jan-2020 02:17:00 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 10
+[23-Jan-2020 02:17:00 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 11
+[23-Jan-2020 02:17:00 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 14
+[23-Jan-2020 02:17:00 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 15
+[23-Jan-2020 02:17:02 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 10
+[23-Jan-2020 02:17:02 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 11
+[23-Jan-2020 02:17:02 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 14
+[23-Jan-2020 02:17:02 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 15
+[23-Jan-2020 02:18:15 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'ludodidactas'@'localhost' (using password: YES) in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/conexion.php on line 20
+[23-Jan-2020 02:18:39 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 10
+[23-Jan-2020 02:18:39 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 11
+[23-Jan-2020 02:18:39 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 14
+[23-Jan-2020 02:18:39 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 15
+[23-Jan-2020 02:33:33 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 10
+[23-Jan-2020 02:33:33 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 11
+[23-Jan-2020 02:33:33 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 14
+[23-Jan-2020 02:33:33 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 15
+[23-Jan-2020 02:44:49 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 10
+[23-Jan-2020 02:44:49 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 11
+[23-Jan-2020 02:44:49 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 14
+[23-Jan-2020 02:44:49 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 15
+[23-Jan-2020 02:45:54 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 10
+[23-Jan-2020 02:45:54 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 11
+[23-Jan-2020 02:45:54 UTC] PHP Notice:  Undefined index: id in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 14
+[23-Jan-2020 02:45:54 UTC] PHP Notice:  Undefined index: clave in /home/agerarg/public_html/battleforembolia.com.ar/micgaming/system/login.php on line 15

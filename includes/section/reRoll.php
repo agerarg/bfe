@@ -204,7 +204,7 @@ function NorRandAttrb($itemId,$grade,$type,$clase,$value,$astralLvl,$forceStats=
 $cantBeAtr=Array();
 	$query = 'SELECT *
 	FROM item_attr
-	WHERE idInventario = '.$itemId;
+	WHERE idInventario = '.$itemId.' AND blackmarket =0';
 	$itematrsq = $db->sql_query($query);
 	$atrbList="";
 	$vueltas=0;
