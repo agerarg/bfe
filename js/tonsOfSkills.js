@@ -73,6 +73,7 @@ skillSetInfo(116,1,"Alien Dimension 6","alien.jpg","You are in Alien World.");
 
 /////// RAIDS /////////////////
 skillSetInfo(15,1,"Raid Silence","raidSilence.jpg","No puedes usar habilidades");
+skillSetInfo(452,1,"Trixie Derrotada","trixie.jpg","Aumenta Exp/Oro +25% y +10% a todas las resistencias.");
 
 ////// MOB /////////////////////////
 skillSetInfo(71,1,"Ant Sickness","antSickness.jpg","Decreases defense, attack and magic attack 15%");

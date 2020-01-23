@@ -592,13 +592,13 @@ if($pj['descanso']==0)
 									$sqlAllow="m.id = 20 ";
 									$query = 'SELECT m.* , c.nombre AS CLANN
 												FROM mundo m LEFT JOIN clan c on c.idClan = m.clan
-												WHERE '.$sqlAllow.' AND m.activo=1 AND m.dimencion=1';
+												WHERE '.$sqlAllow.' AND m.activo=1 AND tipo!="lair" AND m.dimencion=1';
 								
 							}
 								else
 									$query = 'SELECT m.*
 												FROM mundo m
-												WHERE m.activo=1 AND dimencion='.$stats['dimension'].' ORDER BY nivel';
+												WHERE m.activo=1 AND tipo!="lair" AND  dimencion='.$stats['dimension'].' ORDER BY nivel';
 								$mundosq = $db->sql_query($query);
 								while($mundo = $db->sql_fetchrow($mundosq))
 								{

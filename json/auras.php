@@ -21,7 +21,7 @@ if($log->check())
 
 		$query = 'SELECT a.idPersonaje, a.idSkillReal, s.idSkill, a.idAura, a.timeOut, s.nombre, s.imagen, a.static, a.acumuleitor, s.nivel
 		FROM aura a JOIN skill s USING ( idSkill ) 
-		WHERE a.idPersonaje = '.$log->get("pjSelected").' AND s.pasive=0  '.$sqlsd;
+		WHERE (a.idPersonaje = '.$log->get("pjSelected").' AND s.pasive=0  '.$sqlsd.') OR global=1';
 		$skillsq = $db->sql_query($query);
 		$data['something'] = 0;
 		while($aura = $db->sql_fetchrow($skillsq))

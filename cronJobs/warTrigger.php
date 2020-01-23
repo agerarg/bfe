@@ -1,7 +1,6 @@
 <?php
   if(SWORDON != 1) die();
-  include('system/conexion.php');
-  $db = new sql_db;
+
   
   $query = 'SELECT * FROM gameactive';
   $gameCore = $db->sql_fetchrow($db->sql_query($query));
@@ -20,6 +19,9 @@ if(!$gameCore['war'])
     {
         $db->sql_query("DELETE FROM inmundo 
         WHERE mundo IN(159,160,161,162,163,164,165)");
+
+        $db->sql_query("DELETE FROM inmundo 
+        WHERE idMonster = 204");
 
         addNexus(159);	
         addNexus(160);	
@@ -74,7 +76,8 @@ else
             VALUES(1,"'.$msg.'",'.$now.')');
         $db->sql_query("DELETE FROM inmundo 
         WHERE mundo IN(159,160,161,162,163,164,165)");    
-
+          $db->sql_query("DELETE FROM inmundo 
+        WHERE idMonster = 204");
         die();
     }
 }

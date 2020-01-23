@@ -279,6 +279,8 @@ if($pj)
 		$mapAllow[]=156;// Conquista 1
 		$mapAllow[]=157;// Conquista 1
 		$mapAllow[]=158;// Conquista 1
+		$mapAllow[]=182; //Trixy
+		$mapAllow[]=183; //Trixy
 	}
 	if($pj['nivel']>=90)
 	{

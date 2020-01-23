@@ -3042,6 +3042,15 @@ margin-left: -40px;
 	font-size: 30px;
 	border: 3px dashed black; 
 }
+.trixie_start{
+	color:#FFFF00; 
+	font-variant: small-caps; 
+	font-weight:bold; 
+	background:#43126E ; 
+	padding: 6px;
+	font-size: 30px;
+	border: 3px dashed black; 
+}
 .boxClanGrad{ 
 	margin-top: -25px;
 	font-variant: small-caps; 

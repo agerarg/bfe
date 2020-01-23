@@ -1214,7 +1214,7 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 		// AURAS CHECK //
 		$query = 'SELECT a.idPersonaje, s.idRealSkill, s.idSkill, a.idAura, a.timeOut, a.extraData, s.nombre,s.nivel , s.imagen, a.buff, a.statsChanger, a.static, a.acumuleitor
 		FROM aura a JOIN skill s USING ( idSkill )
-		WHERE a.idPersonaje = '.$PJID.' AND a.aventura = 0 ORDER BY s.active, s.idRealSkill';
+		WHERE (a.idPersonaje = '.$PJID.' OR global=1) AND a.aventura = 0 ORDER BY s.active, s.idRealSkill';
 		$skillsq = $db->sql_query($query);
 		while($aura = $db->sql_fetchrow($skillsq))
 		{
@@ -1677,7 +1677,7 @@ function checkStats($STR,$CON,$DEX,$WIT,$INT,$MEN,$LVL,$PJID)
 
 		$pj['Ataque']=intval($pj['Ataque']);
 		//TEST
-		//$pj['Ataque']=1;// potenciar(potenciar(12077270,859),1000)  ;
+		//$pj['Ataque']=potenciar(potenciar(12077270,859),1000)  ;
 		//$pj['PSpeed']=1;
 		//$pj['Defensa']+=99999;
 		//$pj['Critico'] = 100;

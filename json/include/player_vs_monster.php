@@ -188,7 +188,13 @@ if($pj['antiBot']>$now)
 								
 								break;
 							}
-
+						if($monster['idMonster']==248) //Trixxie dye
+							{
+								if($danoFinalPuro>100000)
+									$danoFinalPuro=100000;
+								$data['info']="Golpeaste por ". optimalDmg($danoFinalPuro);
+								$data['refreshOnHit']=1;
+							}
 
 						$nexAttack = $monster['attackType'];
 						
@@ -289,6 +295,46 @@ if($pj['antiBot']>$now)
 							{
 								$monster['Ataque']=$monster['Ataque']+bigintval(($monster['Ataque']/2)*$dungeon['eliteLevel']);
 							}	
+
+
+							if($monster['idMonster']==248) //Trixxie dye
+							{
+								
+									$query = 'SELECT count(*) as CONTA
+									FROM inmundo
+								WHERE idMonster = 249 AND mundo=183';
+									$protectors = $db->sql_fetchrow($db->sql_query($query));
+									$healingFromProt = (int)$protectors["CONTA"] * 50000;
+
+									$monsterHeal+=$healingFromProt;
+									if($monsterHeal>0)
+									{
+										systemLog("global","<div class=petDrop>Protectores curaron a Trixie por ".$healingFromProt."</div>") ;
+									}
+
+
+									if(mt_rand(1,10)==5)
+									{
+										$monsterHeal+=1000000;
+										systemLog("global","<div class=petDrop>Trixie se curo sola 1000000</div>") ;
+									}
+									
+							if(($monster['VidaServer']+$monsterHeal)>$monster['VidaLimit'])
+											$monsterHeal= $monster['VidaLimit']-$monster['VidaServer'];
+							
+
+							if(mt_rand(1,5)==3)
+								{
+									for($i=0;$i<mt_rand(5,15);$i++)
+									{
+									 $db->sql_query('INSERT INTO  
+						                inmundo(idMonster,tipo,mundo,
+						                currentLife,dificulty,element,globalmap) 
+						            VALUES(249,2,183,10000000,1,"holy",1)');
+									}
+									systemLog("global","<div class=petDrop>Trixie summoneo unos Protectores</div>") ;
+								}
+							}
 
 								switch ($monster['element']) 
 								{
@@ -677,12 +723,14 @@ if($pj['antiBot']>$now)
 
                          $ownerTime=($now+300);
                         if($pj['inRunz']){ $ownerTime=0; }
-						
+									
+
+
 								if($monsterAttackTrue)
 								{
 										$db->sql_query("UPDATE inmundo im 
 										SET im.attackType = ".$nexAttack.", 
-										im.currentLife=(im.currentLife-".($danoFinalPuro+$monsterHeal)."),  
+										im.currentLife=(im.currentLife-".($danoFinalPuro-$monsterHeal)."),  
 										im.attackCooldown=".($now+$monster['attackSpeed'])." 
 										 WHERE ".$monster_hash."");
 								}
@@ -690,7 +738,7 @@ if($pj['antiBot']>$now)
 								{
 										$db->sql_query("UPDATE inmundo im 
 										SET im.attackType = ".$nexAttack.", 
-										im.currentLife=(im.currentLife-".($danoFinalPuro+$monsterHeal).")
+										im.currentLife=(im.currentLife-".($danoFinalPuro-$monsterHeal).")
 										 WHERE ".$monster_hash."");
 								}
 							
@@ -784,6 +832,23 @@ if($pj['antiBot']>$now)
 									systemLog("party","<div class=recompensaAstral>".$pj['nombre']." consiguio el poder de Odin!</div>");
 								}
 
+								if($monster['idMonster']==248) //Trixxie dye
+								{
+
+									$query = 'SELECT *
+											FROM aura
+											WHERE idSkillReal = 452';
+									$bufftrixsq = $db->sql_query($query);
+									$buffTrix = $db->sql_fetchrow($bufftrixsq);	
+									systemLog("global","<div class=recompensaAstral>Trixie fue Derrotada!</div>") ;
+									if(!$buffTrix)
+									{
+										systemLog("global","<div class=recompensaAstral>Obtienes el buff Trixie!</div>") ;
+										$db->sql_query('INSERT INTO  aura(idSkill,idSkillReal,static,global) 
+														VALUES(608,452,1,1)');
+									}
+
+								}
 
 								if($monster['idMonster']==242)// SANTA // COMANDANTE
 								{

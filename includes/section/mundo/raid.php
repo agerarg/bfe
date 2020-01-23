@@ -3,6 +3,9 @@
 /////////////////////////// Script By Ager [ager.arg@gmail.com] ///////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 										$goFight=0;	
+
+
+
 										if($pj['party']==0)
 										{
 											show_error("Necesitas una party para pelear con un Raid Boss","index.php?sec=mundo&");
@@ -21,8 +24,10 @@
 											$goFight=0;	
 										}
 										else
-										if($mundo['warTime']<$now)
+										if(1==1)
 										{
+											
+
 											$query = 'SELECT m.*, i.Nombre AS ITEM
 											FROM monster m LEFT JOIN item i ON m.idMaterial = i.idItem
 											WHERE m.idMonster = "'.$mundo['extraInfo'].'" 
@@ -30,7 +35,11 @@
 										$monstersq = $db->sql_query($query);
 		
 											$monster = $db->sql_fetchrow($monstersq);
-
+											if($monster['idMonster']==248 && isset($_GET['go']))
+											{
+												header("Location: index.php?sec=mundo&mundo=183");
+												die();
+											}
 											$goFight=0;
 											if($pj['party']==$log->get("pjSelected"))
 											{
@@ -125,26 +134,49 @@
 																	'.$pj['party'].',"'.getRandomElem().'")');
 																				
 																		
-																		
 																$db->sql_query("UPDATE personaje SET
 																		inDungeon = 1, dungeonInstance=".$maxId['ID']."
 																		WHERE  party = '".$pj['idPersonaje']."'");		
-																		
-																		
 																}
 														}
 														else
 														{
+															$cost = "Costo ".$monster['costo']." ".$monster['ITEM']." cada uno.";
+															$move = "<div class='menuItem' onclick=".'"location.href='."'index.php?sec=mundo&mundo=".$mundoid."&go'".';"'.">SI</div>
+													    </div>";
+															if($monster['idMonster']==248)
+															{
+																$cost="";
+																$query = 'SELECT idInMundo AS ID FROM inmundo WHERE
+																 idMonster = 248 AND mundo=183';	
+																$bosssq = $db->sql_query($query);
+																$trixie = $db->sql_fetchrow($bosssq);
+																if(!$trixie)
+																{
+																	$move = "Actualmente Trixie esta muerta. Pero va revivir pronto!</div>";
+																}
+																else
+																	$cost="Costo Gratis";
+
+
+															}
+
+
+
+
 											show_message("Quieres luchar contra este Raid Boss?
 											<br><img src='images/mobs/".$monster['imagen']."'  width=50 height=50 /><br>
 											<spam class='raidname'>".$monster['nombre']."</spam>
 														<br>
-														Costo ".$monster['costo']." ".$monster['ITEM']." cada uno.
+														".$cost."
 														<div class='raidButton_move'>
-														<div class='menuItem' onclick=".'"location.href='."'index.php?sec=mundo&mundo=".$mundoid."&go'".';"'.">SI</div>
-													    </div>
+														".$move."
 															",
 															"index.php?sec=mundo");
+
+
+
+
 														}
 											}
 											else

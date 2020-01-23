@@ -6,4 +6,5 @@ $db = new sql_db;
 include('topUpdate.php'); 
 //include('currencyUpdate.php');   
 include('warTrigger.php'); 
+include('TrixieTrigger.php'); 
 ?>
